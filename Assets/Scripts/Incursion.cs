@@ -61,7 +61,6 @@ public class Incursion : MonoBehaviour
             {
                 CreatePath = false;
                 Path[] Tiles = transform.parent.GetComponentsInChildren<Path>();
-                Debug.Log(Tiles.Length);
                 for (int i = 0; i < Routes[ActivePath].CheckPoints.Count; i++)
                 {
                     Visited = new List<Vector3>();
@@ -81,22 +80,18 @@ public class Incursion : MonoBehaviour
         {
             foreach (Vector3 Dir in AllDirections(StartLoc))
             {
-                Debug.Log("Checking " + Dir + " for Index" + Index);
                 if (Routes[ActivePath].CheckPoints[i].ContainsKey(Dir) && !Visited.Contains(Dir))
                 {
                     Routes[ActivePath].CheckPoints[i].SetValue(Dir,Index);
-                    Debug.Log("Added "+Dir+" with Index "+Index);
                     AddValues(Dir,Index+1,i);
                 }
                 else if(Routes[ActivePath].CheckPoints[i].ContainsKey(Dir)&&Routes[ActivePath].CheckPoints[i].GetValue(Dir)>Index)
                 {
                     Routes[ActivePath].CheckPoints[i].SetValue(Dir,Index);
-                    Debug.Log("Added "+Dir+" with Index "+Index);
                     AddValues(Dir,Index+1,i);
                 }
             }
         }
-        Debug.Log("Exiting "+Index);
     }
 
     private void MakePath()
@@ -112,7 +107,6 @@ public class Incursion : MonoBehaviour
                 NextRoute = RightDir(ShortRoute,i);
             }
 
-            Debug.Log("Made Path to "+i);
         }
     }
 
