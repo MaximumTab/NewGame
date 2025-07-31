@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7228546073538427368}
   - component: {fileID: 646662430355824544}
+  - component: {fileID: 3945486237562809756}
   m_Layer: 0
   m_Name: Enemy Incursion
   m_TagString: Untagged
@@ -49,6 +50,20 @@ MonoBehaviour:
   ActivePath: 0
   CreatePath: 0
   Visited: []
+  Routes: []
+--- !u!114 &3945486237562809756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396633971748990759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef872ce46bcc39a4182a4c6501615e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawn: {fileID: 0}
   Routes: []
 --- !u!1 &8285148197516334755
 GameObject:
@@ -154,7 +169,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
