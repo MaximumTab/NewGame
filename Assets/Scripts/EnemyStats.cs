@@ -11,6 +11,8 @@ public class EnemyStats : ScriptableObject
     public float Atk;
     public float AttackInterval;
     public float Speed;
+
+    public Ability[] Abilities;
     public enum EnemyType
     {
         Basic,
@@ -22,6 +24,13 @@ public class EnemyStats : ScriptableObject
     {
         Melee= 1<<0,
         Ranged= 1<<1
+    }
+    [Serializable]
+    public struct Ability
+    {
+        public RangeType Range;
+        
+        public ActionAttack AtkExecute;
     }
 
 }

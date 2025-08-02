@@ -1875,7 +1875,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 646662430355824544, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: ActivePath
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 646662430355824544, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: CreatePath
@@ -8830,7 +8830,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 646662430355824544, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: ActivePath
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 646662430355824544, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: CreatePath
