@@ -62,7 +62,7 @@ public class EntityBehaviour : MonoBehaviour
                 StartCoroutine(WaitAttacks());
                 StartCoroutine(CoolDownAbl(index));
                 //Add way to tie into animation.
-                entityStats.Abilities[index].AtkExecute.UseAbility(TargetsInRange[index].First(),transform.position);
+                entityStats.Abilities[index].AtkExecute.UseAbility(TargetsInRange[index].First(),transform.position,Atk);
             }
         }
     }

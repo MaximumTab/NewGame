@@ -7,8 +7,14 @@ public class ActionAttack : ScriptableObject
     public float Range;
     public float AtkModifier;
     public float Cooldown;
-    public virtual void UseAbility(GameObject Target, Vector3 Source)
+    public GameObject Projectile;
+    public virtual void UseAbility(GameObject Target, Vector3 Source,float Atk)
     {
         Debug.Log("You are using the base Ability. The target was "+Target+" from "+ Source);
+        GameObject newProj=Instantiate(Projectile, Source, Quaternion.identity);
+        if (newProj.GetComponent<ProjectileBehaviour>())
+        {
+            newProj.GetComponent<ProjectileBehaviour>().DamageDoneTo(Atk, AtkModifier, Target);
+        }
     }
 }

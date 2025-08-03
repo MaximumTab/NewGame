@@ -15,3 +15,4 @@ MonoBehaviour:
   Range: 5
   AtkModifier: 1
   Cooldown: 3
+  Projectile: {fileID: 7355939984919831324, guid: 2e00087fa59b65048819d74ac7867c9b, type: 3}
