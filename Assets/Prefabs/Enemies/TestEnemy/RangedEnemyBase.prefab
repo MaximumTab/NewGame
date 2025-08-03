@@ -156,11 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e19c5f4f501ea146ba424f7bb6bf936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyStats: {fileID: 11400000, guid: da475f4ef0f752d449b7f2d5bd4daf36, type: 2}
+  entityStats: {fileID: 11400000, guid: da475f4ef0f752d449b7f2d5bd4daf36, type: 2}
   Route:
     CheckPoints: []
-  CurPath: []
-  CheckProg: 0
   SpawnSuccess: 0
 --- !u!54 &2889365799378613610
 Rigidbody:
