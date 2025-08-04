@@ -11,6 +11,7 @@ public class EntityStats : ScriptableObject
     [Header("How many seconds inbetween attacks")]
     public float AttackInterval; 
     public float Speed;
+    public ObjectTag Tag;
 
     public Ability[] Abilities;
     [Flags]
@@ -25,5 +26,10 @@ public class EntityStats : ScriptableObject
         public RangeType Range;
         
         public ActionAttack AtkExecute;
+    }
+    public enum ObjectTag 
+    {
+        Enemy,
+        Tower
     }
 }
