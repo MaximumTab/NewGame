@@ -5,7 +5,7 @@ public class ActionAttack : ScriptableObject
 {
     //To be changed according to each enemy;
     public float Range;
-    public float AtkModifier;
+    public float AtkModifier = 1;
     public float Cooldown;
     public GameObject Projectile;
     public virtual void UseAbility(GameObject Target, Vector3 Source,float Atk)

@@ -8,7 +8,8 @@ public class EntityStats : ScriptableObject
     public RangeType Range;
     public float MaxHp;
     public float Atk;
-    public float AttackInterval;
+    [Header("How many seconds inbetween attacks")]
+    public float AttackInterval; 
     public float Speed;
 
     public Ability[] Abilities;

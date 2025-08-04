@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileStats : ScriptableObject
 {
     public ProjectileType DistanceMode;
+    [Header ("units per second")]
     public float Speed;
     public ImpactType ImpactMode;
     public float AoeRange;
@@ -14,7 +15,7 @@ public class ProjectileStats : ScriptableObject
     
     public enum ProjectileType
     {
-        Arc,
+        Moving,
         Instant
     }
     public enum ImpactType

@@ -1,19 +1,20 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewTowerStats", menuName = "TowerDefense/TowerStats")]
-public class TowerStats : ScriptableObject
+public class TowerStats : EntityStats
 {
-    [Header("Attack Stats")]
-    public float damage;
-    public float range;
-    public float attackCooldown;  
 
-    [Header("Economy Stats")]
-    public int cost;
-    public int upgradeCost;
+    [Header("Tower cost")]
+    public TowerCost[] towerCosts;
 
-    [Header("Projectile")]
-    public GameObject projectilePrefab;
+    public struct TowerCost
+    {
+        public enum ResourceType { wood, iron, /* add more recource types herer*/};
+        public ResourceType resourceType;
+
+        public int resourceCost;
+    }
 
     //[Header("Visuals")]
     //public Sprite towerSprite;

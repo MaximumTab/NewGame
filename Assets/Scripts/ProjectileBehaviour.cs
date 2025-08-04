@@ -30,7 +30,7 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         switch (projectileStats.DistanceMode)
         {
-            case ProjectileStats.ProjectileType.Arc:
+            case ProjectileStats.ProjectileType.Moving:
                 rb.linearVelocity = (target.transform.position - transform.position).normalized * projectileStats.Speed;
                 break;
             case ProjectileStats.ProjectileType.Instant:
