@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12981e0ed6215e04fbfc525bde61e4a4, type: 3}
+  m_Name: TowerBaseStats
+  m_EditorClassIdentifier: 
+  damage: 0
+  range: 10
+  attackCooldown: 1
+  cost: 0
+  upgradeCost: 0
+  projectilePrefab: {fileID: 962822658389544807, guid: cd84976bd86075c42b3cc66b0fb37be3, type: 3}
