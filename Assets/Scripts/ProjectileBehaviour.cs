@@ -72,10 +72,10 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void DoDamage(GameObject target)
     {
-        if (target.transform.parent.GetComponent<EntityBehaviour>())
+        if (target.transform.GetComponent<EntityBehaviour>())
         {
-            target.transform.parent.GetComponent<EntityBehaviour>().TakeDamage(Damage);
-            Instantiate(projectileStats.OnHitEffect,target.transform.parent);
+            target.transform.GetComponent<EntityBehaviour>().TakeDamage(Damage);
+            Instantiate(projectileStats.OnHitEffect,target.transform);
         }
     }
 

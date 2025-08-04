@@ -18,6 +18,7 @@ MonoBehaviour:
   Atk: 10
   AttackInterval: 3
   Speed: 0
+  Tag: 1
   Abilities:
   - Range: 2
     AtkExecute: {fileID: 11400000, guid: e9c04336f8bf0984da2ae60f07dd0e3f, type: 2}

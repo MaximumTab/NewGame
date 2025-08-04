@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class EntityBehaviour : MonoBehaviour
 {
     [SerializeField] protected EntityStats entityStats;
@@ -13,14 +14,14 @@ public class EntityBehaviour : MonoBehaviour
     protected float Speed;
     protected bool Attacking = false;
     protected bool Blocked = false;
-    protected Dictionary<Collider,int> AbilityTriggers;
+    protected Dictionary<Collider, int> AbilityTriggers;
     protected bool[] AbilityOnCooldown;
     protected List<GameObject>[] TargetsInRange;
 
     public virtual void OnSpawn()
     {
         gameObject.tag = entityStats.Tag.ToString();
-        transform.GetChild(0).tag=entityStats.Tag.ToString();
+        transform.GetChild(0).tag = entityStats.Tag.ToString();
         Hp = entityStats.MaxHp;
         Atk = entityStats.Atk;
         Speed = entityStats.Speed;
@@ -33,7 +34,7 @@ public class EntityBehaviour : MonoBehaviour
             SphereCollider SphCol = gameObject.AddComponent<SphereCollider>();
             SphCol.radius = statsAbility.AtkExecute.Range;
             SphCol.isTrigger = true;
-            AbilityTriggers.Add(SphCol,i);
+            AbilityTriggers.Add(SphCol, i);
             i++;
         }
         TargetsInRange = new List<GameObject>[i];
@@ -43,7 +44,7 @@ public class EntityBehaviour : MonoBehaviour
             TargetsInRange[k] = new List<GameObject>();
         }
     }
-    
+
     private void Update()
     {
         AlwaysRun();
@@ -58,12 +59,12 @@ public class EntityBehaviour : MonoBehaviour
     {
         foreach (int index in AbilityTriggers.Values)
         {
-            if (!AbilityOnCooldown[index] && !Attacking&&TargetsInRange[index].Count>0)
+            if (!AbilityOnCooldown[index] && !Attacking && TargetsInRange[index].Count > 0)
             {
                 StartCoroutine(WaitAttacks());
                 StartCoroutine(CoolDownAbl(index));
                 //Add way to tie into animation.
-                entityStats.Abilities[index].AtkExecute.UseAbility(TargetsInRange[index].First(),transform.position,Atk);
+                entityStats.Abilities[index].AtkExecute.UseAbility(TargetsInRange[index].First(), transform.position, Atk);
             }
         }
     }
@@ -79,7 +80,7 @@ public class EntityBehaviour : MonoBehaviour
     IEnumerator CoolDownAbl(int abilityIndex)
     {
         AbilityOnCooldown[abilityIndex] = true;
-        Debug.Log("Ability "+ abilityIndex+ " On Cooldown");
+        Debug.Log("Ability " + abilityIndex + " On Cooldown");
         yield return new WaitForSeconds(entityStats.Abilities[abilityIndex].AtkExecute.Cooldown);
         AbilityOnCooldown[abilityIndex] = false;
     }
@@ -95,7 +96,7 @@ public class EntityBehaviour : MonoBehaviour
     }
     public List<int> InRange(Collider other)
     {
-        List<int> newColIndex=new List<int>();
+        List<int> newColIndex = new List<int>();
         foreach (Collider AbilityCol in AbilityTriggers.Keys)
         {
             if (AbilityCol.bounds.Intersects(other.bounds) &&
@@ -109,7 +110,7 @@ public class EntityBehaviour : MonoBehaviour
     }
     public List<int> OutRange(Collider other)
     {
-        List<int> newColIndex=new List<int>();
+        List<int> newColIndex = new List<int>();
         foreach (Collider AbilityCol in AbilityTriggers.Keys)
         {
             if (!AbilityCol.bounds.Intersects(other.bounds) &&
@@ -124,7 +125,7 @@ public class EntityBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(entityStats.Tag==EntityStats.ObjectTag.Enemy?EntityStats.ObjectTag.Tower.ToString():EntityStats.ObjectTag.Enemy.ToString()))
+        if (other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Tower.ToString() : EntityStats.ObjectTag.Enemy.ToString()))
         {
             foreach (int Index in InRange(other))
             {
@@ -135,7 +136,7 @@ public class EntityBehaviour : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag(entityStats.Tag==EntityStats.ObjectTag.Enemy?EntityStats.ObjectTag.Tower.ToString():EntityStats.ObjectTag.Enemy.ToString()))
+        if (other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Tower.ToString() : EntityStats.ObjectTag.Enemy.ToString()))
         {
             foreach (int Index in OutRange(other))
             {

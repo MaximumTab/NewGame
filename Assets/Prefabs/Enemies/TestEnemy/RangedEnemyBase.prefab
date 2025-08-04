@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 710965299032480213}
   - component: {fileID: 159628839330567306}
   - component: {fileID: 1141493297012981061}
-  - component: {fileID: 3140083555687583783}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Enemy
@@ -87,29 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3140083555687583783
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641572714631293177}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &865991990133982177
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,6 +97,7 @@ GameObject:
   - component: {fileID: 4697178224799912142}
   - component: {fileID: 5750703429239691374}
   - component: {fileID: 2889365799378613610}
+  - component: {fileID: 6294528438460463883}
   m_Layer: 0
   m_Name: RangedEnemyBase
   m_TagString: Untagged
@@ -187,3 +164,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!136 &6294528438460463883
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865991990133982177}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.12
+  m_Height: 0.53
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.25, z: 0}
