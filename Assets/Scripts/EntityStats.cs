@@ -10,6 +10,7 @@ public class EntityStats : ScriptableObject
     public float Atk;
     public float AttackInterval;
     public float Speed;
+    public ObjectTag Tag;
 
     public Ability[] Abilities;
     [Flags]
@@ -24,5 +25,10 @@ public class EntityStats : ScriptableObject
         public RangeType Range;
         
         public ActionAttack AtkExecute;
+    }
+    public enum ObjectTag 
+    {
+        Enemy,
+        Tower
     }
 }

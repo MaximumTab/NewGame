@@ -11,7 +11,6 @@ public class EntityBehaviour : MonoBehaviour
     protected float AtkInterval;
     protected float Aspd;
     protected float Speed;
-    
     protected bool Attacking = false;
     protected bool Blocked = false;
     protected Dictionary<Collider,int> AbilityTriggers;
@@ -20,6 +19,8 @@ public class EntityBehaviour : MonoBehaviour
 
     public virtual void OnSpawn()
     {
+        gameObject.tag = entityStats.Tag.ToString();
+        transform.GetChild(0).tag=entityStats.Tag.ToString();
         Hp = entityStats.MaxHp;
         Atk = entityStats.Atk;
         Speed = entityStats.Speed;
@@ -123,7 +124,7 @@ public class EntityBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Tower"))
+        if (other.gameObject.CompareTag(entityStats.Tag==EntityStats.ObjectTag.Enemy?EntityStats.ObjectTag.Tower.ToString():EntityStats.ObjectTag.Enemy.ToString()))
         {
             foreach (int Index in InRange(other))
             {
@@ -134,7 +135,7 @@ public class EntityBehaviour : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Tower"))
+        if (other.gameObject.CompareTag(entityStats.Tag==EntityStats.ObjectTag.Enemy?EntityStats.ObjectTag.Tower.ToString():EntityStats.ObjectTag.Enemy.ToString()))
         {
             foreach (int Index in OutRange(other))
             {
