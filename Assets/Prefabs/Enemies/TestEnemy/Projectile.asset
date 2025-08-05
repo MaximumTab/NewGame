@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c057674c1f16e42a68fd2be6ef74f7, type: 3}
   m_Name: Projectile
   m_EditorClassIdentifier: 
-  DistanceMode: 0
+  DistanceMode: 2
   Speed: 2
+  ArcHeight: 5
   ImpactMode: 0
   AoeRange: 2
-  AoeHitEffect: {fileID: 3130045842231319469, guid: 4187a65df93a20040b05f556ade7c363, type: 3}
-  OnHitEffect: {fileID: 679952778245316672, guid: 23ed78823e43d1e4ea0b0afc37782d72, type: 3}
+  AoeHitEffect: {fileID: 3130045842231319469, guid: ed28763a5609aca4fbb1123b14dceeeb, type: 3}
+  OnHitEffect: {fileID: 679952778245316672, guid: a477399d462d8d34581c3fbc6671a200, type: 3}
   LingeringTime: 0.1

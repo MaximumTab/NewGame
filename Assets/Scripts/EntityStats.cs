@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EntityStats", menuName = "Scriptable Objects/EntityStats")]
+[CreateAssetMenu(fileName = "EntityStats", menuName = "Entities/EntityStats")]
 public class EntityStats : ScriptableObject
 {
     public string Name;

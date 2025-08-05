@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyStats", menuName = "Scriptable Objects/EnemyStats")]
+[CreateAssetMenu(fileName = "EnemyStats", menuName = "Entities/EnemyStats")]
 public class EnemyStats : EntityStats
 {
     public EnemyType Type;

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewTowerStats", menuName = "TowerDefense/TowerStats")]
+[CreateAssetMenu(fileName = "TowerStats", menuName = "Entities/TowerStats")]
 public class TowerStats : EntityStats
 {
 

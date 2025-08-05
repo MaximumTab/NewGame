@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SpawningPattern", menuName = "Scriptable Objects/SpawningPattern")]
+[CreateAssetMenu(fileName = "SpawningPattern", menuName = "Spawning/SpawningPattern")]
 public class SpawningPattern : ScriptableObject
 {
     public List<EnemySpawn> EnemySpawns;

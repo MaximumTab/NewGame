@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: RangedTestData
   m_EditorClassIdentifier: 
   Name: RangedTest
-  Type: 0
   Range: 2
   MaxHp: 50
   Atk: 20
   AttackInterval: 1
   Speed: 1
+  Tag: 0
   Abilities:
-  - Range: 0
-    AtkExecute: {fileID: 11400000, guid: 853ae26ce6ecac544974eab5000cc7d5, type: 2}
+  - Range: 2
+    AtkExecute: {fileID: 11400000, guid: 38b4eb59451e04442b06b711d487c623, type: 2}
+  Type: 0

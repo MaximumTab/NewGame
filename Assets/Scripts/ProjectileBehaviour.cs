@@ -9,12 +9,14 @@ public class ProjectileBehaviour : MonoBehaviour
     private GameObject target;
     private float Damage;
     private bool targetHit = false;
+    private Vector3 StartLoc;
 
     private Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        StartLoc = transform.position;
     }
 
     // Update is called once per frame
@@ -35,6 +37,27 @@ public class ProjectileBehaviour : MonoBehaviour
                 break;
             case ProjectileStats.ProjectileType.Instant:
                 rb.position = target.transform.position;
+                break;
+            case ProjectileStats.ProjectileType.Arcing:
+                if (transform.position.y>target.transform.position.y||new Vector3(target.transform.position.x - transform.position.x, 0,
+                        target.transform.position.z - transform.position.z).magnitude -
+                    new Vector3(target.transform.position.x - StartLoc.x, 0,
+                        target.transform.position.z - StartLoc.z).magnitude / 2>0)
+                {
+                    rb.linearVelocity =
+                        new Vector3(target.transform.position.x - transform.position.x, 0,
+                            target.transform.position.z - transform.position.z).normalized * projectileStats.Speed +
+                        Vector3.up *
+                        ((new Vector3(target.transform.position.x - transform.position.x, 0,
+                              target.transform.position.z - transform.position.z).magnitude -
+                          new Vector3(target.transform.position.x - StartLoc.x, 0,
+                              target.transform.position.z - StartLoc.z).magnitude / 2) * projectileStats.ArcHeight* projectileStats.Speed/4);
+                }
+                else
+                {
+                    rb.linearVelocity = (target.transform.position - transform.position).normalized * projectileStats.Speed;
+                }
+
                 break;
         }
     }

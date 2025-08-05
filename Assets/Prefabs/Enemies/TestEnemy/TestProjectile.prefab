@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b152094f7533d742ae4426329dc7c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileStats: {fileID: 11400000, guid: 99526d4550869ac479a9520d436ca24e, type: 2}
+  projectileStats: {fileID: 11400000, guid: 1f822e436886f6d489a55d52b180e591, type: 2}
 --- !u!54 &7967271423306203628
 Rigidbody:
   m_ObjectHideFlags: 0

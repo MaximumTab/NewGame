@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RangedTestingPattern
   m_EditorClassIdentifier: 
   EnemySpawns:
-  - SpawnTimer: 10
+  - SpawnTimer: 3
     RouteTaken: 0
     Enemy: {fileID: 865991990133982177, guid: 1164842ae26af65428583f85eaea2608, type: 3}
