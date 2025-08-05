@@ -45,6 +45,25 @@ public class EntityBehaviour : MonoBehaviour
         }
     }
 
+    private void sortTarget()
+    {
+        for (int i = 0; i < TargetsInRange.Length; i++)
+        {
+            switch (entityStats.SortBy.Stat)
+            {
+                case EntityStats.SortedBy.Stats.Hp:
+                    TargetsInRange[i].Sort(((o, o1) =>o.GetComponent<EntityBehaviour>().Hp.CompareTo(o1.GetComponent<EntityBehaviour>().Hp) ));
+                    break;
+                case EntityStats.SortedBy.Stats.Atk:
+                    TargetsInRange[i].Sort(((o, o1) =>o.GetComponent<EntityBehaviour>().Atk.CompareTo(o1.GetComponent<EntityBehaviour>().Atk) ));
+                    break;
+                case EntityStats.SortedBy.Stats.Order:
+                    TargetsInRange[i].Sort(((o, o1) =>o.GetComponent<EntityBehaviour>().Order.CompareTo(o1.GetComponent<EntityBehaviour>().Order) ));
+                    break;
+            }
+        }
+    }
+
     private void Update()
     {
         AlwaysRun();
@@ -64,7 +83,14 @@ public class EntityBehaviour : MonoBehaviour
                 StartCoroutine(WaitAttacks());
                 StartCoroutine(CoolDownAbl(index));
                 //Add way to tie into animation.
-                entityStats.Abilities[index].AtkExecute.UseAbility(TargetsInRange[index].First(), transform.position, Atk);
+                for (int i = 0;
+                     i < (entityStats.NumOfTargets > TargetsInRange[index].Count
+                         ? entityStats.NumOfTargets
+                         : TargetsInRange[index].Count);
+                     i++)
+                {
+                    entityStats.Abilities[index].AtkExecute.UseAbility(TargetsInRange[index][i], transform.position, Atk);
+                }
             }
         }
     }
@@ -130,6 +156,7 @@ public class EntityBehaviour : MonoBehaviour
             foreach (int Index in InRange(other))
             {
                 TargetsInRange[Index].Add(other.gameObject);
+                sortTarget();
                 Debug.Log("Added Target to collider " + Index);
             }
         }
@@ -141,6 +168,7 @@ public class EntityBehaviour : MonoBehaviour
             foreach (int Index in OutRange(other))
             {
                 TargetsInRange[Index].Remove(other.gameObject);
+                sortTarget();
                 Debug.Log("Removed Target to collider " + Index);
             }
         }
