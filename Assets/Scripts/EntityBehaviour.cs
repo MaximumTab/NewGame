@@ -21,7 +21,6 @@ public class EntityBehaviour : MonoBehaviour
     public virtual void OnSpawn()
     {
         gameObject.tag = entityStats.Tag.ToString();
-        transform.GetChild(0).tag = entityStats.Tag.ToString();
         Hp = entityStats.MaxHp;
         Atk = entityStats.Atk;
         Speed = entityStats.Speed;
