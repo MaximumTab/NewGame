@@ -137,12 +137,33 @@ public class Paths
 
         return RightOne;
     }
+
+    public float GetPathLength()
+    {
+        float result = 0;
+        for (int i = 1; i < Path.Count; i++)
+        {
+            result += (Path[i - 0] - Path[i]).magnitude;
+        }
+
+        return result;
+    }
 }
 [Serializable]
 public struct TravelPoints
 {
     public List<Paths> CheckPoints;
 
+    public float GetFullPathLength()
+    {
+        float result = 0;
+        foreach (Paths route in CheckPoints)
+        {
+            result += route.GetPathLength();
+        }
+
+        return result;
+    }
 }
 
 public static class UtilPath
@@ -170,19 +191,5 @@ public static class UtilPath
             Loc + Vector3.left + Vector3.back,
             Loc + Vector3.right + Vector3.forward
         };
-    }
-}
-
-public class Resources
-{
-    
-}
-
-public struct Resource
-{
-    enum ResourceType
-    {
-        Wood,
-        Stone //More to be added
     }
 }

@@ -12,6 +12,7 @@ public class EntityStats : ScriptableObject
     public float AttackInterval; 
     public float Speed;
     public ObjectTag Tag;
+    public SortedBy SortBy;
 
     public Ability[] Abilities;
     [Flags]
@@ -31,5 +32,24 @@ public class EntityStats : ScriptableObject
     {
         Enemy,
         Tower
+    }
+
+    public struct SortedBy
+    {
+        public Stats Stat;
+        public Methods Method;
+        public enum Stats
+        {
+            Hp,
+            Atk,
+            Order
+        }
+
+        public enum Methods
+        {
+            Greatest,
+            None,
+            Smallest
+        }
     }
 }

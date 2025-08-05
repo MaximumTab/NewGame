@@ -14,6 +14,8 @@ public class EnemyBehaviour : EntityBehaviour
     private bool Leaked;
     public bool SpawnSuccess = false;
     private bool Waits = false;
+    private Vector3 PrevCheck;
+    private float FullLength;
 
     public override void OnSpawn()
     {
@@ -22,8 +24,8 @@ public class EnemyBehaviour : EntityBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         base.OnSpawn();
         NewRoute();
+        PrevCheck = transform.position;
     }
-
 
     public override void AlwaysRun()
     {
@@ -34,6 +36,29 @@ public class EnemyBehaviour : EntityBehaviour
     public void Move()
     {
         rb.linearVelocity=(CurPath.First()-transform.position).normalized * (Attacking?0:Speed);
+        Order = FullLength + (CurPath.First() - transform.position).magnitude;
+    }
+
+    public float getCurPathLength()
+    {
+        float result = 0;
+        for (int i = CheckProg+1; i < Route.CheckPoints.Count; i++)
+        {
+            Vector3 prevVect = Route.CheckPoints[i].Path.First();
+            foreach (Vector3 Vects in Route.CheckPoints[i].Path)
+            {
+                result += (Vects - prevVect).magnitude;
+                prevVect = Vects;
+            }
+        }
+        Vector3 PrevVect = CurPath.Count!=0?CurPath.First():Vector3.zero;
+        foreach (Vector3 Vects in CurPath)
+        {
+            result += (Vects - PrevVect).magnitude;
+            PrevVect = Vects;
+        }
+
+        return result;
     }
 
     public void NewRoute()
@@ -78,6 +103,7 @@ public class EnemyBehaviour : EntityBehaviour
             if ((transform.position - CurPath.First()).magnitude < 0.25f)
             {
                 CurPath.Remove(CurPath.First());
+                FullLength = getCurPathLength();
             }
             else
             {

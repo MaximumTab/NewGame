@@ -12,6 +12,7 @@ public class EntityBehaviour : MonoBehaviour
     protected float AtkInterval;
     protected float Aspd;
     protected float Speed;
+    public float Order;
     protected bool Attacking = false;
     protected bool Blocked = false;
     protected Dictionary<Collider, int> AbilityTriggers;

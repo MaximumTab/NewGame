@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DistanceMode: 0
   Speed: 3
+  ArcHeight: 0
   ImpactMode: 1
   AoeRange: 0
   AoeHitEffect: {fileID: 0}
-  OnHitEffect: {fileID: 679952778245316672, guid: 23ed78823e43d1e4ea0b0afc37782d72, type: 3}
+  OnHitEffect: {fileID: 679952778245316672, guid: a477399d462d8d34581c3fbc6671a200, type: 3}
   LingeringTime: 0.1
