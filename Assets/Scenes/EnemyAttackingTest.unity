@@ -3222,7 +3222,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1920944731}
-  - component: {fileID: 1920944732}
   m_Layer: 0
   m_Name: CardContainer
   m_TagString: Untagged
@@ -3249,18 +3248,6 @@ Transform:
   - {fileID: 626973569}
   m_Father: {fileID: 125522097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!225 &1920944732
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920944730}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!224 &1939329260 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3098942172749675357, guid: 767527351e9bbc64fa94b04e53115bdd, type: 3}
@@ -3522,11 +3509,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3098942172749675357, guid: 767527351e9bbc64fa94b04e53115bdd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -256.36182
+      value: -258
       objectReference: {fileID: 0}
     - target: {fileID: 3098942172749675357, guid: 767527351e9bbc64fa94b04e53115bdd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -58.20027
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 3098942172749675357, guid: 767527351e9bbc64fa94b04e53115bdd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
