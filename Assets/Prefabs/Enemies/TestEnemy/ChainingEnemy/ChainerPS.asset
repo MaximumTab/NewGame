@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c057674c1f16e42a68fd2be6ef74f7, type: 3}
   m_Name: ChainerPS
   m_EditorClassIdentifier: 
-  DistanceMode: 0
+  DistanceMode: 1
   Speed: 5
-  ArcHeight: 3
-  ImpactMode: 2
+  ArcHeight: 5
+  ImpactMode: 1
   AoeRange: 2
   BounceRange: 2
-  BounceNum: 0
+  BounceNum: 3
   AoeHitEffect: {fileID: 0}
   OnHitEffect: {fileID: 2879384755852692718, guid: 6a097845b55080040b89a49b5c24310c, type: 3}
   LingeringTime: 0.1

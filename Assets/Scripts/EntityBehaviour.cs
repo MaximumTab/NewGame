@@ -29,10 +29,10 @@ public class EntityBehaviour : MonoBehaviour
         Aspd = 100;
         AbilityTriggers = new Dictionary<Collider, int>();
         int i = 0;
-        foreach (EntityStats.Ability statsAbility in entityStats.Abilities)
+        foreach (EntityStats.Abil statsAbility in entityStats.Abilities)
         {
             SphereCollider SphCol = gameObject.AddComponent<SphereCollider>();
-            SphCol.radius = statsAbility.AtkExecute.Range;
+            SphCol.radius = statsAbility.Ability.Range;
             SphCol.isTrigger = true;
             AbilityTriggers.Add(SphCol, i);
             i++;
@@ -74,7 +74,7 @@ public class EntityBehaviour : MonoBehaviour
         DoAction();
     }
 
-    public void DoAction()
+    public virtual void DoAction()
     {
         foreach (int index in AbilityTriggers.Values)
         {
@@ -84,28 +84,38 @@ public class EntityBehaviour : MonoBehaviour
                 StartCoroutine(CoolDownAbl(index));
                 //Add way to tie into animation.
                 for (int i = 0;
-                     i < (entityStats.Abilities[index].AtkExecute.NumOfTargets < TargetsInRange[index].Count
-                         ? entityStats.Abilities[index].AtkExecute.NumOfTargets
+                     i < (entityStats.Abilities[index].Ability.NumOfTargets < TargetsInRange[index].Count
+                         ? entityStats.Abilities[index].Ability.NumOfTargets
                          : TargetsInRange[index].Count);
                      i++)
                 {
-                    entityStats.Abilities[index].AtkExecute.UseAbility(TargetsInRange[index][i], transform.position, Atk);
+                    entityStats.Abilities[index].Ability.UseAbility(TargetsInRange[index][i], transform.position, Atk);
+                }
+            }
+            else if (!AbilityOnCooldown[index] && !Attacking&&entityStats.Abilities[index].Ability.GetType()==typeof(SummonerAbil))
+            {
+                StartCoroutine(WaitAttacks());
+                StartCoroutine(CoolDownAbl(index));
+                //Add way to tie into animation.
+                for (int i = 0; i < entityStats.Abilities[index].Ability.NumOfTargets;i++)
+                {
+                    entityStats.Abilities[index].Ability.UseAbility(gameObject, transform.position, Atk);
                 }
             }
         }
     }
 
-    IEnumerator WaitAttacks()
+    public IEnumerator WaitAttacks()
     {
         Attacking = true;
         yield return new WaitForSeconds(AtkInterval);
         Attacking = false;
     }
 
-    IEnumerator CoolDownAbl(int abilityIndex)
+    public IEnumerator CoolDownAbl(int abilityIndex)
     {
         AbilityOnCooldown[abilityIndex] = true;
-        yield return new WaitForSeconds(entityStats.Abilities[abilityIndex].AtkExecute.Cooldown);
+        yield return new WaitForSeconds(entityStats.Abilities[abilityIndex].Ability.Cooldown);
         AbilityOnCooldown[abilityIndex] = false;
     }
 

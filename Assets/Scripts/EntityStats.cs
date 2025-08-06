@@ -14,7 +14,7 @@ public class EntityStats : ScriptableObject
     public ObjectTag Tag;
     public SortedBy SortBy;
 
-    public Ability[] Abilities;
+    public Abil[] Abilities;
     [Flags]
     public enum RangeType
     {
@@ -22,11 +22,11 @@ public class EntityStats : ScriptableObject
         Ranged= 1<<1
     }
     [Serializable]
-    public struct Ability
+    public struct Abil
     {
         public RangeType Range;
         
-        public ActionAttack AtkExecute;
+        public Ability Ability;
     }
     public enum ObjectTag 
     {

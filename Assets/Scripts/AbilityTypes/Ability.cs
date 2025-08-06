@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Abilitybase", menuName = "Scriptable Objects/Abilities")]
-public class ActionAttack : ScriptableObject
+[CreateAssetMenu(fileName = "AbilityProjectile", menuName = "Abilities/Projectiles")]
+public class Ability : ScriptableObject
 {
     //To be changed according to each enemy;
     public float Range;

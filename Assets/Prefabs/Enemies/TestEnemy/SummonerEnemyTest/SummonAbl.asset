@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
-  m_Name: ChainerAbility
+  m_Script: {fileID: 11500000, guid: 0fd985fbdfc2a2f4c8e293cd54b988b6, type: 3}
+  m_Name: SummonAbl
   m_EditorClassIdentifier: 
-  Range: 3
+  Range: 0.2
   AtkModifier: 1
-  NumOfTargets: 1
-  Cooldown: 5
-  Projectile: {fileID: 3671251506380815835, guid: da2e0036654ba9a4ba6b047874e9f446, type: 3}
+  NumOfTargets: 3
+  Cooldown: 10
+  Projectile: {fileID: 865991990133982177, guid: 0d0a2240cb8beb74b8b5a20ae96d3d68, type: 3}

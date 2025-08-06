@@ -39,7 +39,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void sortTarget()
     {
-        TargetsInRange.Sort(((o, o1) =>o.GetComponent<EntityBehaviour>().Order.CompareTo(o1.GetComponent<EntityBehaviour>().Order) ));
+        TargetsInRange.Sort((o, o1) =>o.GetComponent<EntityBehaviour>().Order.CompareTo(o1.GetComponent<EntityBehaviour>().Order) );
     }
     private void MoveToTarget()
     {
@@ -83,9 +83,10 @@ public class ProjectileBehaviour : MonoBehaviour
             if (!GettingTarget)
             {
                 OnHit();
+                BounceAmount--;
             }
 
-            if (BounceAmount > 0)
+            if (BounceAmount > 0&&projectileStats.ImpactMode==ProjectileStats.ImpactType.Bouncing)
             {
                 targetHit = false;
             }
@@ -114,11 +115,7 @@ public class ProjectileBehaviour : MonoBehaviour
                 AHEffect.transform.localScale=Vector3.one*projectileStats.AoeRange;
                 break;
             case ProjectileStats.ImpactType.Bouncing:
-                SphCol = gameObject.AddComponent<SphereCollider>();
-                SphCol.radius = projectileStats.BounceRange;
-                SphCol.isTrigger = true;
                 DoDamage(target);
-                BounceAmount--;
                 StartCoroutine(GetNextTarget());
                 break;
         }
@@ -127,19 +124,24 @@ public class ProjectileBehaviour : MonoBehaviour
     private IEnumerator GetNextTarget()
     {
         GettingTarget = true;
-        yield return new WaitForSeconds(0.02f);
+        foreach (Collider other in Physics.OverlapSphere(transform.position, projectileStats.BounceRange))
+        {
+            if (other.gameObject.CompareTag(target.tag))
+            {
+                if (!AlreadyHitTargets.Contains(other.gameObject))
+                {
+                    TargetsInRange.Add(other.gameObject);
+                }
+            }
+        }
+
+        yield return null;
         sortTarget();
-        Debug.Log(TargetsInRange.Count);
         if (TargetsInRange.Count > 0)
         {
             StartLoc = target.transform.position;
             target = TargetsInRange.First();
-            AlreadyHitTargets.Add(target);
             TargetsInRange = new List<GameObject>();
-            if (SphCol)
-            {
-                Destroy(SphCol);
-            }
         }
         else
         {
@@ -147,16 +149,19 @@ public class ProjectileBehaviour : MonoBehaviour
             StartCoroutine(DestroySelf());
         }
 
+        yield return null;
         GettingTarget = false;
     }
 
     private void DoDamage(GameObject target)
     {
+        AlreadyHitTargets.Add(target);
         if (target.transform.GetComponent<EntityBehaviour>())
         {
             target.transform.GetComponent<EntityBehaviour>().TakeDamage(Damage);
             Instantiate(projectileStats.OnHitEffect,target.transform);
         }
+        
     }
 
     public void DamageDoneTo(float Atk, float AtkMod,GameObject Target)
@@ -164,9 +169,7 @@ public class ProjectileBehaviour : MonoBehaviour
         Damage = Atk * AtkMod;
         target = Target;
         AlreadyHitTargets = new List<GameObject>();
-        AlreadyHitTargets.Add(target);
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(target.tag))
@@ -175,12 +178,6 @@ public class ProjectileBehaviour : MonoBehaviour
             {
                 case ProjectileStats.ImpactType.Aoe:
                     DoDamage(other.gameObject);
-                    break;
-                case ProjectileStats.ImpactType.Bouncing:
-                    if (!AlreadyHitTargets.Contains(other.gameObject))
-                    {
-                        TargetsInRange.Add(other.gameObject);
-                    }
                     break;
             }
         }

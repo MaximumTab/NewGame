@@ -21,5 +21,5 @@ MonoBehaviour:
   Tag: 0
   Abilities:
   - Range: 2
-    AtkExecute: {fileID: 11400000, guid: 38b4eb59451e04442b06b711d487c623, type: 2}
+    Ability: {fileID: 11400000, guid: 38b4eb59451e04442b06b711d487c623, type: 2}
   Type: 0
