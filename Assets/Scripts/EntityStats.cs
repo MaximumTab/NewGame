@@ -11,7 +11,6 @@ public class EntityStats : ScriptableObject
     [Header("How many seconds inbetween attacks")]
     public float AttackInterval; 
     public float Speed;
-    public int NumOfTargets=1;
     public ObjectTag Tag;
     public SortedBy SortBy;
 

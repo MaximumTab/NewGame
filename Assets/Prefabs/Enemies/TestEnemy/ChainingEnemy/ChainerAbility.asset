@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
-  m_Name: Abilitybase
+  m_Name: ChainerAbility
   m_EditorClassIdentifier: 
-  Range: 2
+  Range: 3
   AtkModifier: 1
-  NumOfTargets: 1
-  Cooldown: 3
-  Projectile: {fileID: 7355939984919831324, guid: 509634221a9d8c349a6afac8cbd41484, type: 3}
+  NumOfTargets: 0
+  Cooldown: 5
+  Projectile: {fileID: 3671251506380815835, guid: da2e0036654ba9a4ba6b047874e9f446, type: 3}

@@ -9,11 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
-  m_Name: Abilitybase
+  m_Script: {fileID: 11500000, guid: 7ac9f665be22eeb4e8f4479bb1306928, type: 3}
+  m_Name: ChainerES
   m_EditorClassIdentifier: 
+  Name: Chainer
   Range: 2
-  AtkModifier: 1
-  NumOfTargets: 1
-  Cooldown: 3
-  Projectile: {fileID: 7355939984919831324, guid: 509634221a9d8c349a6afac8cbd41484, type: 3}
+  MaxHp: 100
+  Atk: 5
+  AttackInterval: 1
+  Speed: 2
+  Tag: 0
+  Abilities:
+  - Range: 2
+    AtkExecute: {fileID: 11400000, guid: cc0797879e955e04aaac8ab49b28a67a, type: 2}
+  Type: 0

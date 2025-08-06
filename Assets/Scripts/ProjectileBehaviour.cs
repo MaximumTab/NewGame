@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
@@ -9,7 +10,12 @@ public class ProjectileBehaviour : MonoBehaviour
     private GameObject target;
     private float Damage;
     private bool targetHit = false;
+    private bool GettingTarget = false;
+    private float BounceAmount;
     private Vector3 StartLoc;
+    private List<GameObject> AlreadyHitTargets;
+    private List<GameObject> TargetsInRange;
+    SphereCollider SphCol;
 
     private Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,6 +23,9 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
         StartLoc = transform.position;
+        TargetsInRange = new List<GameObject>();
+        AlreadyHitTargets = new List<GameObject>();
+        BounceAmount = projectileStats.BounceNum;
     }
 
     // Update is called once per frame
@@ -28,6 +37,10 @@ public class ProjectileBehaviour : MonoBehaviour
         }
     }
 
+    private void sortTarget()
+    {
+        TargetsInRange.Sort(((o, o1) =>o.GetComponent<EntityBehaviour>().Order.CompareTo(o1.GetComponent<EntityBehaviour>().Order) ));
+    }
     private void MoveToTarget()
     {
         switch (projectileStats.DistanceMode)
@@ -67,15 +80,25 @@ public class ProjectileBehaviour : MonoBehaviour
         if ((target.transform.position - transform.position).magnitude <= 0.1f&&!targetHit)
         {
             targetHit = true;
-            OnHit();
-            StartCoroutine(DestroySelf());
+            if (!GettingTarget)
+            {
+                OnHit();
+            }
+
+            if (BounceAmount > 0)
+            {
+                targetHit = false;
+            }
+            else
+            {
+                StartCoroutine(DestroySelf());
+            }
         }
         else if(!targetHit)
         {
             MoveToTarget();
         }
     }
-
     private void OnHit()
     {
         switch (projectileStats.ImpactMode)
@@ -84,13 +107,47 @@ public class ProjectileBehaviour : MonoBehaviour
                 DoDamage(target);
                 break;
             case ProjectileStats.ImpactType.Aoe:
-                SphereCollider SphCol = gameObject.AddComponent<SphereCollider>();
+                SphCol = gameObject.AddComponent<SphereCollider>();
                 SphCol.radius = projectileStats.AoeRange;
                 SphCol.isTrigger = true;
                 GameObject AHEffect=Instantiate(projectileStats.AoeHitEffect, transform.position, Quaternion.identity);
                 AHEffect.transform.localScale=Vector3.one*projectileStats.AoeRange;
                 break;
+            case ProjectileStats.ImpactType.Bouncing:
+                SphCol = gameObject.AddComponent<SphereCollider>();
+                SphCol.radius = projectileStats.BounceRange;
+                SphCol.isTrigger = true;
+                DoDamage(target);
+                BounceAmount--;
+                StartCoroutine(GetNextTarget());
+                break;
         }
+    }
+
+    private IEnumerator GetNextTarget()
+    {
+        GettingTarget = true;
+        yield return new WaitForSeconds(0.02f);
+        sortTarget();
+        Debug.Log(TargetsInRange.Count);
+        if (TargetsInRange.Count > 0)
+        {
+            StartLoc = target.transform.position;
+            target = TargetsInRange.First();
+            AlreadyHitTargets.Add(target);
+            TargetsInRange = new List<GameObject>();
+            if (SphCol)
+            {
+                Destroy(SphCol);
+            }
+        }
+        else
+        {
+            BounceAmount = 0;
+            StartCoroutine(DestroySelf());
+        }
+
+        GettingTarget = false;
     }
 
     private void DoDamage(GameObject target)
@@ -106,13 +163,26 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         Damage = Atk * AtkMod;
         target = Target;
+        AlreadyHitTargets = new List<GameObject>();
+        AlreadyHitTargets.Add(target);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(target.tag))
         {
-            DoDamage(other.gameObject);
+            switch (projectileStats.ImpactMode)
+            {
+                case ProjectileStats.ImpactType.Aoe:
+                    DoDamage(other.gameObject);
+                    break;
+                case ProjectileStats.ImpactType.Bouncing:
+                    if (!AlreadyHitTargets.Contains(other.gameObject))
+                    {
+                        TargetsInRange.Add(other.gameObject);
+                    }
+                    break;
+            }
         }
     }
 

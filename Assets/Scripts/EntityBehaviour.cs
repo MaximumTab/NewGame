@@ -84,8 +84,8 @@ public class EntityBehaviour : MonoBehaviour
                 StartCoroutine(CoolDownAbl(index));
                 //Add way to tie into animation.
                 for (int i = 0;
-                     i < (entityStats.NumOfTargets > TargetsInRange[index].Count
-                         ? entityStats.NumOfTargets
+                     i < (entityStats.Abilities[index].AtkExecute.NumOfTargets < TargetsInRange[index].Count
+                         ? entityStats.Abilities[index].AtkExecute.NumOfTargets
                          : TargetsInRange[index].Count);
                      i++)
                 {
@@ -98,7 +98,6 @@ public class EntityBehaviour : MonoBehaviour
     IEnumerator WaitAttacks()
     {
         Attacking = true;
-        Debug.Log("Attacking");
         yield return new WaitForSeconds(AtkInterval);
         Attacking = false;
     }
@@ -106,7 +105,6 @@ public class EntityBehaviour : MonoBehaviour
     IEnumerator CoolDownAbl(int abilityIndex)
     {
         AbilityOnCooldown[abilityIndex] = true;
-        Debug.Log("Ability " + abilityIndex + " On Cooldown");
         yield return new WaitForSeconds(entityStats.Abilities[abilityIndex].AtkExecute.Cooldown);
         AbilityOnCooldown[abilityIndex] = false;
     }
@@ -139,8 +137,7 @@ public class EntityBehaviour : MonoBehaviour
         List<int> newColIndex = new List<int>();
         foreach (Collider AbilityCol in AbilityTriggers.Keys)
         {
-            if (!AbilityCol.bounds.Intersects(other.bounds) &&
-                TargetsInRange[AbilityTriggers[AbilityCol]].Contains(other.gameObject))
+            if (TargetsInRange[AbilityTriggers[AbilityCol]].Contains(other.gameObject))
             {
                 newColIndex.Add(AbilityTriggers[AbilityCol]);
             }
@@ -157,7 +154,6 @@ public class EntityBehaviour : MonoBehaviour
             {
                 TargetsInRange[Index].Add(other.gameObject);
                 sortTarget();
-                Debug.Log("Added Target to collider " + Index);
             }
         }
     }
@@ -169,7 +165,6 @@ public class EntityBehaviour : MonoBehaviour
             {
                 TargetsInRange[Index].Remove(other.gameObject);
                 sortTarget();
-                Debug.Log("Removed Target to collider " + Index);
             }
         }
     }
