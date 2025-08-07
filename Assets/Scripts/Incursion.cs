@@ -11,23 +11,31 @@ public class Incursion:MonoBehaviour
     public bool CreatePath;
     public List<Vector3> Visited;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
 
+
+    private Dictionary<Vector3, Tunnel> Tunnels;
     public List<TravelPoints> Routes;
 
     public void GeneratePath()
     {
+        Path[] Tiles = transform.parent.GetComponentsInChildren<Path>();
+        Tunnel[] TunnTiles = transform.parent.GetComponentsInChildren<Tunnel>();
+        Debug.Log(Tiles.Length+ " "+TunnTiles.Length);
+        Tunnels = new Dictionary<Vector3, Tunnel>();
+        foreach (Tunnel Tun in TunnTiles)
+        {
+            Tunnels.Add(Tun.transform.position,Tun);
+        }
         for (int k = 0; k < Routes.Count; k++)
         {
             //Routes[k].CheckPoints.First().Distances=new Dictionary<Vector3, int>();
-            Path[] Tiles = transform.parent.GetComponentsInChildren<Path>();
             for (int i = 0; i < Routes[k].CheckPoints.Count; i++)
             {
                 Visited = new List<Vector3>();
                 Routes[k].CheckPoints[i].Distances =UtilPath.EmpAndAddDist(Routes[k].CheckPoints[i].Distances,Tiles);
 
                 AddValues(Routes[k].CheckPoints[i].Objective.position, 1, i,k);
-                Routes[k].CheckPoints[i].Path=UtilPath.MakePath(i==0?transform.position:Routes[k].CheckPoints[i-1].Objective.transform.position,Routes[k].CheckPoints[i].Distances,Routes[k].CheckPoints[i].Path);
+                Routes[k].CheckPoints[i].Path=UtilPath.MakePath(i==0?transform.position:Routes[k].CheckPoints[i-1].Objective.transform.position,Routes[k].CheckPoints[i].Distances,Routes[k].CheckPoints[i].Path,Tunnels);
             }
         }
     }
@@ -53,14 +61,24 @@ public class Incursion:MonoBehaviour
         Visited.Add(StartLoc);
         if (StartLoc != transform.position)
         {
+            if (Tunnels.Keys.Contains(StartLoc))
+            {
+                if (Routes[RouteID].CheckPoints[i].Distances
+                        .ContainsKey(Tunnels[StartLoc].BuddyTunnel.transform.position) &&
+                    (!Visited.Contains(Tunnels[StartLoc].BuddyTunnel.transform.position) || Routes[RouteID]
+                        .CheckPoints[i].Distances[Tunnels[StartLoc].BuddyTunnel.transform.position] > Index))
+                {
+                    Routes[RouteID].CheckPoints[i].Distances[Tunnels[StartLoc].BuddyTunnel.transform.position]=Index;
+                    AddValues(Tunnels[StartLoc].BuddyTunnel.transform.position,Index+1,i,RouteID);
+                    
+                }
+
+                Debug.Log("Gone through Tunnels, my index is "+Index);
+            }
+            Debug.Log("My index is "+Index);
             foreach (Vector3 Dir in UtilPath.AllAdjDirections(StartLoc))
             {
-                if (Routes[RouteID].CheckPoints[i].Distances.ContainsKey(Dir) && !Visited.Contains(Dir))
-                {
-                    Routes[RouteID].CheckPoints[i].Distances[Dir]=Index;
-                    AddValues(Dir,Index+1,i,RouteID);
-                }
-                else if(Routes[RouteID].CheckPoints[i].Distances.ContainsKey(Dir)&&Routes[RouteID].CheckPoints[i].Distances[Dir]>Index)
+                if (Routes[RouteID].CheckPoints[i].Distances.ContainsKey(Dir) && (!Visited.Contains(Dir)||Routes[RouteID].CheckPoints[i].Distances[Dir]>Index))
                 {
                     Routes[RouteID].CheckPoints[i].Distances[Dir]=Index;
                     AddValues(Dir,Index+1,i,RouteID);

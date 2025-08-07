@@ -1,10 +1,28 @@
 fileFormatVersion: 2
-guid: 70c888f49ba4b5c4ea886d5c94e7b21b
+guid: 4606be86c42c7234b9f025b37b25b1f0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7145198348311737387
-    second: Sprite-0002_0
+      213: 4354231566380549168
+    second: Skeleton_0
+  - first:
+      213: 5809030516613042957
+    second: Skeleton_1
+  - first:
+      213: 6682473901004932845
+    second: Skeleton_2
+  - first:
+      213: -6895646428441557691
+    second: Skeleton_3
+  - first:
+      213: 8681928648562347177
+    second: Skeleton_4
+  - first:
+      213: -6534455043122499310
+    second: Skeleton_5
+  - first:
+      213: -7021505876318606439
+    second: Skeleton_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +55,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 3
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,23 +144,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite-0002_0
+      name: Skeleton_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 0
-        width: 177
-        height: 275
+        x: 0
+        y: 2
+        width: 49
+        height: 74
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b2434d87a08d82360800000000000000
-      internalID: 7145198348311737387
+      spriteID: 2be911f27b63e8948a3754df9725bd2b
+      internalID: 4354231566380549168
       vertices: []
       indices: 
       edges: []
@@ -151,7 +169,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 904d3b8db0d669e48bd75bfcde07f360
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +179,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sprite-0002_0: 7145198348311737387
+      Skeleton_0: 4354231566380549168
+      Skeleton_1: 5809030516613042957
+      Skeleton_2: 6682473901004932845
+      Skeleton_3: -6895646428441557691
+      Skeleton_4: 8681928648562347177
+      Skeleton_5: -6534455043122499310
+      Skeleton_6: -7021505876318606439
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

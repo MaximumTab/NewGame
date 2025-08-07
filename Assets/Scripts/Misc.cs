@@ -91,16 +91,16 @@ public static class UtilPath
         }
     }
 
-    public static List<Vector3> ReduceNodes(List<Vector3> Path,Dictionary<Vector3, int> Distances)
+    public static List<Vector3> ReduceNodes(List<Vector3> Path,Dictionary<Vector3, int> Distances, Dictionary<Vector3,Tunnel>Tunnels)
     {
-        Path=Shortcut(Path,Distances);
+        Path=Shortcut(Path,Distances,Tunnels);
         List<Vector3> ResultPath=new List<Vector3>();
         Vector3 LastNode=Path[0];
         Vector3 PreviousTile=Path[0];
         ResultPath.Add(LastNode);
         foreach (Vector3 Tile in Path)
         {
-            if (!Mathf.Approximately(LastNode.x, Tile.x) && !Mathf.Approximately(LastNode.z, Tile.z))
+            if (!Mathf.Approximately(LastNode.x, Tile.x) && !Mathf.Approximately(LastNode.z, Tile.z)||Tunnels.ContainsKey(Tile))
             {
                 ResultPath.Add(PreviousTile);
                 LastNode = PreviousTile;
@@ -112,7 +112,7 @@ public static class UtilPath
         return ResultPath;
     }
 
-    public static List<Vector3> Shortcut(List<Vector3> Path,Dictionary<Vector3, int> Distances)
+    public static List<Vector3> Shortcut(List<Vector3> Path,Dictionary<Vector3, int> Distances,Dictionary<Vector3,Tunnel>Tunnels)
     {
         List<Vector3> ResultPath=new List<Vector3>();
         ResultPath.Add(Path[0]);
@@ -129,7 +129,7 @@ public static class UtilPath
                     }
                 }
             }
-            if (Strikes != 0)
+            if (Strikes != 0||Tunnels.ContainsKey(Path[i-1]))
             {
                 ResultPath.Add(Path[i-1]);
             }
@@ -138,24 +138,36 @@ public static class UtilPath
         return ResultPath;
         
     }
-    public static  List<Vector3> MakePath(Vector3 StartLoc,Dictionary<Vector3, int> Distances,List<Vector3>Path)
+    public static  List<Vector3> MakePath(Vector3 StartLoc,Dictionary<Vector3, int> Distances,List<Vector3>Path, Dictionary<Vector3,Tunnel> Tunnels)
     {
         Vector3 ShortRoute = StartLoc;
         Path = new List<Vector3>();
         AddTile(Path,ShortRoute);
-        Vector3 NextRoute = RightDir(ShortRoute,Distances);
-        while (ShortRoute != NextRoute)
+        Vector3 NextRoute = RightDir(ShortRoute,Distances,Tunnels);
+        while (ShortRoute != NextRoute||Tunnels.ContainsKey(ShortRoute))
         {
             AddTile(Path,NextRoute);
             ShortRoute = NextRoute;
-            NextRoute = RightDir(ShortRoute,Distances);
+            NextRoute = RightDir(ShortRoute,Distances,Tunnels);
         }
-        return ReduceNodes(Path,Distances);
+        return ReduceNodes(Path,Distances,Tunnels);
         
     }
-    private static Vector3 RightDir(Vector3 Loc,Dictionary<Vector3, int> Distances)
+    private static Vector3 RightDir(Vector3 Loc,Dictionary<Vector3, int> Distances,Dictionary<Vector3,Tunnel>Tunnels)
     {
         Vector3 RightOne=Loc;
+        Debug.Log("Tunnel Count is "+Tunnels.Count);
+        if (Tunnels.Keys.Contains(Loc))
+        {
+            Debug.Log("Gone through Tunnels");
+            if (Distances.Keys.Contains(Tunnels[Loc].BuddyTunnel.transform.position) && Distances.Keys.Contains(RightOne))
+            {
+                if (Distances[Tunnels[Loc].BuddyTunnel.transform.position] < Distances[RightOne])
+                {
+                    return Tunnels[Loc].BuddyTunnel.transform.position;
+                }
+            }
+        }
         foreach (Vector3 Dir in AllAdjDirections(Loc))
         {
             if (Distances.Keys.Contains(Dir)&&Distances.Keys.Contains(RightOne))
