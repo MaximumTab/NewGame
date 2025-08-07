@@ -78,7 +78,7 @@ public class EntityBehaviour : MonoBehaviour
     {
         foreach (int index in AbilityTriggers.Values)
         {
-            if (!AbilityOnCooldown[index] && !Attacking && TargetsInRange[index].Count > 0)
+            if (!AbilityOnCooldown[index] && !Attacking && TargetsInRange[index].Count > 0&&entityStats.Abilities[index].Ability.GetType()!=typeof(SummonerAbil))
             {
                 StartCoroutine(WaitAttacks());
                 StartCoroutine(CoolDownAbl(index));

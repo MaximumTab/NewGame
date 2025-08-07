@@ -130,7 +130,7 @@ public class ProjectileBehaviour : MonoBehaviour
         GettingTarget = true;
         foreach (Collider other in Physics.OverlapSphere(transform.position, projectileStats.BounceRange))
         {
-            if (other.gameObject.CompareTag(target.tag))
+            if (other.gameObject.CompareTag(target.tag)&&!other.isTrigger)
             {
                 if (!AlreadyHitTargets.Contains(other.gameObject))
                 {

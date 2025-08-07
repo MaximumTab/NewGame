@@ -17,7 +17,7 @@ MonoBehaviour:
   ArcHeight: 5
   ImpactMode: 1
   AoeRange: 2
-  BounceRange: 2
+  BounceRange: 1
   BounceNum: 3
   AoeHitEffect: {fileID: 0}
   OnHitEffect: {fileID: 2879384755852692718, guid: 6a097845b55080040b89a49b5c24310c, type: 3}
