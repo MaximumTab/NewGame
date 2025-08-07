@@ -9,13 +9,14 @@ public class EnemyBehaviour : EntityBehaviour
     private Rigidbody rb;
     public TravelPoints Route;
     private List<Vector3> CurPath;
+    private List<Vector3> Visited;
     
     private int CheckProg;
     private bool Leaked;
     public bool SpawnSuccess = false;
     private bool Waits = false;
-    private Vector3 PrevCheck;
     private float FullLength;
+
 
     public override void OnSpawn()
     {
@@ -24,7 +25,6 @@ public class EnemyBehaviour : EntityBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         base.OnSpawn();
         NewRoute();
-        PrevCheck = transform.position;
     }
 
     public override void AlwaysRun()
@@ -64,7 +64,7 @@ public class EnemyBehaviour : EntityBehaviour
     public void NewRoute()
     {
         //Route.CheckPoints[CheckProg].MakePath(transform.position);
-        CurPath = Route.CheckPoints[CheckProg].Path;
+        CurPath =Route.CheckPoints[CheckProg].Path;
     }
 
     public void ReachedCheckPoint()
@@ -77,7 +77,6 @@ public class EnemyBehaviour : EntityBehaviour
         else if(!Leaked)
         {
             Leaked = true;
-            Debug.Log("Ive reached the end!!");
             rb.linearVelocity = Vector3.zero;
         }
     }

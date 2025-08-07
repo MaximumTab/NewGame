@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab26a08124141e3408e784e49cb88d8f, type: 3}
+  m_Name: SummonerPattern
+  m_EditorClassIdentifier: 
+  EnemySpawns:
+  - SpawnTimer: 3
+    RouteTaken: 0
+    Enemy: {fileID: 7731731056050431844, guid: aa02d071241bbb143964830ff5b6108e, type: 3}
+  - SpawnTimer: 7
+    RouteTaken: 0
+    Enemy: {fileID: 8084253102435737758, guid: 88c55edbf8a2745439630fb6e52274ed, type: 3}
