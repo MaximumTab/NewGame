@@ -16,8 +16,8 @@ MonoBehaviour:
   Range: 2
   MaxHp: 200
   Atk: 10
-  AttackInterval: 1
-  Speed: 1
+  AttackInterval: 3
+  Speed: 0.5
   Tag: 0
   Abilities:
   - Range: 2

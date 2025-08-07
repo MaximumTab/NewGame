@@ -15,7 +15,6 @@ public class ProjectileBehaviour : MonoBehaviour
     private Vector3 StartLoc;
     private List<GameObject> AlreadyHitTargets;
     private List<GameObject> TargetsInRange;
-    SphereCollider SphCol;
 
     private Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -108,9 +107,14 @@ public class ProjectileBehaviour : MonoBehaviour
                 DoDamage(target);
                 break;
             case ProjectileStats.ImpactType.Aoe:
-                SphCol = gameObject.AddComponent<SphereCollider>();
-                SphCol.radius = projectileStats.AoeRange;
-                SphCol.isTrigger = true;
+                foreach (Collider other in Physics.OverlapSphere(transform.position, projectileStats.BounceRange))
+                {
+                    if (other.gameObject.CompareTag(target.tag)&&!other.isTrigger)
+                    {
+                        DoDamage(other.gameObject);
+                    }
+                }
+
                 GameObject AHEffect=Instantiate(projectileStats.AoeHitEffect, transform.position, Quaternion.identity);
                 AHEffect.transform.localScale=Vector3.one*projectileStats.AoeRange;
                 break;
@@ -169,18 +173,6 @@ public class ProjectileBehaviour : MonoBehaviour
         Damage = Atk * AtkMod;
         target = Target;
         AlreadyHitTargets = new List<GameObject>();
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag(target.tag))
-        {
-            switch (projectileStats.ImpactMode)
-            {
-                case ProjectileStats.ImpactType.Aoe:
-                    DoDamage(other.gameObject);
-                    break;
-            }
-        }
     }
 
     IEnumerator DestroySelf()
