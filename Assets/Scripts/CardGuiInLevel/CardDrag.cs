@@ -26,6 +26,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         // spawn the tower in world-space
         draggingTower = Instantiate(towerPrefab);
+        //--- disable the towers scripts -------
+        MonoBehaviour[] scriptsToDisable = draggingTower.GetComponentsInChildren<MonoBehaviour>();
+        foreach (var script in scriptsToDisable)
+            script.enabled = false;
         // place under cursor at grid height
         draggingTower.transform.position = ScreenToGridWorldPoint(e.position);
     }
@@ -52,7 +56,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
         if (best != null && bestDist <= snapThreshold)
             draggingTower.transform.position = best.position;
-
+        //----enable towers scripts from dragingTower -----
+        MonoBehaviour[] scriptsToEnable = draggingTower.GetComponentsInChildren<MonoBehaviour>();
+        foreach (var script in scriptsToEnable)
+            script.enabled = true;
         // remove the card UI
         Destroy(gameObject);
     }
