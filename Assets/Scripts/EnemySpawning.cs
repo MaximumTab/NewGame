@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EnemySpawning : MonoBehaviour
+public class EnemySpawning : Incursion
 {
-    private List<TravelPoints> Routes;
-    private Dictionary<Vector3,Tunnel> TunnelLocs;
     public List<EnemySpawn> EnemySpawns;
     [Serializable]
     public struct EnemySpawn
@@ -24,13 +22,9 @@ public class EnemySpawning : MonoBehaviour
             public float Time;
         }
     }
-
-
-    private void OnDrawGizmos()
+    public override void OnDrawGizmos()
     {
-        Incursion SpawnPoint = gameObject.GetComponent<Incursion>();
-        Routes = SpawnPoint.Routes;
-        TunnelLocs = SpawnPoint.Tunnels;
+        base.OnDrawGizmos();
         foreach (EnemySpawn ES in EnemySpawns)
         {
             int TunnelIndex = 0;
@@ -38,7 +32,7 @@ public class EnemySpawning : MonoBehaviour
             {
                 for (int i=0;i<paths.Path.Count;i++)
                 {
-                    if (TunnelLocs.ContainsKey(paths.Path[i])&&paths.Path.Count>i+1)
+                    if (Tunnels.ContainsKey(paths.Path[i])&&paths.Path.Count>i+1)
                     {
                         if (ES.TunnelTimes.Count == TunnelIndex)
                         {
@@ -64,15 +58,15 @@ public class EnemySpawning : MonoBehaviour
 
     private void Start()
     {
-        Incursion SpawnPoint = gameObject.GetComponent<Incursion>();
-        SpawnPoint.GeneratePath();
-        Routes = SpawnPoint.Routes;
-        TunnelLocs = SpawnPoint.Tunnels;
         StartCoroutine(SpawnCycle());
     }
+    
 
     IEnumerator SpawnCycle()
     {
+        yield return null;
+        GeneratePath();
+        yield return new WaitForSeconds(0.2f);
         float Timer = 0;
         int Iter = 0;
         while (EnemySpawns.Last().SpawnTimer > Timer)
@@ -88,13 +82,14 @@ public class EnemySpawning : MonoBehaviour
                 {
                     CurEnem.Route.CheckPoints.Add(new Paths(path.Objective));
                     CurEnem.Route.CheckPoints.Last().Path = new List<Vector3>();
+                    CurEnem.Route.CheckPoints.Last().WaitSeconds = path.WaitSeconds;
                     foreach (Vector3 Location in path.Path)
                     {
                         CurEnem.Route.CheckPoints.Last().Path.Add(Location);
                     }
                 }
                 CurEnem.OnSpawn();
-                CurEnem.TunnelLocs = TunnelLocs;
+                CurEnem.TunnelLocs = Tunnels;
                 CurEnem.TunnelTimes = new List<float>();
                 foreach (EnemySpawn.TunnnelsAndTime TAT in EnemySpawns[Iter].TunnelTimes)
                 {

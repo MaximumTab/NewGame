@@ -6,7 +6,6 @@ public static class TunnelManager
     public class CoTunManager: MonoBehaviour { }
 
 
-    //Variable reference for the class
     private static CoTunManager CoTunManag;
 
     public static void GoingThrough(GameObject passenger,Vector3 exitPoint, float travelTime)

@@ -16,9 +16,12 @@ MonoBehaviour:
   Range: 2
   MaxHp: 0
   Atk: 10
-  AttackInterval: 3
+  AttackInterval: 0.5
   Speed: 0
   Tag: 1
+  SortBy:
+    Stat: 2
+    Method: 2
   Abilities:
   - Range: 2
     Ability: {fileID: 11400000, guid: e9c04336f8bf0984da2ae60f07dd0e3f, type: 2}

@@ -34,6 +34,7 @@ public class EntityStats : ScriptableObject
         Tower
     }
 
+    [Serializable]
     public struct SortedBy
     {
         public Stats Stat;

@@ -156,10 +156,10 @@ public static class UtilPath
     private static Vector3 RightDir(Vector3 Loc,Dictionary<Vector3, int> Distances,Dictionary<Vector3,Tunnel>Tunnels)
     {
         Vector3 RightOne=Loc;
-        Debug.Log("Tunnel Count is "+Tunnels.Count);
+        //Debug.Log("Tunnel Count is "+Tunnels.Count);
         if (Tunnels.Keys.Contains(Loc))
         {
-            Debug.Log("Gone through Tunnels");
+            //Debug.Log("Gone through Tunnels");
             foreach(Tunnel Buds in Tunnels[Loc].ExitTunnel)
             {
                 if (Distances.Keys.Contains(Buds.transform.position) && Distances.Keys.Contains(RightOne))

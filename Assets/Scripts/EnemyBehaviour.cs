@@ -12,7 +12,7 @@ public class EnemyBehaviour : EntityBehaviour
     private List<Vector3> Visited;
     public Dictionary<Vector3,Tunnel> TunnelLocs;
     public List<float> TunnelTimes;
-    private int TunnelIndex = 0;
+    public int TunnelIndex = 0;
     
     private int CheckProg;
     private bool Leaked;
@@ -100,7 +100,7 @@ public class EnemyBehaviour : EntityBehaviour
 
     public void FollowingPath()
     {
-        if (CurPath.Count != 0&&SpawnSuccess)
+        if (CurPath.Count != 0&&SpawnSuccess&&!Waits)
         {
             if ((transform.position - CurPath.First()).magnitude < 0.25f)
             {
@@ -132,7 +132,8 @@ public class EnemyBehaviour : EntityBehaviour
     {
         if (TunnelLocs.ContainsKey(CurPath[0]) && TunnelLocs.ContainsKey(CurPath[1]))
         {
-            foreach (Tunnel Buds in TunnelLocs[CurPath[1]].ExitTunnel)
+            Debug.Log("Going Through");
+            foreach (Tunnel Buds in TunnelLocs[CurPath[0]].ExitTunnel)
             {
                 if (Buds.transform.position == CurPath[1])
                 {

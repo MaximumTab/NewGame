@@ -15,7 +15,8 @@ public class SummonerAbil : Ability
             EnemyBehaviour CurEnem= newProj.GetComponent<EnemyBehaviour>();
             CurEnem.Route = new TravelPoints();
             CurEnem.Route.CheckPoints = new List<Paths>();
-            foreach (Paths path in Target.GetComponent<EnemyBehaviour>().Route.CheckPoints)
+            EnemyBehaviour ParentBehaviour = Target.GetComponent<EnemyBehaviour>();
+            foreach (Paths path in ParentBehaviour.Route.CheckPoints)
             {
                 CurEnem.Route.CheckPoints.Add(new Paths(path.Objective));
                 CurEnem.Route.CheckPoints.Last().Path = new List<Vector3>();
@@ -25,6 +26,9 @@ public class SummonerAbil : Ability
                 }
             }
             CurEnem.OnSpawn();
+            CurEnem.TunnelLocs = ParentBehaviour.TunnelLocs;
+            CurEnem.TunnelTimes = ParentBehaviour.TunnelTimes;
+            CurEnem.TunnelIndex = ParentBehaviour.TunnelIndex;
             CurEnem.SpawnSuccess = true;
         }
     }

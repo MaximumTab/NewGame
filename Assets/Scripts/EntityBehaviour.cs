@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,34 +16,28 @@ public class EntityBehaviour : MonoBehaviour
     public float Order;
     protected bool Attacking = false;
     protected bool Blocked = false;
-    protected Dictionary<Collider, int> AbilityTriggers;
     protected bool[] AbilityOnCooldown;
     protected List<GameObject>[] TargetsInRange;
+    private class CoEntManager: MonoBehaviour { }
+
+
+    private CoEntManager CoEntMan;
 
     public virtual void OnSpawn()
     {
+        if (!CoEntMan)
+        {
+            GameObject CoMan = new GameObject("CoEntityManager for "+entityStats.Name);
+            CoEntMan=CoMan.AddComponent<CoEntManager>();
+        }
         gameObject.tag = entityStats.Tag.ToString();
         Hp = entityStats.MaxHp;
         Atk = entityStats.Atk;
         Speed = entityStats.Speed;
         AtkInterval = entityStats.AttackInterval;
         Aspd = 100;
-        AbilityTriggers = new Dictionary<Collider, int>();
-        int i = 0;
-        foreach (EntityStats.Abil statsAbility in entityStats.Abilities)
-        {
-            SphereCollider SphCol = gameObject.AddComponent<SphereCollider>();
-            SphCol.radius = statsAbility.Ability.Range;
-            SphCol.isTrigger = true;
-            AbilityTriggers.Add(SphCol, i);
-            i++;
-        }
-        TargetsInRange = new List<GameObject>[i];
-        AbilityOnCooldown = new bool[i];
-        for (int k = 0; k < i; k++)
-        {
-            TargetsInRange[k] = new List<GameObject>();
-        }
+        AbilityOnCooldown = new bool[entityStats.Abilities.Length];
+        TargetsInRange = new List<GameObject>[entityStats.Abilities.Length];
     }
 
     private void sortTarget()
@@ -76,12 +71,21 @@ public class EntityBehaviour : MonoBehaviour
 
     public virtual void DoAction()
     {
-        foreach (int index in AbilityTriggers.Values)
+        for (int index=0;index<entityStats.Abilities.Length;index++)
         {
+            TargetsInRange[index] = new List<GameObject>();
+            foreach (Collider other in Physics.OverlapSphere(transform.position, entityStats.Abilities[index].Ability.Range))
+            {
+                if (other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Tower.ToString() : EntityStats.ObjectTag.Enemy.ToString())&&!other.isTrigger)
+                {
+                    TargetsInRange[index].Add(other.gameObject);
+                }
+            }
+            sortTarget();
             if (!AbilityOnCooldown[index] && !Attacking && TargetsInRange[index].Count > 0&&entityStats.Abilities[index].Ability.GetType()!=typeof(SummonerAbil))
             {
-                StartCoroutine(WaitAttacks());
-                StartCoroutine(CoolDownAbl(index));
+                CoEntMan.StartCoroutine(WaitAttacks());
+                CoEntMan.StartCoroutine(CoolDownAbl(index));
                 //Add way to tie into animation.
                 for (int i = 0;
                      i < (entityStats.Abilities[index].Ability.NumOfTargets < TargetsInRange[index].Count
@@ -94,8 +98,8 @@ public class EntityBehaviour : MonoBehaviour
             }
             else if (!AbilityOnCooldown[index] && !Attacking&&entityStats.Abilities[index].Ability.GetType()==typeof(SummonerAbil))
             {
-                StartCoroutine(WaitAttacks());
-                StartCoroutine(CoolDownAbl(index));
+                CoEntMan.StartCoroutine(WaitAttacks());
+                CoEntMan.StartCoroutine(CoolDownAbl(index));
                 //Add way to tie into animation.
                 for (int i = 0; i < entityStats.Abilities[index].Ability.NumOfTargets;i++)
                 {
@@ -128,54 +132,5 @@ public class EntityBehaviour : MonoBehaviour
     {
         return Hp > 0;
     }
-    public List<int> InRange(Collider other)
-    {
-        List<int> newColIndex = new List<int>();
-        foreach (Collider AbilityCol in AbilityTriggers.Keys)
-        {
-            if (AbilityCol.bounds.Intersects(other.bounds) &&
-                !TargetsInRange[AbilityTriggers[AbilityCol]].Contains(other.gameObject))
-            {
-                newColIndex.Add(AbilityTriggers[AbilityCol]);
-            }
-        }
-
-        return newColIndex;
-    }
-    public List<int> OutRange(Collider other)
-    {
-        List<int> newColIndex = new List<int>();
-        foreach (Collider AbilityCol in AbilityTriggers.Keys)
-        {
-            if (TargetsInRange[AbilityTriggers[AbilityCol]].Contains(other.gameObject))
-            {
-                newColIndex.Add(AbilityTriggers[AbilityCol]);
-            }
-        }
-
-        return newColIndex;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Tower.ToString() : EntityStats.ObjectTag.Enemy.ToString()))
-        {
-            foreach (int Index in InRange(other))
-            {
-                TargetsInRange[Index].Add(other.gameObject);
-                sortTarget();
-            }
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Tower.ToString() : EntityStats.ObjectTag.Enemy.ToString()))
-        {
-            foreach (int Index in OutRange(other))
-            {
-                TargetsInRange[Index].Remove(other.gameObject);
-                sortTarget();
-            }
-        }
-    }
+    
 }

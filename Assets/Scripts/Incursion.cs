@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-[ExecuteInEditMode]
 public class Incursion:MonoBehaviour
 {
     
@@ -13,7 +12,7 @@ public class Incursion:MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
-    public Dictionary<Vector3, Tunnel> Tunnels { private set; get; }
+    public Dictionary<Vector3, Tunnel> Tunnels;
     public List<TravelPoints> Routes;
 
     public void GeneratePath()
@@ -39,7 +38,7 @@ public class Incursion:MonoBehaviour
             }
         }
     }
-    private void OnDrawGizmos()
+    public virtual void OnDrawGizmos()
     {
         if (Routes.Count != 0)
         {
@@ -76,9 +75,9 @@ public class Incursion:MonoBehaviour
                     }
                 }
 
-                Debug.Log("Gone through Tunnels, my index is "+Index);
+                //Debug.Log("Gone through Tunnels, my index is "+Index);
             }
-            Debug.Log("My index is "+Index);
+            //Debug.Log("My index is "+Index);
             foreach (Vector3 Dir in UtilPath.AllAdjDirections(StartLoc))
             {
                 if (Routes[RouteID].CheckPoints[i].Distances.ContainsKey(Dir) && (!Visited.Contains(Dir)||Routes[RouteID].CheckPoints[i].Distances[Dir]>Index))
