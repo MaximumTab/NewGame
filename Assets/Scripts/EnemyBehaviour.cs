@@ -11,6 +11,8 @@ public class EnemyBehaviour : EntityBehaviour
     private List<Vector3> CurPath;
     private List<Vector3> Visited;
     public Dictionary<Vector3,Tunnel> TunnelLocs;
+    public List<float> TunnelTimes;
+    private int TunnelIndex = 0;
     
     private int CheckProg;
     private bool Leaked;
@@ -134,7 +136,7 @@ public class EnemyBehaviour : EntityBehaviour
             {
                 if (Buds.transform.position == CurPath[1])
                 {
-                    TunnelManager.GoingThrough(gameObject, CurPath[1], 1);
+                    TunnelManager.GoingThrough(gameObject, CurPath[1], TunnelTimes[TunnelIndex++]);
                 }
             }
         }

@@ -25,7 +25,36 @@ public class EnemySpawning : MonoBehaviour
         }
     }
 
-    
+
+    private void OnDrawGizmos()
+    {
+        Incursion SpawnPoint = gameObject.GetComponent<Incursion>();
+        Routes = SpawnPoint.Routes;
+        TunnelLocs = SpawnPoint.Tunnels;
+        foreach (EnemySpawn ES in EnemySpawns)
+        {
+            int TunnelIndex = 0;
+            foreach (Paths paths in Routes[ES.RouteTaken].CheckPoints)
+            {
+                for (int i=0;i<paths.Path.Count;i++)
+                {
+                    if (TunnelLocs.ContainsKey(paths.Path[i])&&paths.Path.Count>i+1)
+                    {
+                        if (ES.TunnelTimes.Count == TunnelIndex)
+                        {
+                            EnemySpawn.TunnnelsAndTime TAT = new EnemySpawn.TunnnelsAndTime();
+                            TAT.Enter = paths.Path[i];
+                            TAT.Exit = paths.Path[i+1];
+                            ES.TunnelTimes.Add(TAT);
+                        }
+
+                        i++;
+                        TunnelIndex++;
+                    }
+                }
+            }
+        }
+    }
 
     public List<EnemySpawn> GetSpawnOrdered()
     {
@@ -66,6 +95,11 @@ public class EnemySpawning : MonoBehaviour
                 }
                 CurEnem.OnSpawn();
                 CurEnem.TunnelLocs = TunnelLocs;
+                CurEnem.TunnelTimes = new List<float>();
+                foreach (EnemySpawn.TunnnelsAndTime TAT in EnemySpawns[Iter].TunnelTimes)
+                {
+                    CurEnem.TunnelTimes.Add(TAT.Time);
+                }
                 CurEnem.SpawnSuccess = true;
                 Iter++;
             }
