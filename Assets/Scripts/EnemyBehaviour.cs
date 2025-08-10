@@ -10,6 +10,7 @@ public class EnemyBehaviour : EntityBehaviour
     public TravelPoints Route;
     private List<Vector3> CurPath;
     private List<Vector3> Visited;
+    public Dictionary<Vector3,Tunnel> TunnelLocs;
     
     private int CheckProg;
     private bool Leaked;
@@ -101,6 +102,11 @@ public class EnemyBehaviour : EntityBehaviour
         {
             if ((transform.position - CurPath.First()).magnitude < 0.25f)
             {
+                if (CurPath.Count >= 2)
+                {
+                    GoingThroughTunnel();
+                }
+
                 CurPath.Remove(CurPath.First());
                 FullLength = getCurPathLength();
             }
@@ -117,6 +123,14 @@ public class EnemyBehaviour : EntityBehaviour
         else if(SpawnSuccess)
         {
             rb.linearVelocity=Vector3.zero;
+        }
+    }
+
+    public void GoingThroughTunnel()
+    {
+        if (TunnelLocs.ContainsKey(CurPath[0]) && TunnelLocs.ContainsKey(CurPath[1])&&TunnelLocs[CurPath[0]].BuddyTunnel.transform.position==CurPath[1])
+        {
+            TunnelManager.GoingThrough(gameObject, CurPath[1], 1);
         }
     }
 }

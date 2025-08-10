@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: TestingPattern
   m_EditorClassIdentifier: 
   EnemySpawns:
-  - SpawnTimer: 10
-    RouteTaken: 0
+  - SpawnTimer: 4
+    RouteTaken: 1
+    Enemy: {fileID: 865991990133982177, guid: 0d0a2240cb8beb74b8b5a20ae96d3d68, type: 3}
+  - SpawnTimer: 5
+    RouteTaken: 1
     Enemy: {fileID: 865991990133982177, guid: 0d0a2240cb8beb74b8b5a20ae96d3d68, type: 3}

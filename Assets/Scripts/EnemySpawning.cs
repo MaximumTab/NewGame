@@ -8,12 +8,14 @@ public class EnemySpawning : MonoBehaviour
 {
     [SerializeField] private SpawningPattern Spawn;
     private List<TravelPoints> Routes;
+    private Dictionary<Vector3,Tunnel> TunnelLocs;
 
     private void Start()
     {
         Incursion SpawnPoint = gameObject.GetComponent<Incursion>();
         SpawnPoint.GeneratePath();
         Routes = SpawnPoint.Routes;
+        TunnelLocs = SpawnPoint.Tunnels;
         StartCoroutine(SpawnCycle());
     }
 
@@ -40,6 +42,7 @@ public class EnemySpawning : MonoBehaviour
                     }
                 }
                 CurEnem.OnSpawn();
+                CurEnem.TunnelLocs = TunnelLocs;
                 CurEnem.SpawnSuccess = true;
                 Iter++;
             }

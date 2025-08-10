@@ -1431,11 +1431,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 646662430355824544, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: ActivePath
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 646662430355824544, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: CreatePath
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 646662430355824544, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.size
@@ -1885,6 +1885,10 @@ PrefabInstance:
       propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[7].z
       value: 6.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Spawn
+      value: 
+      objectReference: {fileID: 11400000, guid: 521864af0686de6448149a43e8be1254, type: 2}
     - target: {fileID: 4396633971748990759, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: m_Name
       value: Enemy Incursion

@@ -13,7 +13,7 @@ public class Incursion:MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
-    private Dictionary<Vector3, Tunnel> Tunnels;
+    public Dictionary<Vector3, Tunnel> Tunnels { private set; get; }
     public List<TravelPoints> Routes;
 
     public void GeneratePath()
