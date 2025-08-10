@@ -160,13 +160,17 @@ public static class UtilPath
         if (Tunnels.Keys.Contains(Loc))
         {
             Debug.Log("Gone through Tunnels");
-            if (Distances.Keys.Contains(Tunnels[Loc].BuddyTunnel.transform.position) && Distances.Keys.Contains(RightOne))
+            foreach(Tunnel Buds in Tunnels[Loc].ExitTunnel)
             {
-                if (Distances[Tunnels[Loc].BuddyTunnel.transform.position] < Distances[RightOne])
+                if (Distances.Keys.Contains(Buds.transform.position) && Distances.Keys.Contains(RightOne))
                 {
-                    return Tunnels[Loc].BuddyTunnel.transform.position;
+                    if (Distances[Buds.transform.position] < Distances[RightOne])
+                    {
+                        return Buds.transform.position;
+                    }
                 }
             }
+            
         }
         foreach (Vector3 Dir in AllAdjDirections(Loc))
         {

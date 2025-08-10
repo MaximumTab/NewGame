@@ -128,9 +128,15 @@ public class EnemyBehaviour : EntityBehaviour
 
     public void GoingThroughTunnel()
     {
-        if (TunnelLocs.ContainsKey(CurPath[0]) && TunnelLocs.ContainsKey(CurPath[1])&&TunnelLocs[CurPath[0]].BuddyTunnel.transform.position==CurPath[1])
+        if (TunnelLocs.ContainsKey(CurPath[0]) && TunnelLocs.ContainsKey(CurPath[1]))
         {
-            TunnelManager.GoingThrough(gameObject, CurPath[1], 1);
+            foreach (Tunnel Buds in TunnelLocs[CurPath[1]].ExitTunnel)
+            {
+                if (Buds.transform.position == CurPath[1])
+                {
+                    TunnelManager.GoingThrough(gameObject, CurPath[1], 1);
+                }
+            }
         }
     }
 }

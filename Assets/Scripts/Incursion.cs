@@ -39,7 +39,6 @@ public class Incursion:MonoBehaviour
             }
         }
     }
-
     private void OnDrawGizmos()
     {
         if (Routes.Count != 0)
@@ -63,14 +62,18 @@ public class Incursion:MonoBehaviour
         {
             if (Tunnels.Keys.Contains(StartLoc))
             {
-                if (Routes[RouteID].CheckPoints[i].Distances
-                        .ContainsKey(Tunnels[StartLoc].BuddyTunnel.transform.position) &&
-                    (!Visited.Contains(Tunnels[StartLoc].BuddyTunnel.transform.position) || Routes[RouteID]
-                        .CheckPoints[i].Distances[Tunnels[StartLoc].BuddyTunnel.transform.position] > Index))
+                foreach (Tunnel Buds in Tunnels[StartLoc].EnterTunnel)
                 {
-                    Routes[RouteID].CheckPoints[i].Distances[Tunnels[StartLoc].BuddyTunnel.transform.position]=Index;
-                    AddValues(Tunnels[StartLoc].BuddyTunnel.transform.position,Index+1,i,RouteID);
-                    
+                    if (Routes[RouteID].CheckPoints[i].Distances
+                            .ContainsKey(Buds.transform.position) &&
+                        (!Visited.Contains(Buds.transform.position) || Routes[RouteID]
+                            .CheckPoints[i].Distances[Buds.transform.position] > Index))
+                    {
+                        Routes[RouteID].CheckPoints[i].Distances[Buds.transform.position] =
+                            Index;
+                        AddValues(Buds.transform.position, Index + 1, i, RouteID);
+
+                    }
                 }
 
                 Debug.Log("Gone through Tunnels, my index is "+Index);

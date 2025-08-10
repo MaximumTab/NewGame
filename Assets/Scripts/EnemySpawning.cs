@@ -6,9 +6,32 @@ using UnityEngine;
 
 public class EnemySpawning : MonoBehaviour
 {
-    [SerializeField] private SpawningPattern Spawn;
     private List<TravelPoints> Routes;
     private Dictionary<Vector3,Tunnel> TunnelLocs;
+    public List<EnemySpawn> EnemySpawns;
+    [Serializable]
+    public struct EnemySpawn
+    {
+        public float SpawnTimer;
+        public int RouteTaken;
+        public GameObject Enemy;
+        public List<TunnnelsAndTime> TunnelTimes;
+        [Serializable]
+        public struct TunnnelsAndTime
+        {
+            public Vector3 Enter;
+            public Vector3 Exit;
+            public float Time;
+        }
+    }
+
+    
+
+    public List<EnemySpawn> GetSpawnOrdered()
+    {
+        EnemySpawns.Sort((s1, s2) => s1.SpawnTimer.CompareTo(s2.SpawnTimer));
+        return EnemySpawns;
+    }
 
     private void Start()
     {
@@ -23,16 +46,16 @@ public class EnemySpawning : MonoBehaviour
     {
         float Timer = 0;
         int Iter = 0;
-        while (Spawn.EnemySpawns.Last().SpawnTimer > Timer)
+        while (EnemySpawns.Last().SpawnTimer > Timer)
         {
             Timer += Time.fixedDeltaTime;
-            if (Spawn.EnemySpawns[Iter].SpawnTimer < Timer)
+            if (EnemySpawns[Iter].SpawnTimer < Timer)
             {
-                GameObject Enemy= Instantiate(Spawn.EnemySpawns[Iter].Enemy,transform.position+Vector3.up*0.2f,Quaternion.identity);
+                GameObject Enemy= Instantiate(EnemySpawns[Iter].Enemy,transform.position+Vector3.up*0.2f,Quaternion.identity);
                 EnemyBehaviour CurEnem= Enemy.GetComponent<EnemyBehaviour>();
                 CurEnem.Route = new TravelPoints();
                 CurEnem.Route.CheckPoints = new List<Paths>();
-                foreach (Paths path in Routes[Spawn.EnemySpawns[Iter].RouteTaken].CheckPoints)
+                foreach (Paths path in Routes[EnemySpawns[Iter].RouteTaken].CheckPoints)
                 {
                     CurEnem.Route.CheckPoints.Add(new Paths(path.Objective));
                     CurEnem.Route.CheckPoints.Last().Path = new List<Vector3>();
