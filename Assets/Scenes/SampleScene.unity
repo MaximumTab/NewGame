@@ -6417,11 +6417,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: ActivePath
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: CreatePath
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.size
@@ -12336,13 +12336,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796477045}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.2229832, y: -0.769889, z: 0.3590051, w: 0.47818905}
   m_LocalPosition: {x: 0.9480345, y: -16.317987, z: 1.8507609}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: -116.31, z: 0}
 --- !u!1001 &1801440243
 PrefabInstance:
   m_ObjectHideFlags: 0
