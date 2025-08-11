@@ -100,7 +100,7 @@ public static class UtilPath
         ResultPath.Add(LastNode);
         foreach (Vector3 Tile in Path)
         {
-            if (!Mathf.Approximately(LastNode.x, Tile.x) && !Mathf.Approximately(LastNode.z, Tile.z)||Tunnels.ContainsKey(Tile))
+            if (!Mathf.Approximately(LastNode.x, Tile.x) && !Mathf.Approximately(LastNode.z, Tile.z)||Tunnels.ContainsKey(PreviousTile))
             {
                 ResultPath.Add(PreviousTile);
                 LastNode = PreviousTile;
