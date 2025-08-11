@@ -32,7 +32,7 @@ public class Incursion:MonoBehaviour
             {
                 Visited = new List<Vector3>();
                 Routes[k].CheckPoints[i].Distances =UtilPath.EmpAndAddDist(Routes[k].CheckPoints[i].Distances,Tiles);
-
+                Routes[k].CheckPoints[i].Distances[Routes[k].CheckPoints[i].Objective.position]=0;
                 AddValues(Routes[k].CheckPoints[i].Objective.position, 1, i,k);
                 Routes[k].CheckPoints[i].Path=UtilPath.MakePath(i==0?transform.position:Routes[k].CheckPoints[i-1].Objective.transform.position,Routes[k].CheckPoints[i].Distances,Routes[k].CheckPoints[i].Path,Tunnels);
             }

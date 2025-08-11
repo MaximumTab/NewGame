@@ -77,7 +77,7 @@ public static class UtilPath
         Distances = new Dictionary<Vector3, int>();
         foreach (Path path in Tiles)
         {
-            Distances.Add(path.transform.position,0);
+            Distances.Add(path.transform.position,Int32.MaxValue);
         }
 
         return Distances;
