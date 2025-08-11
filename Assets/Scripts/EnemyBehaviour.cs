@@ -23,9 +23,15 @@ public class EnemyBehaviour : EntityBehaviour
 
     public override void OnSpawn()
     {
+        CapsuleCollider CapCol=gameObject.AddComponent<CapsuleCollider>();
+        CapCol.radius = 0.05f;
+        CapCol.height = 0.2f;
+        CapCol.center.Set(0,0.2f,0);
+        rb = gameObject.AddComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+        rb.useGravity = false;
         CheckProg = 0;
         Leaked = false;
-        rb = gameObject.GetComponent<Rigidbody>();
         base.OnSpawn();
         NewRoute();
     }

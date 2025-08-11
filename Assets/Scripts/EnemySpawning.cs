@@ -71,7 +71,7 @@ public class EnemySpawning : Incursion
         int Iter = 0;
         while (EnemySpawns.Last().SpawnTimer > Timer)
         {
-            Timer += Time.fixedDeltaTime;
+            Timer += Time.deltaTime;
             if (EnemySpawns[Iter].SpawnTimer < Timer)
             {
                 GameObject Enemy= Instantiate(EnemySpawns[Iter].Enemy,transform.position+Vector3.up*0.2f,Quaternion.identity);

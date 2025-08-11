@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
 public class EntityBehaviour : MonoBehaviour
 {
     [SerializeField] protected EntityStats entityStats;
