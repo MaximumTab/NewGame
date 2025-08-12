@@ -19,6 +19,9 @@ MonoBehaviour:
   AttackInterval: 1
   Speed: 1
   Tag: 0
+  SortBy:
+    Stat: 0
+    Method: 0
   Abilities:
   - Range: 2
     Ability: {fileID: 11400000, guid: 38b4eb59451e04442b06b711d487c623, type: 2}

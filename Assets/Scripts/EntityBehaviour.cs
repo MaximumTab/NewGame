@@ -7,7 +7,8 @@ using UnityEngine;
 public class EntityBehaviour : MonoBehaviour
 {
     [SerializeField] protected EntityStats entityStats;
-    protected float Hp;
+    public float Hp;
+    protected float MaxHp;
     protected float Atk;
     protected float AtkInterval;
     protected float Aspd;
@@ -31,6 +32,7 @@ public class EntityBehaviour : MonoBehaviour
         }
         gameObject.tag = entityStats.Tag.ToString();
         Hp = entityStats.MaxHp;
+        MaxHp = entityStats.MaxHp;
         Atk = entityStats.Atk;
         Speed = entityStats.Speed;
         AtkInterval = entityStats.AttackInterval;
@@ -66,6 +68,8 @@ public class EntityBehaviour : MonoBehaviour
     public virtual void AlwaysRun()
     {
         DoAction();
+        CheckAlive();
+        OverMaxHp();
     }
 
     public virtual void DoAction()
@@ -127,9 +131,26 @@ public class EntityBehaviour : MonoBehaviour
         Hp -= DamageTaken;
     }
 
-    public bool CheckAlive()
+    public void CheckAlive()
     {
-        return Hp > 0;
+        if (Hp <= 0)
+        {
+            DestroySelf();
+        }
     }
-    
+
+    public void OverMaxHp()
+    {
+        if (Hp > MaxHp)
+        {
+            Hp=MaxHp;
+        }
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(CoEntMan.gameObject);
+        Destroy(gameObject);
+    }
+
 }

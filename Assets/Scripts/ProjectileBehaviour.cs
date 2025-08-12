@@ -34,6 +34,10 @@ public class ProjectileBehaviour : MonoBehaviour
         {
             CheckOnHit();
         }
+        else
+        {
+            StartCoroutine(DestroySelf());
+        }
     }
 
     private void sortTarget()

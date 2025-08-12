@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: BaseTower
   Range: 2
-  MaxHp: 0
+  MaxHp: 50
   Atk: 10
   AttackInterval: 0.5
   Speed: 0

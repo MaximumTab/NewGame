@@ -38,7 +38,7 @@ public class EnemyBehaviour : EntityBehaviour
 
     public override void AlwaysRun()
     {
-        DoAction();
+        base.AlwaysRun();
         FollowingPath();
     }
 

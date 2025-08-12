@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Summoner
   Range: 2
-  MaxHp: 200
+  MaxHp: 300
   Atk: 10
   AttackInterval: 3
   Speed: 0.5
   Tag: 0
+  SortBy:
+    Stat: 0
+    Method: 0
   Abilities:
   - Range: 2
     Ability: {fileID: 11400000, guid: 836cfd512df384745ae489b744f06f1d, type: 2}
