@@ -20,6 +20,7 @@ public class EnemyBehaviour : EntityBehaviour
     private bool Waits = false;
     private float FullLength;
 
+    public bool ForLeak;
 
     public override void OnSpawn()
     {
@@ -87,6 +88,7 @@ public class EnemyBehaviour : EntityBehaviour
         {
             Leaked = true;
             rb.linearVelocity = Vector3.zero;
+            GameManager.LoseLife(((EnemyStats)entityStats).ObjectiveLives);
         }
     }
 
@@ -147,5 +149,15 @@ public class EnemyBehaviour : EntityBehaviour
                 }
             }
         }
+    }
+
+    public override void DestroySelf()
+    {
+        if (ForLeak)
+        {
+            GameManager.AddRemovedEnem(1);
+        }
+
+        base.DestroySelf();
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyStats : EntityStats
 {
     public EnemyType Type;
+    public int ObjectiveLives=1;
 
     public enum EnemyType
     {

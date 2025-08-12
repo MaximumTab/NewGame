@@ -17,6 +17,7 @@ public class Incursion:MonoBehaviour
 
     public void GeneratePath()
     {
+        GameManager.MakingIGM();
         Path[] Tiles = transform.parent.GetComponentsInChildren<Path>();
         Tunnel[] TunnTiles = transform.parent.GetComponentsInChildren<Tunnel>();
         Debug.Log(Tiles.Length+ " "+TunnTiles.Length);

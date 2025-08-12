@@ -147,7 +147,7 @@ public class EntityBehaviour : MonoBehaviour
         }
     }
 
-    public void DestroySelf()
+    public virtual void DestroySelf()
     {
         Destroy(CoEntMan.gameObject);
         Destroy(gameObject);

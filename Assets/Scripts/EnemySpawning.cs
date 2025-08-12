@@ -22,6 +22,8 @@ public class EnemySpawning : Incursion
             public float Time;
         }
     }
+
+    public int EnemyCount;
     public override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
@@ -48,6 +50,14 @@ public class EnemySpawning : Incursion
                 }
             }
         }
+
+        EnemyCount = EnemySpawns.Count;
+        if (!GameManager.Incursions.Contains(this))
+        {
+            GameManager.AddMaxEnem(EnemyCount);
+            GameManager.Incursions.Add(this);
+        }
+        
     }
 
     public List<EnemySpawn> GetSpawnOrdered()
@@ -91,6 +101,7 @@ public class EnemySpawning : Incursion
                 CurEnem.OnSpawn();
                 CurEnem.TunnelLocs = Tunnels;
                 CurEnem.TunnelTimes = new List<float>();
+                CurEnem.ForLeak = true;
                 foreach (EnemySpawn.TunnnelsAndTime TAT in EnemySpawns[Iter].TunnelTimes)
                 {
                     CurEnem.TunnelTimes.Add(TAT.Time);
