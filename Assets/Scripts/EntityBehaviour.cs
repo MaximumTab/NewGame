@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +14,10 @@ public class EntityBehaviour : MonoBehaviour
     protected float Speed;
     public float Order;
     protected bool Attacking = false;
-    protected bool Blocked = false;
     protected bool[] AbilityOnCooldown;
     protected List<GameObject>[] TargetsInRange;
+    protected Dictionary<GameObject,int> BlockingTargets;
+    public bool Blocked = false;
     private class CoEntManager: MonoBehaviour { }
 
 
@@ -39,25 +39,87 @@ public class EntityBehaviour : MonoBehaviour
         Aspd = 100;
         AbilityOnCooldown = new bool[entityStats.Abilities.Length];
         TargetsInRange = new List<GameObject>[entityStats.Abilities.Length];
+        BlockingTargets = new Dictionary<GameObject, int>();
     }
 
-    private void sortTarget()
+    
+    public void OnTriggerExit(Collider other)
     {
-        for (int i = 0; i < TargetsInRange.Length; i++)
+        if (other.gameObject.GetComponent<EntityBehaviour>())
         {
-            switch (entityStats.SortBy.Stat)
+            EntityBehaviour otherEnt = other.gameObject.GetComponent<EntityBehaviour>();
+            if (otherEnt.entityStats.Tag != entityStats.Tag)
             {
-                case EntityStats.SortedBy.Stats.Hp:
-                    TargetsInRange[i].Sort(((o, o1) =>o.GetComponent<EntityBehaviour>().Hp.CompareTo(o1.GetComponent<EntityBehaviour>().Hp) ));
-                    break;
-                case EntityStats.SortedBy.Stats.Atk:
-                    TargetsInRange[i].Sort(((o, o1) =>o.GetComponent<EntityBehaviour>().Atk.CompareTo(o1.GetComponent<EntityBehaviour>().Atk) ));
-                    break;
-                case EntityStats.SortedBy.Stats.Order:
-                    TargetsInRange[i].Sort(((o, o1) =>o.GetComponent<EntityBehaviour>().Order.CompareTo(o1.GetComponent<EntityBehaviour>().Order) ));
-                    break;
+                if (otherEnt.entityStats.Tag == EntityStats.ObjectTag.Enemy)
+                {
+                    otherEnt.Blocked = false;
+                }
+                otherEnt.BlockingTargets.Remove(gameObject);
+                BlockingTargets.Remove(otherEnt.gameObject);
             }
         }
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<EntityBehaviour>())
+        {
+            EntityBehaviour otherEnt = other.gameObject.GetComponent<EntityBehaviour>();
+            if (otherEnt.entityStats.Tag != entityStats.Tag)
+            {
+                if (otherEnt.entityStats.Tag == EntityStats.ObjectTag.Enemy&&!otherEnt.Blocked&&BlockingTargets.Values.Sum()+otherEnt.entityStats.Block<=entityStats.Block)
+                {
+                    otherEnt.Blocked = true;
+                    otherEnt.BlockingTargets.Add(gameObject,0);
+                    BlockingTargets.Add(otherEnt.gameObject,otherEnt.entityStats.Block);
+                }
+            }
+        }
+    }
+
+    private List<GameObject> sortTarget(List<GameObject> list)
+    {
+        List<GameObject> ResultList = new List<GameObject>();
+        switch (entityStats.SortBy.Stat)
+        {
+            case EntityStats.SortedBy.Stats.Hp:
+                switch (entityStats.SortBy.Method)
+                {
+                    case EntityStats.SortedBy.Methods.Greatest:
+                        ResultList=new List<GameObject>(list.OrderByDescending(o => o.GetComponent<EntityBehaviour>().Hp));
+                        break;
+                    case EntityStats.SortedBy.Methods.None:
+                    case EntityStats.SortedBy.Methods.Smallest:
+                        ResultList=new List<GameObject>(list.OrderBy(o => o.GetComponent<EntityBehaviour>().Hp));
+                        break;
+                }
+                break;
+            case EntityStats.SortedBy.Stats.Atk:
+                switch (entityStats.SortBy.Method)
+                {
+                    case EntityStats.SortedBy.Methods.Greatest:
+                        ResultList=new List<GameObject>(list.OrderByDescending(o => o.GetComponent<EntityBehaviour>().Atk));
+                        break;
+                    case EntityStats.SortedBy.Methods.None:
+                    case EntityStats.SortedBy.Methods.Smallest:
+                        ResultList=new List<GameObject>(list.OrderBy(o => o.GetComponent<EntityBehaviour>().Atk));
+                        break;
+                }
+                break;
+            case EntityStats.SortedBy.Stats.Order:
+                switch (entityStats.SortBy.Method)
+                {
+                    case EntityStats.SortedBy.Methods.Greatest:
+                        ResultList=new List<GameObject>(list.OrderByDescending(o => o.GetComponent<EntityBehaviour>().Order));
+                        break;
+                    case EntityStats.SortedBy.Methods.None:
+                    case EntityStats.SortedBy.Methods.Smallest:
+                        ResultList=new List<GameObject>(list.OrderBy(o => o.GetComponent<EntityBehaviour>().Order));
+                        break;
+                }
+                break;
+        }
+
+        return ResultList;
     }
 
     private void Update()
@@ -76,15 +138,23 @@ public class EntityBehaviour : MonoBehaviour
     {
         for (int index=0;index<entityStats.Abilities.Length;index++)
         {
+            if (entityStats.Abilities[index].Range == EntityStats.RangeType.Melee && !Blocked)
+            {
+                continue;
+            }
+
             TargetsInRange[index] = new List<GameObject>();
+            TargetsInRange[index].AddRange(BlockingTargets.Keys);
+            List<GameObject> TempList=new List<GameObject>();
             foreach (Collider other in Physics.OverlapSphere(transform.position, entityStats.Abilities[index].Ability.Range))
             {
-                if (other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Tower.ToString() : EntityStats.ObjectTag.Enemy.ToString())&&!other.isTrigger)
+                if (other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Tower.ToString() : EntityStats.ObjectTag.Enemy.ToString())&&!TargetsInRange[index].Contains(other.gameObject))
                 {
-                    TargetsInRange[index].Add(other.gameObject);
+                    TempList.Add(other.gameObject);
                 }
             }
-            sortTarget();
+            TargetsInRange[index].AddRange(sortTarget(TempList));
+            
             if (!AbilityOnCooldown[index] && !Attacking && TargetsInRange[index].Count > 0&&entityStats.Abilities[index].Ability.GetType()!=typeof(SummonerAbil))
             {
                 CoEntMan.StartCoroutine(WaitAttacks());
@@ -135,6 +205,21 @@ public class EntityBehaviour : MonoBehaviour
     {
         if (Hp <= 0)
         {
+            foreach (GameObject other in BlockingTargets.Keys)
+            {
+                if (other.GetComponent<EntityBehaviour>())
+                {
+                    EntityBehaviour otherEnt = other.GetComponent<EntityBehaviour>();
+                    if (otherEnt.entityStats.Tag != entityStats.Tag)
+                    {
+                        if (otherEnt.entityStats.Tag == EntityStats.ObjectTag.Enemy)
+                        {
+                            otherEnt.Blocked = false;
+                        }
+                        otherEnt.BlockingTargets.Remove(gameObject);
+                    }
+                }
+            }
             DestroySelf();
         }
     }

@@ -52,11 +52,12 @@ public class EnemySpawning : Incursion
         }
 
         EnemyCount = EnemySpawns.Count;
+        /*
         if (!GameManager.Incursions.Contains(this))
         {
             GameManager.AddMaxEnem(EnemyCount);
             GameManager.Incursions.Add(this);
-        }
+        }*/
         
     }
 

@@ -113,7 +113,7 @@ public class ProjectileBehaviour : MonoBehaviour
             case ProjectileStats.ImpactType.Aoe:
                 foreach (Collider other in Physics.OverlapSphere(transform.position, projectileStats.BounceRange))
                 {
-                    if (other.gameObject.CompareTag(target.tag)&&!other.isTrigger)
+                    if (other.gameObject.CompareTag(target.tag))
                     {
                         DoDamage(other.gameObject);
                     }
@@ -134,7 +134,7 @@ public class ProjectileBehaviour : MonoBehaviour
         GettingTarget = true;
         foreach (Collider other in Physics.OverlapSphere(transform.position, projectileStats.BounceRange))
         {
-            if (other.gameObject.CompareTag(target.tag)&&!other.isTrigger)
+            if (other.gameObject.CompareTag(target.tag))
             {
                 if (!AlreadyHitTargets.Contains(other.gameObject))
                 {

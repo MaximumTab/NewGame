@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 710965299032480213}
   - component: {fileID: 159628839330567306}
   - component: {fileID: 1141493297012981061}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4697178224799912142}
   - component: {fileID: 5750703429239691374}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyBaseTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,9 +132,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityStats: {fileID: 11400000, guid: 263cf7b8e565ee5458b6bf59ca72f5dc, type: 2}
+  Hp: 0
   Order: 0
+  Blocked: 0
+  rb: {fileID: 0}
   Route:
     CheckPoints: []
   TunnelTimes: []
   TunnelIndex: 0
   SpawnSuccess: 0
+  ForLeak: 0

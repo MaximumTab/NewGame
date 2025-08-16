@@ -19,4 +19,8 @@ MonoBehaviour:
   AttackInterval: 1
   Speed: 0
   Tag: 1
+  SortBy:
+    Stat: 0
+    Method: 0
+  Block: 10
   Abilities: []

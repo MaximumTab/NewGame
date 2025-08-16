@@ -13,6 +13,7 @@ public class EntityStats : ScriptableObject
     public float Speed;
     public ObjectTag Tag;
     public SortedBy SortBy;
+    public int Block=1;
 
     public Abil[] Abilities;
     [Flags]

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2258604863402634459}
   - component: {fileID: 1824825613366831046}
   - component: {fileID: 4840516633748252465}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1473307873186269263}
   - component: {fileID: 3879767784631496910}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SummonerTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,9 +132,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityStats: {fileID: 11400000, guid: f7f95928691d89f4cb342d9659f8ab33, type: 2}
+  Hp: 0
   Order: 0
+  Blocked: 0
+  rb: {fileID: 0}
   Route:
     CheckPoints: []
   TunnelTimes: []
   TunnelIndex: 0
   SpawnSuccess: 0
+  ForLeak: 0

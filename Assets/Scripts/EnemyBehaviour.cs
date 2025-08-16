@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyBehaviour : EntityBehaviour
 {
-    private Rigidbody rb;
+    public Rigidbody rb;
     public TravelPoints Route;
     private List<Vector3> CurPath;
     private List<Vector3> Visited;
@@ -24,6 +24,7 @@ public class EnemyBehaviour : EntityBehaviour
 
     public override void OnSpawn()
     {
+        gameObject.layer = 6;
         CapsuleCollider CapCol=gameObject.AddComponent<CapsuleCollider>();
         CapCol.radius = 0.05f;
         CapCol.height = 0.2f;
@@ -35,6 +36,7 @@ public class EnemyBehaviour : EntityBehaviour
         Leaked = false;
         base.OnSpawn();
         NewRoute();
+        
     }
 
     public override void AlwaysRun()
@@ -45,7 +47,7 @@ public class EnemyBehaviour : EntityBehaviour
 
     public void Move()
     {
-        rb.linearVelocity=(CurPath.First()-transform.position).normalized * (Attacking?0:Speed);
+        rb.linearVelocity=(CurPath.First()-transform.position).normalized * (Attacking||Blocked?0:Speed);
         Order = FullLength + (CurPath.First() - transform.position).magnitude;
     }
 
@@ -88,7 +90,7 @@ public class EnemyBehaviour : EntityBehaviour
         {
             Leaked = true;
             rb.linearVelocity = Vector3.zero;
-            GameManager.LoseLife(((EnemyStats)entityStats).ObjectiveLives);
+            //GameManager.LoseLife(((EnemyStats)entityStats).ObjectiveLives);
         }
     }
 
@@ -140,7 +142,6 @@ public class EnemyBehaviour : EntityBehaviour
     {
         if (TunnelLocs.ContainsKey(CurPath[0]) && TunnelLocs.ContainsKey(CurPath[1]))
         {
-            Debug.Log("Going Through");
             foreach (Tunnel Buds in TunnelLocs[CurPath[0]].ExitTunnel)
             {
                 if (Buds.transform.position == CurPath[1])
@@ -155,7 +156,7 @@ public class EnemyBehaviour : EntityBehaviour
     {
         if (ForLeak)
         {
-            GameManager.AddRemovedEnem(1);
+            //GameManager.AddRemovedEnem(1);
         }
 
         base.DestroySelf();

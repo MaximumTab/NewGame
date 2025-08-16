@@ -22,6 +22,7 @@ MonoBehaviour:
   SortBy:
     Stat: 2
     Method: 2
+  Block: 1
   Abilities:
   - Range: 2
     Ability: {fileID: 11400000, guid: e9c04336f8bf0984da2ae60f07dd0e3f, type: 2}
