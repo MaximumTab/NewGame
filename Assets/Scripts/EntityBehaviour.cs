@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EntityBehaviour : MonoBehaviour
 {
+    [SerializeField] protected GameObject HpBar;
+    private Slider HpSlider;
+    private Camera SceneCam;
     [SerializeField] protected EntityStats entityStats;
     public float Hp;
+    public float PercHp;
     protected float MaxHp;
     protected float Atk;
     protected float AtkInterval;
@@ -30,8 +35,19 @@ public class EntityBehaviour : MonoBehaviour
             GameObject CoMan = new GameObject("CoEntityManager for "+entityStats.Name);
             CoEntMan=CoMan.AddComponent<CoEntManager>();
         }
+
+        if (!HpSlider)
+        {
+            GameObject hpBar= Instantiate(HpBar, transform);
+            HpSlider = hpBar.GetComponentInChildren<Slider>();
+            SceneCam = FindFirstObjectByType<Camera>().GetComponentInChildren<Camera>();
+            hpBar.GetComponentInChildren<Canvas>().worldCamera = SceneCam;
+            hpBar.transform.rotation = SceneCam.transform.rotation;
+        }
+
         gameObject.tag = entityStats.Tag.ToString();
         Hp = entityStats.MaxHp;
+        PercHp = 1;
         MaxHp = entityStats.MaxHp;
         Atk = entityStats.Atk;
         Speed = entityStats.Speed;
@@ -42,7 +58,7 @@ public class EntityBehaviour : MonoBehaviour
         BlockingTargets = new Dictionary<GameObject, int>();
     }
 
-    
+
     public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.GetComponent<EntityBehaviour>())
@@ -221,7 +237,10 @@ public class EntityBehaviour : MonoBehaviour
                 }
             }
             DestroySelf();
+            
         }
+        PercHp = Hp / MaxHp;
+        HpSlider.value = PercHp;
     }
 
     public void OverMaxHp()

@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: 7e19c5f4f501ea146ba424f7bb6bf936
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - HpBar: {fileID: 2964377668342257350, guid: 45fdf50af33b03b4897a60c4df94cd72, type: 3}
+  - HpSlider: {instanceID: 0}
+  - entityStats: {instanceID: 0}
+  - rb: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

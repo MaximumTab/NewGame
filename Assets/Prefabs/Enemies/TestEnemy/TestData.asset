@@ -22,5 +22,9 @@ MonoBehaviour:
   SortBy:
     Stat: 0
     Method: 0
-  Abilities: []
+  Block: 1
+  Abilities:
+  - Range: 1
+    Ability: {fileID: 11400000, guid: 0176f41163112a8489abf4dfbb0854bd, type: 2}
   Type: 0
+  ObjectiveLives: 1

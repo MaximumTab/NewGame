@@ -49,9 +49,10 @@ public class Incursion:MonoBehaviour
                 GeneratePath();
             }
         }
-        for (int i = 0; i < Routes[ActivePath].CheckPoints.Count; i++)
+
+        foreach (Paths drawPaths in Routes[ActivePath].CheckPoints)
         {
-            Routes[ActivePath].CheckPoints[i].OnDrawGizmos();
+            drawPaths.OnDrawGizmos();
         }
     }
 

@@ -131,8 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e19c5f4f501ea146ba424f7bb6bf936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HpBar: {fileID: 2964377668342257350, guid: 45fdf50af33b03b4897a60c4df94cd72, type: 3}
+  HpSlider: {fileID: 0}
   entityStats: {fileID: 11400000, guid: 263cf7b8e565ee5458b6bf59ca72f5dc, type: 2}
   Hp: 0
+  PercHp: 0
   Order: 0
   Blocked: 0
   rb: {fileID: 0}
