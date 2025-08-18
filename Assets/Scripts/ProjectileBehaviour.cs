@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
@@ -167,7 +168,8 @@ public class ProjectileBehaviour : MonoBehaviour
         if (target.transform.GetComponent<EntityBehaviour>())
         {
             target.transform.GetComponent<EntityBehaviour>().TakeDamage(Damage);
-            Instantiate(projectileStats.OnHitEffect,target.transform);
+            GameObject targOHE= Instantiate(projectileStats.OnHitEffect,target.transform);
+            targOHE.transform.Rotate(Vector3.forward,Random.Range(0,360));
         }
         
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2510397551635475340}
   - component: {fileID: 1655826705910552298}
   - component: {fileID: 3893896369172250638}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ChainerOHE
   m_TagString: Untagged
   m_Icon: {fileID: 0}

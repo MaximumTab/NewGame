@@ -72,6 +72,10 @@ public class EntityBehaviour : MonoBehaviour
                 }
                 otherEnt.BlockingTargets.Remove(gameObject);
                 BlockingTargets.Remove(otherEnt.gameObject);
+                if (BlockingTargets.Count == 0)
+                {
+                    Blocked = false;
+                }
             }
         }
     }
@@ -87,6 +91,7 @@ public class EntityBehaviour : MonoBehaviour
                     otherEnt.Blocked = true;
                     otherEnt.BlockingTargets.Add(gameObject,0);
                     BlockingTargets.Add(otherEnt.gameObject,otherEnt.entityStats.Block);
+                    Blocked = true;
                 }
             }
         }
