@@ -17,7 +17,7 @@ MonoBehaviour:
   MaxHp: 50
   Atk: 10
   AttackInterval: 2
-  Speed: 0.7
+  Speed: 1
   Tag: 0
   SortBy:
     Stat: 2

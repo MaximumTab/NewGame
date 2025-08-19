@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ac9f665be22eeb4e8f4479bb1306928, type: 3}
-  m_Name: Weak1ES
+  m_Name: FastWeakES
   m_EditorClassIdentifier: 
-  Name: Weak1
+  Name: FastWeak
   Range: 1
-  MaxHp: 100
-  Atk: 15
-  AttackInterval: 2
-  Speed: 1
+  MaxHp: 50
+  Atk: 10
+  AttackInterval: 0.8
+  Speed: 1.5
   Tag: 0
   SortBy:
     Stat: 2
@@ -25,6 +25,6 @@ MonoBehaviour:
   Block: 1
   Abilities:
   - Range: 1
-    Ability: {fileID: 11400000, guid: 342e03bf8c9bff444a7892dff9e6f309, type: 2}
+    Ability: {fileID: 11400000, guid: db0e603421e148148a4eb123f9fbb5d8, type: 2}
   Type: 0
   ObjectiveLives: 1
