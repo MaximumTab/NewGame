@@ -9,11 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
-  m_Name: BlockingAbl
+  m_Script: {fileID: 11500000, guid: 70c1828caf0c32c4499679eb11de5dd0, type: 3}
+  m_Name: TrailPathES
   m_EditorClassIdentifier: 
-  Range: 0.6
-  AtkModifier: 1
-  NumOfTargets: 3
-  Cooldown: 0
-  Projectile: {fileID: 7338167329821200303, guid: e3b683045ce51fc4eb9e6de359298a01, type: 3}
+  Name: Trail
+  Range: 0
+  MaxHp: 1
+  Atk: 0
+  AttackInterval: 0
+  Speed: 5
+  Tag: 0
+  SortBy:
+    Stat: 0
+    Method: 0
+  Block: 0
+  Abilities: []

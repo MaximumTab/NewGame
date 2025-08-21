@@ -23,6 +23,7 @@ public class EntityBehaviour : MonoBehaviour
     protected List<GameObject>[] TargetsInRange;
     protected Dictionary<GameObject,int> BlockingTargets;
     public bool Blocked = false;
+    public Rigidbody rb;
     private class CoEntManager: MonoBehaviour { }
 
 
@@ -35,16 +36,7 @@ public class EntityBehaviour : MonoBehaviour
             GameObject CoMan = new GameObject("CoEntityManager for "+entityStats.Name);
             CoEntMan=CoMan.AddComponent<CoEntManager>();
         }
-
-        if (!HpSlider)
-        {
-            GameObject hpBar= Instantiate(HpBar, transform);
-            HpSlider = hpBar.GetComponentInChildren<Slider>();
-            SceneCam = FindFirstObjectByType<Camera>().GetComponentInChildren<Camera>();
-            hpBar.GetComponentInChildren<Canvas>().worldCamera = SceneCam;
-            hpBar.transform.rotation = SceneCam.transform.rotation;
-        }
-
+        CreateHpBar();
         gameObject.tag = entityStats.Tag.ToString();
         Hp = entityStats.MaxHp;
         PercHp = 1;
@@ -56,6 +48,18 @@ public class EntityBehaviour : MonoBehaviour
         AbilityOnCooldown = new bool[entityStats.Abilities.Length];
         TargetsInRange = new List<GameObject>[entityStats.Abilities.Length];
         BlockingTargets = new Dictionary<GameObject, int>();
+    }
+
+    public virtual void CreateHpBar()
+    {
+        if (!HpSlider)
+        {
+            GameObject hpBar= Instantiate(HpBar, transform);
+            HpSlider = hpBar.GetComponentInChildren<Slider>();
+            SceneCam = FindFirstObjectByType<Camera>().GetComponentInChildren<Camera>();
+            hpBar.GetComponentInChildren<Canvas>().worldCamera = SceneCam;
+            hpBar.transform.rotation = SceneCam.transform.rotation;
+        }
     }
 
 
@@ -245,7 +249,8 @@ public class EntityBehaviour : MonoBehaviour
             
         }
         PercHp = Hp / MaxHp;
-        HpSlider.value = PercHp;
+        if(HpSlider)
+            HpSlider.value = PercHp;
     }
 
     public void OverMaxHp()

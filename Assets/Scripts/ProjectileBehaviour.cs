@@ -21,11 +21,13 @@ public class ProjectileBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
+        rb = gameObject.AddComponent<Rigidbody>();
+        
         StartLoc = transform.position;
         TargetsInRange = new List<GameObject>();
         AlreadyHitTargets = new List<GameObject>();
         BounceAmount = projectileStats.BounceNum;
+        rb.useGravity = false;
     }
 
     // Update is called once per frame

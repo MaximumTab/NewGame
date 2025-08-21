@@ -6,16 +6,15 @@ using UnityEngine;
 
 public class EnemyBehaviour : EntityBehaviour
 {
-    public Rigidbody rb;
     public TravelPoints Route;
     private List<Vector3> CurPath;
     private List<Vector3> Visited;
     public Dictionary<Vector3,Tunnel> TunnelLocs;
     public List<float> TunnelTimes;
     public int TunnelIndex = 0;
-    
-    private int CheckProg;
-    private bool Leaked;
+
+    protected int CheckProg;
+    protected bool Leaked;
     public bool SpawnSuccess = false;
     private bool Waits = false;
     private float FullLength;
@@ -25,10 +24,7 @@ public class EnemyBehaviour : EntityBehaviour
     public override void OnSpawn()
     {
         gameObject.layer = 6;
-        CapsuleCollider CapCol=gameObject.AddComponent<CapsuleCollider>();
-        CapCol.radius = 0.05f;
-        CapCol.height = 0.2f;
-        CapCol.center.Set(0,0.2f,0);
+        CreateCollider();
         rb = gameObject.AddComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
         rb.useGravity = false;
@@ -37,6 +33,14 @@ public class EnemyBehaviour : EntityBehaviour
         base.OnSpawn();
         NewRoute();
         
+    }
+    
+    public virtual void CreateCollider()
+    {
+        CapsuleCollider CapCol=gameObject.AddComponent<CapsuleCollider>();
+        CapCol.radius = 0.05f;
+        CapCol.height = 0.2f;
+        CapCol.center.Set(0,0.2f,0);
     }
 
     public override void AlwaysRun()
@@ -79,7 +83,7 @@ public class EnemyBehaviour : EntityBehaviour
         CurPath =Route.CheckPoints[CheckProg].Path;
     }
 
-    public void ReachedCheckPoint()
+    public virtual void ReachedCheckPoint()
     {
         CheckProg++;
         if (Route.CheckPoints.Count != CheckProg)

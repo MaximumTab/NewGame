@@ -47,29 +47,34 @@ public class TravelPoints
 
 public static class UtilPath
 {
+    private static Vector3[] Dirs = { Vector3.forward, Vector3.back, Vector3.left, Vector3.right,Vector3.forward + Vector3.left,Vector3.back + Vector3.right,Vector3.left + Vector3.back,Vector3.right + Vector3.forward };
+    private static Vector3[] AdjDirs = { Vector3.forward, Vector3.back, Vector3.left, Vector3.right };
     public static Vector3[] AllAdjDirections(Vector3 Loc)
     {
-        return new Vector3[]
+        Vector3[] Directions = new Vector3[4];
+        for (int i = 0; i < AdjDirs.Length; i++)
         {
-            Loc + Vector3.forward,
-            Loc + Vector3.back,
-            Loc + Vector3.left,
-            Loc + Vector3.right
-        };
+            Directions[i] = Loc+AdjDirs[i];
+        }
+
+        return Directions;
     }
-    public static Vector3[] AllDirections(Vector3 Loc)
+    public static Vector3[] AllDirections(Vector3 Loc,int Closeness)
     {
-        return new Vector3[]
+        if (Closeness == 1)
         {
-            Loc + Vector3.forward,
-            Loc + Vector3.back,
-            Loc + Vector3.left,
-            Loc + Vector3.right,
-            Loc + Vector3.forward + Vector3.left,
-            Loc + Vector3.back + Vector3.right,
-            Loc + Vector3.left + Vector3.back,
-            Loc + Vector3.right + Vector3.forward
-        };
+            Vector3[] Directions = new Vector3[8];
+            for (int i = 0; i < Dirs.Length; i++)
+            {
+                Directions[i] = Loc + Dirs[i];
+            }
+
+            return Directions;
+        }
+        else
+        {
+            return AllAdjDirections(Loc);
+        }
     }
 
     public static Dictionary<Vector3, int> EmpAndAddDist(Dictionary<Vector3, int> Distances,Path[] Tiles)
@@ -116,23 +121,78 @@ public static class UtilPath
     {
         List<Vector3> ResultPath=new List<Vector3>();
         ResultPath.Add(Path[0]);
+        int LastDead = 0;
+        int checkNeighbours = 0;
         for (int i = 2; i < Path.Count; i++)
         {
-            int Strikes = 2;
-            foreach (Vector3 neighbour1 in AllAdjDirections(Path[i-2]))
+            float Strikes = 2;
+            foreach (Vector3 LateNode in AllDirections(Path[i-2-LastDead],checkNeighbours))
             {
-                foreach (Vector3 neighbour2 in AllAdjDirections(Path[i]))
+                foreach (Vector3 EarlyNode in AllDirections(Path[i],checkNeighbours))
                 {
-                    if (neighbour1 == neighbour2 && Distances.ContainsKey(neighbour1))
+                    if (!Distances.ContainsKey(LateNode) || !Distances.ContainsKey(EarlyNode))
+                        continue;
+                    if ((Path[i - 2 - LastDead] - Path[i]).magnitude <= 2)
                     {
-                        Strikes--;
+                        if (LateNode == EarlyNode&&!(Path[i - 2 ].x == Path[i ].x ||
+                              Path[i - 2 ].z == Path[i ].z))//CornerCases
+                        {
+                            Strikes--;
+                        }
+                        else if((Path[i] - EarlyNode).magnitude == 1&&(Path[i - 2 ] - LateNode).magnitude == 1&&(EarlyNode-LateNode).magnitude==2&&(Path[i - 2 ].x == Path[i ].x ||
+                                    Path[i - 2 ].z == Path[i ].z)&&EarlyNode!=Path[i-1]&&LateNode!=Path[i-1])
+                        {
+                            if(Distances.ContainsKey((EarlyNode-LateNode)/2+EarlyNode)&&Distances.ContainsKey(Path[i]*2-EarlyNode)==Distances.ContainsKey(Path[i - 2 ]*2 - LateNode))
+                            {
+                                Strikes-=2;
+                            }
+                        }
+                    }else if ((Path[i - 2 - LastDead] - Path[i]).magnitude > 2)
+                    {
+                        if (LateNode == EarlyNode)
+                        {
+                            Strikes -= 0.5f;
+                        }
+
+                        if ((Path[i - 2 - LastDead] - EarlyNode).magnitude == 2 && (Path[i] - LateNode).magnitude == 2)
+                        {
+                            Strikes--;
+                            if (Path.Contains(Path[i - 2 - LastDead] * 2 - LateNode)&&!Path.Contains(Path[i] * 2 - EarlyNode))
+                            {
+                                ResultPath.Add((Path[i - 2 - LastDead] - EarlyNode) / 2 + EarlyNode);
+                            }/*
+                            else if(Path.Contains(Path[i] * 2 - EarlyNode))
+                            {
+                                ResultPath.Add((Path[i] - LateNode) / 2 + LateNode);
+                            }*/
+                        }
                     }
                 }
             }
-            if (Strikes != 0||Tunnels.ContainsKey(Path[i-1]))
+            if (Strikes <= 0)
             {
+                LastDead = 1;
+                checkNeighbours = 1;
+            }else if(LastDead==1)
+            {
+                LastDead = 0;
+                i--;
+            }
+            else
+            {
+                checkNeighbours = 0;
                 ResultPath.Add(Path[i-1]);
             }
+
+            /*if (Strikes != 0||Tunnels.ContainsKey(Path[i-1]))
+            {
+                ResultPath.Add(Path[i-1]);
+                LastDead = 0;
+            }
+            else
+            {
+                LastDead=1;
+            }*/
         }
         ResultPath.Add(Path.Last());
         return ResultPath;
@@ -172,7 +232,7 @@ public static class UtilPath
             }
             
         }
-        foreach (Vector3 Dir in AllAdjDirections(Loc))
+        foreach (Vector3 Dir in Distances[Loc] % 2 == 0 ? AllAdjDirections(Loc) : AllAdjDirections(Loc).Reverse())
         {
             if (Distances.Keys.Contains(Dir)&&Distances.Keys.Contains(RightOne))
             {

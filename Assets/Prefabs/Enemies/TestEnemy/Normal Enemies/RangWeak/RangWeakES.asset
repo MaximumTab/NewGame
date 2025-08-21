@@ -9,20 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12981e0ed6215e04fbfc525bde61e4a4, type: 3}
-  m_Name: BlockingTS
+  m_Script: {fileID: 11500000, guid: 70c1828caf0c32c4499679eb11de5dd0, type: 3}
+  m_Name: RangWeakES
   m_EditorClassIdentifier: 
-  Name: BAttack
-  Range: 1
-  MaxHp: 1000
+  Name: RangWeak
+  Range: 2
+  MaxHp: 100
   Atk: 10
   AttackInterval: 1
-  Speed: 0
-  Tag: 1
+  Speed: 1
+  Tag: 0
   SortBy:
     Stat: 2
-    Method: 2
-  Block: 3
+    Method: 0
+  Block: 1
   Abilities:
   - Range: 2
-    Ability: {fileID: 11400000, guid: b52eec5ab24004e48803e60ef5b2f8e8, type: 2}
+    Ability: {fileID: 11400000, guid: b07e0e234fdcfd14cafc3e004a3a1279, type: 2}
