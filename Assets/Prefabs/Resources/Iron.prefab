@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4207830573884923451}
   - component: {fileID: 6091050489126549365}
   m_Layer: 8
-  m_Name: Wood
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4df506d694279484abd0a6e5c6eb2d1e, type: 2}
+  - {fileID: 2100000, guid: 6980d2640b7db164886f989474cab3e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,4 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d901e3cb35518d4db5f17d7e1e287bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 2

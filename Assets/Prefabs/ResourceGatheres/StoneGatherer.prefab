@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3301008098416997091}
   - component: {fileID: 4462687888251994405}
   m_Layer: 0
-  m_Name: ResourceGatherer
+  m_Name: StoneGatherer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,13 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67a80927c590884fbf6af36ab73510b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gathererType: 0
+  gathererType: 1
   perSecond: 1
   tickSeconds: 1
   adjacencyRadius: 1.25
   resourceLayer:
     serializedVersion: 2
     m_Bits: 256
+  debugOnPlacement: 1
+  debugDrawSeconds: 2
 --- !u!1 &3875045580799956537
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +130,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6007857137893288414, guid: 0a3072f91d3ae62449c499df92126ef5, type: 3}
+  m_Sprite: {fileID: 6631536843440991524, guid: f0d0752ccc6aa95409c30292d030f4ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
