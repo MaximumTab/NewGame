@@ -25,31 +25,39 @@ public class EnemySpawning : Incursion
     }
 
     public int EnemyCount;
+
     public override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-        foreach (EnemySpawn ES in EnemySpawns)
+        try
         {
-            int TunnelIndex = 0;
-            foreach (Paths paths in Routes[ES.RouteTaken].CheckPoints)
+            foreach (EnemySpawn ES in EnemySpawns)
             {
-                for (int i=0;i<paths.Path.Count;i++)
+                int TunnelIndex = 0;
+                foreach (Paths paths in Routes[ES.RouteTaken].CheckPoints)
                 {
-                    if (Tunnels.ContainsKey(paths.Path[i])&&paths.Path.Count>i+1)
+                    for (int i = 0; i < paths.Path.Count; i++)
                     {
-                        if (ES.TunnelTimes.Count == TunnelIndex)
+                        if (Tunnels.ContainsKey(paths.Path[i]) && paths.Path.Count > i + 1)
                         {
-                            EnemySpawn.TunnnelsAndTime TAT = new EnemySpawn.TunnnelsAndTime();
-                            TAT.Enter = paths.Path[i];
-                            TAT.Exit = paths.Path[i+1];
-                            ES.TunnelTimes.Add(TAT);
-                        }
+                            if (ES.TunnelTimes.Count == TunnelIndex)
+                            {
+                                EnemySpawn.TunnnelsAndTime TAT = new EnemySpawn.TunnnelsAndTime();
+                                TAT.Enter = paths.Path[i];
+                                TAT.Exit = paths.Path[i + 1];
+                                ES.TunnelTimes.Add(TAT);
+                            }
 
-                        i++;
-                        TunnelIndex++;
+                            i++;
+                            TunnelIndex++;
+                        }
                     }
                 }
             }
+        }
+        catch (Exception e)
+        {
+            GeneratePath();
         }
 
         EnemyCount = EnemySpawns.Count;

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
+  m_Name: PuffPAS
+  m_EditorClassIdentifier: 
+  Range: 1
+  AtkModifier: 1
+  NumOfTargets: 1
+  Cooldown: 3
+  Projectile: {fileID: 3240375809118629576, guid: 99b9da8ecd160064db06fbdf0f7d5d45, type: 3}

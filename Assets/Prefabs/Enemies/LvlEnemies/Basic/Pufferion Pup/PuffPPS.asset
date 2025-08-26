@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c057674c1f16e42a68fd2be6ef74f7, type: 3}
+  m_Name: PuffPPS
+  m_EditorClassIdentifier: 
+  DistanceMode: 2
+  Speed: 5
+  ArcHeight: 2
+  ImpactMode: 0
+  AoeRange: 0.9
+  BounceRange: 1
+  BounceNum: 0
+  AoeHitEffect: {fileID: 8453507137555819875, guid: 977ed2bac2f3147438111a21f63fcbc4, type: 3}
+  OnHitEffect: {fileID: 6237821853947767641, guid: cf9426ef5c4459b41aec0493bbd4ca71, type: 3}
+  LingeringTime: 0.1
