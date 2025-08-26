@@ -14,6 +14,9 @@ public class ProjectileStats : ScriptableObject
     public float BounceNum = 0;
     public GameObject AoeHitEffect;
     public GameObject OnHitEffect;
+    
+    public int NumOfHits = 1;
+    public float DelayBtwHit = 0.1f;
     public float LingeringTime=0.1f;
     
     public enum ProjectileType

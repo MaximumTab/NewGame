@@ -111,14 +111,14 @@ public class ProjectileBehaviour : MonoBehaviour
         switch (projectileStats.ImpactMode)
         {
             case ProjectileStats.ImpactType.Single:
-                DoDamage(target);
+                StartCoroutine(DoDamage(target));
                 break;
             case ProjectileStats.ImpactType.Aoe:
                 foreach (Collider other in Physics.OverlapSphere(transform.position, projectileStats.BounceRange))
                 {
                     if (other.gameObject.CompareTag(target.tag))
                     {
-                        DoDamage(other.gameObject);
+                        StartCoroutine(DoDamage(other.gameObject));
                     }
                 }
 
@@ -126,7 +126,7 @@ public class ProjectileBehaviour : MonoBehaviour
                 AHEffect.transform.localScale=Vector3.one*projectileStats.AoeRange;
                 break;
             case ProjectileStats.ImpactType.Bouncing:
-                DoDamage(target);
+                StartCoroutine(DoDamage(target));
                 StartCoroutine(GetNextTarget());
                 break;
         }
@@ -164,16 +164,23 @@ public class ProjectileBehaviour : MonoBehaviour
         GettingTarget = false;
     }
 
-    private void DoDamage(GameObject target)
+    private IEnumerator DoDamage(GameObject target)
     {
         AlreadyHitTargets.Add(target);
-        if (target.transform.GetComponent<EntityBehaviour>())
+        for (int i = 0; i < projectileStats.NumOfHits; i++)
         {
-            target.transform.GetComponent<EntityBehaviour>().TakeDamage(Damage);
-            GameObject targOHE= Instantiate(projectileStats.OnHitEffect,target.transform);
-            targOHE.transform.Rotate(Vector3.forward,Random.Range(0,360));
+            if (target.transform.GetComponent<EntityBehaviour>())
+            {
+                target.transform.GetComponent<EntityBehaviour>().TakeDamage(Damage);
+                GameObject targOHE = Instantiate(projectileStats.OnHitEffect, target.transform);
+                targOHE.transform.Rotate(Vector3.forward, Random.Range(0, 360));
+            }
+
+            yield return new WaitForSeconds(projectileStats.DelayBtwHit);
         }
-        
+
+        yield return null;
+
     }
 
     public void DamageDoneTo(float Atk, float AtkMod,GameObject Target)
