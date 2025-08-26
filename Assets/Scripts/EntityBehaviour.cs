@@ -173,7 +173,7 @@ public class EntityBehaviour : MonoBehaviour
             List<GameObject> TempList=new List<GameObject>();
             foreach (Collider other in Physics.OverlapSphere(transform.position, entityStats.Abilities[index].Ability.Range))
             {
-                if (other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Tower.ToString() : EntityStats.ObjectTag.Enemy.ToString())&&!TargetsInRange[index].Contains(other.gameObject))
+                if (((other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Tower.ToString() : EntityStats.ObjectTag.Enemy.ToString())&&entityStats.Abilities[index].Ability.GetType()!=typeof(HealerAbil))||(other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Enemy.ToString() : EntityStats.ObjectTag.Tower.ToString())&&entityStats.Abilities[index].Ability.GetType()==typeof(HealerAbil)))&&!TargetsInRange[index].Contains(other.gameObject))
                 {
                     TempList.Add(other.gameObject);
                 }
