@@ -12,6 +12,7 @@ public class EnemyBehaviour : EntityBehaviour
     public Dictionary<Vector3,Tunnel> TunnelLocs;
     public List<float> TunnelTimes;
     public int TunnelIndex = 0;
+    private GameManager GM;
 
     protected int CheckProg;
     protected bool Leaked;
@@ -32,7 +33,10 @@ public class EnemyBehaviour : EntityBehaviour
         Leaked = false;
         base.OnSpawn();
         NewRoute();
-        
+        if (!GM)
+        {
+            GM = FindFirstObjectByType<GameManager>();
+        }
     }
     
     public virtual void CreateCollider()
@@ -94,7 +98,7 @@ public class EnemyBehaviour : EntityBehaviour
         {
             Leaked = true;
             rb.linearVelocity = Vector3.zero;
-            //GameManager.LoseLife(((EnemyStats)entityStats).ObjectiveLives);
+            GM.LoseALife(((EnemyStats)entityStats).ObjectiveLives);
         }
     }
 
@@ -160,7 +164,7 @@ public class EnemyBehaviour : EntityBehaviour
     {
         if (ForLeak)
         {
-            //GameManager.AddRemovedEnem(1);
+            GM.SetCurEnemCount();
         }
 
         base.DestroySelf();

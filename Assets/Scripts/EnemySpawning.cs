@@ -7,6 +7,7 @@ using UnityEngine;
 public class EnemySpawning : Incursion
 {
     public List<EnemySpawn> EnemySpawns;
+    private GameManager GM;
     [Serializable]
     public struct EnemySpawn
     {
@@ -52,13 +53,8 @@ public class EnemySpawning : Incursion
         }
 
         EnemyCount = EnemySpawns.Count;
-        /*
-        if (!GameManager.Incursions.Contains(this))
-        {
-            GameManager.AddMaxEnem(EnemyCount);
-            GameManager.Incursions.Add(this);
-        }*/
-        
+        EnemyCount-=EnemySpawns.FindAll(es => es.Enemy.GetComponent<TrailPath>()).Count;
+
     }
 
     public List<EnemySpawn> GetSpawnOrdered()
@@ -70,6 +66,11 @@ public class EnemySpawning : Incursion
     private void Start()
     {
         StartCoroutine(SpawnCycle());
+        if (!GM)
+        {
+            GM = FindFirstObjectByType<GameManager>();
+            GM.SetEnemyCount(EnemySpawns.Count);
+        }
     }
     
 
@@ -78,6 +79,7 @@ public class EnemySpawning : Incursion
         yield return null;
         GeneratePath();
         yield return new WaitForSeconds(0.2f);
+        EnemySpawns = GetSpawnOrdered();
         float Timer = 0;
         int Iter = 0;
         while (EnemySpawns.Last().SpawnTimer > Timer)
