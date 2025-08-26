@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c057674c1f16e42a68fd2be6ef74f7, type: 3}
+  m_Name: FailedExperPS
+  m_EditorClassIdentifier: 
+  DistanceMode: 0
+  Speed: 5
+  ArcHeight: 3
+  ImpactMode: 2
+  AoeRange: 2
+  BounceRange: 1
+  BounceNum: 0
+  AoeHitEffect: {fileID: 0}
+  OnHitEffect: {fileID: 6363046314920156253, guid: 4c5f7c493dbdb414ebb4ab99d3f2cf11, type: 3}
+  NumOfHits: 1
+  DelayBtwHit: 0.1
+  LingeringTime: 0.1
