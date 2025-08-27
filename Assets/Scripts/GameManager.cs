@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,12 +7,9 @@ public class GameManager : MonoBehaviour
     public int Lives = 3;
     public int AllEnemyCount;
     public int CurEnemyCount = 0;
+    [SerializeField] private TMP_Text LivesDisplay;
+    [SerializeField] private TMP_Text CounterDisplay;
 
-    private void Start()
-    {
-        CurEnemyCount = 0;
-        AllEnemyCount = 0;
-    }
 
     private void Update()
     {
@@ -20,6 +18,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("You Failed");
             Time.timeScale = 0;
         }
+        
+        LivesDisplay.text = ""+Lives;
+        CounterDisplay.text = CurEnemyCount + "/" + AllEnemyCount;
     }
 
     public void SetCurEnemCount()
@@ -35,5 +36,17 @@ public class GameManager : MonoBehaviour
     public void LoseALife(int lives)
     {
         Lives -= lives;
+    }
+
+    public void ToggleSpeed()
+    {
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 2;
+        }
+        else if (Time.timeScale == 2)
+        {
+            Time.timeScale = 1;
+        }
     }
 }

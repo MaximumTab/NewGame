@@ -77,7 +77,7 @@ public class EnemySpawning : Incursion
         if (!GM)
         {
             GM = FindFirstObjectByType<GameManager>();
-            GM.SetEnemyCount(EnemySpawns.Count);
+            GM.SetEnemyCount(EnemyCount);
         }
     }
     

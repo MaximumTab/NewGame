@@ -375,7 +375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: EnemySpawns.Array.data[1].SpawnTimer
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.size
@@ -1677,7 +1677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: EnemySpawns.Array.data[1].SpawnTimer
-      value: 7
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.size

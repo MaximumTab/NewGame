@@ -99,6 +99,7 @@ public class EnemyBehaviour : EntityBehaviour
             Leaked = true;
             rb.linearVelocity = Vector3.zero;
             GM.LoseALife(((EnemyStats)entityStats).ObjectiveLives);
+            DestroySelf();
         }
     }
 

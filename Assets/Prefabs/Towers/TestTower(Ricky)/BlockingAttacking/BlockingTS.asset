@@ -24,5 +24,5 @@ MonoBehaviour:
     Method: 2
   Block: 3
   Abilities:
-  - Range: 2
+  - Range: 1
     Ability: {fileID: 11400000, guid: b52eec5ab24004e48803e60ef5b2f8e8, type: 2}

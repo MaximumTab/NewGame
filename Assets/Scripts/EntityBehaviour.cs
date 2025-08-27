@@ -173,7 +173,7 @@ public class EntityBehaviour : MonoBehaviour
             List<GameObject> TempList=new List<GameObject>();
             foreach (Collider other in Physics.OverlapSphere(transform.position, entityStats.Abilities[index].Ability.Range))
             {
-                if (((other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Tower.ToString() : EntityStats.ObjectTag.Enemy.ToString())&&entityStats.Abilities[index].Ability.GetType()!=typeof(HealerAbil))||(other.gameObject.CompareTag(entityStats.Tag == EntityStats.ObjectTag.Enemy ? EntityStats.ObjectTag.Enemy.ToString() : EntityStats.ObjectTag.Tower.ToString())&&entityStats.Abilities[index].Ability.GetType()==typeof(HealerAbil)))&&!TargetsInRange[index].Contains(other.gameObject))
+                if (AblTargetConf(other.gameObject,entityStats.Abilities[index].Ability)&&!TargetsInRange[index].Contains(other.gameObject))
                 {
                     TempList.Add(other.gameObject);
                 }
@@ -205,6 +205,28 @@ public class EntityBehaviour : MonoBehaviour
                 }
             }
         }
+    }
+
+    private bool AblTargetConf(GameObject other, Ability abl)
+    {
+        return other.CompareTag(AblTargetString(abl));
+    }
+
+    private string AblTargetString(Ability abl)
+    {
+        if (abl.GetType() != typeof(HealerAbil))
+        {
+            if (entityStats.Tag == EntityStats.ObjectTag.Enemy)
+            {
+                return EntityStats.ObjectTag.Tower.ToString();
+            }
+            return EntityStats.ObjectTag.Enemy.ToString();
+        }
+        if (entityStats.Tag == EntityStats.ObjectTag.Enemy)
+        {
+            return EntityStats.ObjectTag.Enemy.ToString();
+        }
+        return EntityStats.ObjectTag.Tower.ToString();
     }
 
     public IEnumerator WaitAttacks()
