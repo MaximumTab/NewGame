@@ -6,7 +6,7 @@ public class Gatherer : MonoBehaviour
 {
     [Header("Gatherer Setup")]
     public ResourceType gathererType = ResourceType.Wood;
-    [Min(1)] public int perSecond = 1;
+    [Min(1)] public float perSecond = 1;
     [Min(0.05f)] public float tickSeconds = 1f;
 
     [Header("Placement Rules")]
@@ -19,7 +19,6 @@ public class Gatherer : MonoBehaviour
 
     private Coroutine loop;
 
-    // runtime-only debug cache
     private readonly List<Transform> _debugTargets = new List<Transform>();
     private float _debugUntil = 0f;
 
@@ -83,9 +82,7 @@ public class Gatherer : MonoBehaviour
         while (true)
         {
             ResourceManager.Instance.Add(gathererType, perSecond);
-            // Debug tick log
-            int total = ResourceManager.Instance.Get(gathererType);
-            Debug.Log($"+1 {gathererType} (total: {total})");
+            float total = ResourceManager.Instance.Get(gathererType);
             yield return wait;
         }
     }

@@ -5,7 +5,7 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager Instance { get; private set; }
 
     // index by (int)ResourceType
-    [SerializeField] private int[] amounts = new int[3];
+    [SerializeField] private float[] amounts = new float[3];
 
     void Awake()
     {
@@ -13,11 +13,11 @@ public class ResourceManager : MonoBehaviour
         Instance = this;
     }
 
-    public void Add(ResourceType type, int value)
+    public void Add(ResourceType type, float value)
     {
         amounts[(int)type] += value;
         // TODO: raise UI update event if you have one
     }
 
-    public int Get(ResourceType type) => amounts[(int)type];
+    public float Get(ResourceType type) => amounts[(int)type];
 }
