@@ -20,8 +20,17 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     void Awake()
     {
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
-
         mainCamera = Camera.main;
+
+        // Auto-assign gridRoot if not set
+        if (gridRoot == null)
+        {
+            GameObject found = GameObject.Find("Grid");
+            if (found != null)
+                gridRoot = found.transform;
+            else
+                Debug.LogWarning("GridRoot not found in scene. Please assign gridRoot manually.");
+        }
     }
 
     public void OnBeginDrag(PointerEventData e)
