@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,8 @@ public class EntityBehaviour : MonoBehaviour
     [SerializeField] protected GameObject HpBar;
     private Slider HpSlider;
     private Camera SceneCam;
+    protected Animator EntAnim;
+    private Transform SpriteObj;
     [SerializeField] protected EntityStats entityStats;
     public float Hp;
     public float PercHp;
@@ -28,6 +31,9 @@ public class EntityBehaviour : MonoBehaviour
 
 
     private CoEntManager CoEntMan;
+    private static readonly int Attacking1 = Animator.StringToHash("Attacking");
+    private static readonly int Speed1 = Animator.StringToHash("Speed");
+    private static readonly int Aspd1 = Animator.StringToHash("ASPD");
 
     public virtual void OnSpawn()
     {
@@ -36,6 +42,12 @@ public class EntityBehaviour : MonoBehaviour
             GameObject CoMan = new GameObject("CoEntityManager for "+entityStats.Name);
             CoEntMan=CoMan.AddComponent<CoEntManager>();
         }
+
+        if (!EntAnim)
+        {
+            EntAnim = gameObject.GetComponentInChildren<Animator>();
+        }
+
         CreateHpBar();
         gameObject.tag = entityStats.Tag.ToString();
         Hp = entityStats.MaxHp;
@@ -50,15 +62,25 @@ public class EntityBehaviour : MonoBehaviour
         BlockingTargets = new Dictionary<GameObject, int>();
     }
 
+    public float GetAspd()
+    {
+        return 100 / Aspd;
+    }
+
     public virtual void CreateHpBar()
     {
+        SceneCam = FindFirstObjectByType<Camera>().GetComponentInChildren<Camera>();
         if (!HpSlider)
         {
             GameObject hpBar= Instantiate(HpBar, transform);
             HpSlider = hpBar.GetComponentInChildren<Slider>();
-            SceneCam = FindFirstObjectByType<Camera>().GetComponentInChildren<Camera>();
             hpBar.GetComponentInChildren<Canvas>().worldCamera = SceneCam;
             hpBar.transform.rotation = SceneCam.transform.rotation;
+        }
+        if (EntAnim)
+        {
+            SpriteObj = EntAnim.transform.parent;
+            SpriteObj.rotation = SceneCam.transform.rotation;
         }
     }
 
@@ -157,6 +179,12 @@ public class EntityBehaviour : MonoBehaviour
         DoAction();
         CheckAlive();
         OverMaxHp();
+        if (EntAnim)
+        {
+            EntAnim.SetBool(Attacking1,Attacking);
+            EntAnim.SetFloat(Speed1,rb.linearVelocity.magnitude);
+            EntAnim.SetFloat(Aspd1, GetAspd());
+        }
     }
 
     public virtual void DoAction()
