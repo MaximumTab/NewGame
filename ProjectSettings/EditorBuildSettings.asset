@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelIdeas/Tut-2.unity
     guid: e6c3492da7dc70148b8ed3dbb446b04b
+  - enabled: 1
+    path: Assets/Scenes/LevelIdeas/Main-1.unity
+    guid: bfcf7d672448b77418ac78f9181c7192
+  - enabled: 1
+    path: Assets/Scenes/LevelIdeas/JaysAwesomeLevel.unity
+    guid: 6a652ded013cc5d44a22fd74a5ad6c4e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
