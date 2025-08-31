@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Pufferion Pup
   Range: 2
-  MaxHp: 100
+  MaxHp: 200
   Atk: 20
   AttackInterval: 1
   Speed: 0.3

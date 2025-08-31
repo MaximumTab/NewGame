@@ -17,7 +17,6 @@ public class ProjectileStats : ScriptableObject
     
     public int NumOfHits = 1;
     public float DelayBtwHit = 0.1f;
-    public float LingeringTime=0.1f;
     
     public enum ProjectileType
     {

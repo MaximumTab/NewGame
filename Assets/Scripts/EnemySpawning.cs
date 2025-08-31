@@ -57,7 +57,7 @@ public class EnemySpawning : Incursion
         }
         catch (Exception e)
         {
-            GeneratePath();
+            CreatePath = true;
         }
 
         EnemyCount = EnemySpawns.Count;
@@ -76,6 +76,8 @@ public class EnemySpawning : Incursion
         StartCoroutine(SpawnCycle());
         if (!GM)
         {
+            EnemyCount = EnemySpawns.Count;
+            EnemyCount-=EnemySpawns.FindAll(es => es.Enemy.GetComponent<TrailPath>()).Count;
             GM = FindFirstObjectByType<GameManager>();
             GM.SetEnemyCount(EnemyCount);
         }
