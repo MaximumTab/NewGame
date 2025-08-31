@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Range: 2
   AtkModifier: 1
-  NumOfTargets: 5
+  NumOfTargets: 2
   Cooldown: 0
   Projectile: {fileID: 5438021278605143860, guid: f78e5f0c9c5eac14a8b88f8b31f62fef, type: 3}

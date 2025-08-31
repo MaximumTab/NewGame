@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 5951703095989049651}
   - component: {fileID: 819672537326522529}
   m_Layer: 5
-  m_Name: TowerTestCard
+  m_Name: SpadeTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcac11a7e51cd04c86be058104ffb52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 6824723297457469691, guid: 0c17ff12000462c4fbecd18aacfd373b, type: 3}
+  towerPrefab: {fileID: 7596022827755399929, guid: 469ab89e37558914ab4d192a60c36813, type: 3}
   gridRoot: {fileID: 0}
   snapThreshold: 0.7
   requireAffordable: 1
