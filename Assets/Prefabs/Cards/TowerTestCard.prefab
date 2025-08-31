@@ -228,4 +228,15 @@ MonoBehaviour:
   towerPrefab: {fileID: 6824723297457469691, guid: 0c17ff12000462c4fbecd18aacfd373b, type: 3}
   gridRoot: {fileID: 0}
   snapThreshold: 0.5
-  mainCamera: {fileID: 0}
+  requireAffordable: 1
+  isResourceGatherer: 0
+  resourceLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  adjacencyRadius: 1.25
+  towerGridLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  resourceGridLayer:
+    serializedVersion: 2
+    m_Bits: 0

@@ -12,16 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12981e0ed6215e04fbfc525bde61e4a4, type: 3}
   m_Name: TowerHeartStats
   m_EditorClassIdentifier: 
-  Name: 
-  Range: 0
-  MaxHp: 0
-  Atk: 0
-  AttackInterval: 0
+  Name: Heart Tower
+  Range: 2
+  MaxHp: 50
+  Atk: 5
+  AttackInterval: 2
   Speed: 0
-  Tag: 0
+  Tag: 1
   SortBy:
     Stat: 0
-    Method: 0
+    Method: 2
   Block: 1
-  Abilities: []
-  towerCosts: []
+  Abilities:
+  - Range: 2
+    Ability: {fileID: 11400000, guid: c76c61a47a915da47b169155387d98fd, type: 2}
+  towerCosts:
+  - resourceType: 0
+    resourceCost: 20
+  - resourceType: 1
+    resourceCost: 10

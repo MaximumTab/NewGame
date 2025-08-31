@@ -16,7 +16,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public LayerMask resourceLayer;         // layer of Resource tiles
     public float adjacencyRadius = 1.25f;   // how close it must be to count as "next to"
 
-    private Camera mainCamera;       
+    [Header("Auto-assign Grids By Layer")]
+    public LayerMask towerGridLayer;      // layer of the regular tower grid root
+    public LayerMask resourceGridLayer;   // layer of the resource grid root
+
+    private Camera mainCamera;
     private CanvasGroup canvasGroup;
     private GameObject draggingTower;
     private TowerStats.TowerCost[] prefabCosts;
@@ -26,20 +30,43 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
         mainCamera = Camera.main;
 
-        // pull TowerStats from the prefab’s EntityBehaviour
         var eb = towerPrefab != null ? towerPrefab.GetComponent<EntityBehaviour>() : null;
         var towerStats = eb != null ? eb.Stats as TowerStats : null;
         prefabCosts = towerStats != null ? towerStats.towerCosts : null;
-        // Auto-assign gridRoot if not set
-        if (gridRoot == null)
+
+        if (!gridRoot)
         {
-            GameObject found = GameObject.Find("Grid");
-            if (found != null)
-                gridRoot = found.transform;
+            if (isResourceGatherer)
+            {
+                GameObject resGrid = GameObject.FindWithTag("ResourceGrid");
+                if (resGrid != null)
+                {
+                    gridRoot = resGrid.transform;
+                    Debug.Log($"[CardDrag] Resource grid assigned: {gridRoot.name}");
+                }
+                else
+                {
+                    Debug.LogWarning("[CardDrag] Resource grid not found! Please tag your resource grid root 'ResourceGrid'.");
+                }
+            }
             else
-                Debug.LogWarning("GridRoot not found in scene. Please assign gridRoot manually.");
+            {
+                GameObject normalGrid = GameObject.FindWithTag("TowerGrid");
+                if (normalGrid != null)
+                {
+                    gridRoot = normalGrid.transform;
+                    Debug.Log($"[CardDrag] Tower grid assigned: {gridRoot.name}");
+                }
+                else
+                {
+                    Debug.LogWarning("[CardDrag] Tower grid not found! Please tag your tower grid root 'TowerGrid'.");
+                }
+            }
         }
     }
+
+
+
 
     public void OnBeginDrag(PointerEventData e)
     {
@@ -137,28 +164,69 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private bool CanPlaceGathererHere(Vector3 pos)
     {
-        // find nearby resource tiles on the specified layer
-        var hits = Physics.OverlapSphere(pos, adjacencyRadius, resourceLayer);
-        if (hits == null || hits.Length == 0) return false;
-
-        // if the prefab has a Gatherer script, match tile type to gatherer type
-        var gatherer = draggingTower.GetComponentInChildren<Gatherer>();
-        if (gatherer != null)
+        if (isResourceGatherer)
         {
-            for (int i = 0; i < hits.Length; i++)
+            // pick mask: if resourceLayer is empty, search all layers
+            int mask = (resourceLayer.value != 0) ? resourceLayer.value : ~0;
+
+            Collider[] hits = Physics.OverlapSphere(
+                pos,
+                adjacencyRadius,
+                mask,
+                QueryTriggerInteraction.Collide
+            );
+
+            if (hits == null || hits.Length == 0)
             {
-                var tile = hits[i].GetComponent<ResourceTile>();
-                if (tile != null && tile.type == gatherer.gathererType)
-                    return true;
+                Debug.LogWarning($"[CardDrag] No resource colliders in range. " +
+                                $"radius={adjacencyRadius}, layerMask={(resourceLayer.value != 0 ? resourceLayer.value : ~0)}");
+                return false;
             }
+
+            // get gatherer type from the dragged prefab
+            var gatherer = draggingTower.GetComponentInChildren<Gatherer>();
+            if (gatherer == null)
+            {
+                // If no Gatherer script, allow adjacency to ANY ResourceTile
+                foreach (var h in hits)
+                {
+                    // ResourceTile may be on the collider or its parent
+                    var tile = h.GetComponent<ResourceTile>() ?? h.GetComponentInParent<ResourceTile>();
+                    if (tile != null)
+                    {
+                        Debug.Log($"[CardDrag] Found resource '{tile.type}' at {h.transform.name}");
+                        return true;
+                    }
+                }
+                Debug.LogWarning("[CardDrag] Found colliders, but none had ResourceTile.");
+                return false;
+            }
+
+            // Require matching resource type
+            foreach (var h in hits)
+            {
+                var tile = h.GetComponent<ResourceTile>() ?? h.GetComponentInParent<ResourceTile>();
+                if (tile != null)
+                {
+                    Debug.Log($"[CardDrag] In range: {tile.type} (need {gatherer.gathererType}) on {h.transform.name}");
+                    if (tile.type == gatherer.gathererType)
+                        return true;
+                }
+                else
+                {
+                    // Helpful debug when layer is right but component missing
+                    Debug.Log($"[CardDrag] Collider {h.name} on resource layer but no ResourceTile component.");
+                }
+            }
+
+            Debug.LogWarning($"[CardDrag] No matching resource tile in range. Need {gatherer.gathererType}.");
             return false;
         }
 
-        // otherwise, allow any resource tile adjacency
-        for (int i = 0; i < hits.Length; i++)
-            if (hits[i].GetComponent<ResourceTile>() != null)
-                return true;
-
-        return false;
+        // not a resource gatherer -> always OK
+        return true;
     }
+
+    
+
 }

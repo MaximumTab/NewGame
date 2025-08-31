@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
-  m_Name: TowerBaseAbilityAS
+  m_Script: {fileID: 11500000, guid: de846c77927eef540b255d841c716d39, type: 3}
+  m_Name: TowerHeartAS
   m_EditorClassIdentifier: 
-  Range: 3
+  Range: 2
   AtkModifier: 1
+  NumOfTargets: 5
   Cooldown: 0
   Projectile: {fileID: 5438021278605143860, guid: f78e5f0c9c5eac14a8b88f8b31f62fef, type: 3}
