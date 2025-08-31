@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4a6c6aa6bc0e52e4ea842f1635640e1c
+guid: 692d316e7fbbc034bb77ff9c78c35f4c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2920230112216380605
-    second: item card_0
+      213: 438507381636602466
+    second: thumb-1920-1205979_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,43 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: item card_0
+      name: thumb-1920-1205979_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 850
-        height: 1203
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: db47e05a0ddb68820800000000000000
-      internalID: 2920230112216380605
+      spriteID: 26a16d9e324e51600800000000000000
+      internalID: 438507381636602466
       vertices: []
       indices: 
       edges: []
@@ -135,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      item card_0: 2920230112216380605
+      thumb-1920-1205979_0: 438507381636602466
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
