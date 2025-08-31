@@ -232,7 +232,7 @@ MonoBehaviour:
   isResourceGatherer: 1
   resourceLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   adjacencyRadius: 1.25
   towerGridLayer:
     serializedVersion: 2
