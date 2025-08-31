@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ddf4d4a424e26484592588d8466b75ac
+guid: 49e4ecf12a05b5348b7c47a4d63a4ab5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6020310549619782781
-    second: wood cutter_0
+      213: 7683874893108668257
+    second: stone gatherer_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,30 +109,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WindowsStoreApps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wood cutter_0
+      name: stone gatherer_0
       rect:
         serializedVersion: 2
-        x: 54
-        y: 10
-        width: 1406
-        height: 1711
+        x: 6
+        y: 0
+        width: 568
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d74bf934c807c8350800000000000000
-      internalID: 6020310549619782781
+      spriteID: 167e84e118b92aa60800000000000000
+      internalID: 7683874893108668257
       vertices: []
       indices: 
       edges: []
@@ -161,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      wood cutter_0: 6020310549619782781
+      stone gatherer_0: 7683874893108668257
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
