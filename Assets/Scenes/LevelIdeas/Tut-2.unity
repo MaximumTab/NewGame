@@ -8431,6 +8431,10 @@ PrefabInstance:
       propertyPath: gridRoot
       value: 
       objectReference: {fileID: 963636021}
+    - target: {fileID: 5689829141512470100, guid: 0914e70d8b3f2dc4cb19c34c94d7ea00, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6459533689697845683, guid: 0914e70d8b3f2dc4cb19c34c94d7ea00, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

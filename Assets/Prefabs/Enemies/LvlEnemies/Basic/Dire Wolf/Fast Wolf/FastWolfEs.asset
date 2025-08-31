@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ac9f665be22eeb4e8f4479bb1306928, type: 3}
-  m_Name: PuffPupES
+  m_Name: FastWolfEs
   m_EditorClassIdentifier: 
-  Name: Pufferion Pup
-  Range: 2
-  MaxHp: 200
+  Name: Fast Dire Wolf
+  Range: 1
+  MaxHp: 80
   Atk: 20
-  AttackInterval: 1
-  Speed: 0.3
+  AttackInterval: 0.9
+  Speed: 0.8
   Tag: 0
   SortBy:
     Stat: 2
     Method: 0
   Block: 1
   Abilities:
-  - Range: 2
-    Ability: {fileID: 11400000, guid: c9cf1c2f8393a9b41932110598fc7675, type: 2}
+  - Range: 1
+    Ability: {fileID: 11400000, guid: 72398c071f481484ea1980d2975c1633, type: 2}
   Type: 0
   ObjectiveLives: 1

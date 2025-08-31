@@ -220,7 +220,16 @@ public class EntityBehaviour : MonoBehaviour
                          : TargetsInRange[index].Count);
                      i++)
                 {
-                    entityStats.Abilities[index].Ability.UseAbility(TargetsInRange[index][i], ProjStart.position, Atk);
+                    if (ProjStart)
+                    {
+                        entityStats.Abilities[index].Ability
+                            .UseAbility(TargetsInRange[index][i], ProjStart.position, Atk);
+                    }
+                    else
+                    {
+                        entityStats.Abilities[index].Ability
+                            .UseAbility(TargetsInRange[index][i], transform.position, Atk);
+                    }
                 }
             }
             else if (!AbilityOnCooldown[index] && !Attacking&&entityStats.Abilities[index].Ability.GetType()==typeof(SummonerAbil))
