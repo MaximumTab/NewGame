@@ -8,24 +8,42 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public Transform gridRoot;        // the grid its refering to
     public float snapThreshold = 0.5f; // snap to grid range
 
+    [Header("Cost / Placement Rules")]
+    public bool requireAffordable = true;   // only allow if we have enough resources
+
     [Header("Resource Gatherer Placement")]
-    public bool isResourceGatherer = false;        // tick this for gatherer cards
-    public LayerMask resourceLayer;                // layer of your Resource tiles
-    public float adjacencyRadius = 1.25f;          // how close it must be to count as "next to"
+    public bool isResourceGatherer = false; // tick this for gatherer cards
+    public LayerMask resourceLayer;         // layer of Resource tiles
+    public float adjacencyRadius = 1.25f;   // how close it must be to count as "next to"
 
     private Camera mainCamera;       
     private CanvasGroup canvasGroup;
     private GameObject draggingTower;
+    private TowerStats.TowerCost[] prefabCosts;
 
     void Awake()
     {
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
-
         mainCamera = Camera.main;
+
+        // pull TowerStats from the prefab’s EntityBehaviour
+        var eb = towerPrefab != null ? towerPrefab.GetComponent<EntityBehaviour>() : null;
+        var towerStats = eb != null ? eb.Stats as TowerStats : null;
+        prefabCosts = towerStats != null ? towerStats.towerCosts : null;
     }
 
     public void OnBeginDrag(PointerEventData e)
     {
+        // affordability gate before spawning preview
+        if (requireAffordable && prefabCosts != null && ResourceManager.Instance != null)
+        {
+            if (!ResourceManager.Instance.CanAfford(prefabCosts))
+            {
+                Debug.LogWarning("[CardDrag] Not enough resources to place this tower.");
+                return; // do not start dragging, keep the card visible
+            }
+        }
+
         // hide the card visually but keep it raycast-able
         canvasGroup.alpha = 0f;
 
@@ -35,24 +53,27 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         MonoBehaviour[] scriptsToDisable = draggingTower.GetComponentsInChildren<MonoBehaviour>();
         foreach (var script in scriptsToDisable)
             script.enabled = false;
+
         // place under cursor at grid height
         draggingTower.transform.position = ScreenToGridWorldPoint(e.position);
     }
 
     public void OnDrag(PointerEventData e)
     {
+        if (draggingTower == null) return;
         // follow cursor at grid height
         draggingTower.transform.position = ScreenToGridWorldPoint(e.position);
     }
 
     public void OnEndDrag(PointerEventData e)
     {
+        if (draggingTower == null) return;
+
         // if this is a resource gatherer, enforce adjacency rule before snapping
         if (isResourceGatherer && !CanPlaceGathererHere(draggingTower.transform.position))
         {
             // invalid placement: restore the card, delete the spawned tower, and exit
             canvasGroup.alpha = 1f;                  // show card again
-            transform.localScale = Vector3.one;      // reset scale in case you shrink elsewhere
             Destroy(draggingTower);                  // remove invalid preview/placement
             return;
         }
@@ -71,6 +92,18 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
         if (best != null && bestDist <= snapThreshold)
             draggingTower.transform.position = best.position;
+
+        // final affordability check and spend (handles race conditions)
+        if (requireAffordable && prefabCosts != null && ResourceManager.Instance != null)
+        {
+            if (!ResourceManager.Instance.TrySpend(prefabCosts))
+            {
+                Debug.LogWarning("[CardDrag] Could not spend resources (now insufficient). Cancelling placement.");
+                Destroy(draggingTower);          // cancel placement
+                canvasGroup.alpha = 1f;          // show card again
+                return;
+            }
+        }
 
         //----enable towers scripts from dragingTower -----
         MonoBehaviour[] scriptsToEnable = draggingTower.GetComponentsInChildren<MonoBehaviour>();
@@ -93,37 +126,30 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     // ---- Helpers for gatherer placement ----
 
-    // Checks if there is a matching resource tile within adjacencyRadius.
-    // If the spawned prefab has a Gatherer component, we match its type.
-    // If it doesn't, we just require any ResourceTile in range.
     private bool CanPlaceGathererHere(Vector3 pos)
     {
-        // collect nearby colliders on resource layer
-        Collider[] hits = Physics.OverlapSphere(pos, adjacencyRadius, resourceLayer);
+        // find nearby resource tiles on the specified layer
+        var hits = Physics.OverlapSphere(pos, adjacencyRadius, resourceLayer);
+        if (hits == null || hits.Length == 0) return false;
 
-        if (hits == null || hits.Length == 0)
-            return false;
-
-        // try to read gatherer type from the spawned tower (if present)
-        var gatherer = draggingTower.GetComponentInChildren<Gatherer>(); // your gatherer script with a ResourceType field
-        if (gatherer == null)
+        // if the prefab has a Gatherer script, match tile type to gatherer type
+        var gatherer = draggingTower.GetComponentInChildren<Gatherer>();
+        if (gatherer != null)
         {
-            // no gatherer script found -> allow placement next to any resource tile
-            // (you can change this to 'return false' if you want to hard-require Gatherer)
             for (int i = 0; i < hits.Length; i++)
-                if (hits[i].GetComponent<ResourceTile>() != null)
+            {
+                var tile = hits[i].GetComponent<ResourceTile>();
+                if (tile != null && tile.type == gatherer.gathererType)
                     return true;
+            }
             return false;
         }
 
-        // match by resource type
-        ResourceType needType = gatherer.gathererType;
+        // otherwise, allow any resource tile adjacency
         for (int i = 0; i < hits.Length; i++)
-        {
-            var tile = hits[i].GetComponent<ResourceTile>();
-            if (tile != null && tile.type == needType)
+            if (hits[i].GetComponent<ResourceTile>() != null)
                 return true;
-        }
+
         return false;
     }
 }

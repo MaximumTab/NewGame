@@ -1,23 +1,16 @@
-using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TowerStats", menuName = "Entities/TowerStats")]
 public class TowerStats : EntityStats
 {
-
     [Header("Tower cost")]
     public TowerCost[] towerCosts;
 
+    [System.Serializable]
     public struct TowerCost
     {
-        public enum ResourceType { wood, iron, /* add more recource types herer*/};
         public ResourceType resourceType;
-
-        public int resourceCost;
+        public float resourceCost;
     }
-
-    //[Header("Visuals")]
-    //public Sprite towerSprite;
-
-    // Add other fields as needed
+    // Add other fields as needed (sprites, DPS, etc.)
 }

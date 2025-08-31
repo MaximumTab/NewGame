@@ -5263,6 +5263,10 @@ PrefabInstance:
       propertyPath: gridRoot
       value: 
       objectReference: {fileID: 1906779611}
+    - target: {fileID: 3781501154486279099, guid: 0914e70d8b3f2dc4cb19c34c94d7ea00, type: 3}
+      propertyPath: requireAffordable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4290103822220321279, guid: 0914e70d8b3f2dc4cb19c34c94d7ea00, type: 3}
       propertyPath: gridRoot
       value: 

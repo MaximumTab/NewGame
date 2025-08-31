@@ -10,6 +10,7 @@ public class EntityBehaviour : MonoBehaviour
     private Slider HpSlider;
     private Camera SceneCam;
     [SerializeField] protected EntityStats entityStats;
+    public EntityStats Stats => entityStats; //u made it protected so i made a little getter for my resources hope u dont mind
     public float Hp;
     public float PercHp;
     protected float MaxHp;
