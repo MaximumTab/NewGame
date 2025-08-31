@@ -14,6 +14,7 @@ public class EntityBehaviour : MonoBehaviour
     private Transform SpriteObj;
     [SerializeField] private Transform ProjStart;
     [SerializeField] protected EntityStats entityStats;
+    public EntityStats Stats => entityStats; //u made it protected so i made a little getter for my resources hope u dont mind
     public float Hp;
     public float PercHp;
     protected float MaxHp;
@@ -220,7 +221,16 @@ public class EntityBehaviour : MonoBehaviour
                          : TargetsInRange[index].Count);
                      i++)
                 {
-                    entityStats.Abilities[index].Ability.UseAbility(TargetsInRange[index][i], ProjStart.position, Atk);
+                    if (ProjStart)
+                    {
+                        entityStats.Abilities[index].Ability
+                            .UseAbility(TargetsInRange[index][i], ProjStart.position, Atk);
+                    }
+                    else
+                    {
+                        entityStats.Abilities[index].Ability
+                            .UseAbility(TargetsInRange[index][i], transform.position, Atk);
+                    }
                 }
             }
             else if (!AbilityOnCooldown[index] && !Attacking&&entityStats.Abilities[index].Ability.GetType()==typeof(SummonerAbil))

@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2218148450780674047}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21550234, y: 0, z: 0, w: 0.9765033}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 1.23, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3114359400654113235}
-  m_LocalEulerAnglesHint: {x: 24.89, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!212 &7069527349185142936
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7145198348311737387, guid: 70c888f49ba4b5c4ea886d5c94e7b21b, type: 3}
+  m_Sprite: {fileID: 6153867739358977036, guid: 96a7f79acba37d241a50d224c2e26eac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HpBar: {fileID: 2964377668342257350, guid: 45fdf50af33b03b4897a60c4df94cd72, type: 3}
+  ProjStart: {fileID: 0}
   entityStats: {fileID: 11400000, guid: 0bb2e6904918ee14782bf4ef30c60568, type: 2}
   Hp: 0
   PercHp: 0
