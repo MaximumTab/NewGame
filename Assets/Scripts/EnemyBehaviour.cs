@@ -107,11 +107,7 @@ public class EnemyBehaviour : EntityBehaviour
     {
         float time=0;
         Waits = true;
-        while (Route.CheckPoints[CheckProg - 1].WaitSeconds>time)
-        {
-            time+= Time.fixedDeltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(Route.CheckPoints[CheckProg - 1].WaitSeconds);
         NewRoute();
         Waits = false;
         yield return null;

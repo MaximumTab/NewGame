@@ -192,7 +192,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
     IEnumerator DestroySelf()
     {
-        yield return new WaitForSeconds(projectileStats.DelayBtwHit*projectileStats.NumOfHits);
+        yield return new WaitForSeconds(projectileStats.DelayBtwHit*(projectileStats.NumOfHits-1));
         Destroy(gameObject);
     }
 }
