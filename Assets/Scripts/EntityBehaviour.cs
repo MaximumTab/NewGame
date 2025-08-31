@@ -134,11 +134,11 @@ public class EntityBehaviour : MonoBehaviour
                 switch (entityStats.SortBy.Method)
                 {
                     case EntityStats.SortedBy.Methods.Greatest:
-                        ResultList=new List<GameObject>(list.OrderByDescending(o => o.GetComponent<EntityBehaviour>().Hp));
+                        ResultList=new List<GameObject>(list.OrderByDescending(o => o.GetComponent<EntityBehaviour>().PercHp));
                         break;
                     case EntityStats.SortedBy.Methods.None:
                     case EntityStats.SortedBy.Methods.Smallest:
-                        ResultList=new List<GameObject>(list.OrderBy(o => o.GetComponent<EntityBehaviour>().Hp));
+                        ResultList=new List<GameObject>(list.OrderBy(o => o.GetComponent<EntityBehaviour>().PercHp));
                         break;
                 }
                 break;
