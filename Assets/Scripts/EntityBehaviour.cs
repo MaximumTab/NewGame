@@ -12,6 +12,7 @@ public class EntityBehaviour : MonoBehaviour
     private Camera SceneCam;
     protected Animator EntAnim;
     private Transform SpriteObj;
+    [SerializeField] private Transform ProjStart;
     [SerializeField] protected EntityStats entityStats;
     public float Hp;
     public float PercHp;
@@ -219,7 +220,7 @@ public class EntityBehaviour : MonoBehaviour
                          : TargetsInRange[index].Count);
                      i++)
                 {
-                    entityStats.Abilities[index].Ability.UseAbility(TargetsInRange[index][i], transform.position, Atk);
+                    entityStats.Abilities[index].Ability.UseAbility(TargetsInRange[index][i], ProjStart.position, Atk);
                 }
             }
             else if (!AbilityOnCooldown[index] && !Attacking&&entityStats.Abilities[index].Ability.GetType()==typeof(SummonerAbil))

@@ -57,7 +57,7 @@ public class EnemySpawning : Incursion
         }
         catch (Exception e)
         {
-            GeneratePath();
+            CreatePath = true;
         }
 
         EnemyCount = EnemySpawns.Count;
