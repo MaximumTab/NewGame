@@ -944,9 +944,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amounts:
-  - 1.5
-  - 1
-  - 1
+  - 500
+  - 500
+  - 500
 --- !u!1 &7988055924261376506
 GameObject:
   m_ObjectHideFlags: 0
