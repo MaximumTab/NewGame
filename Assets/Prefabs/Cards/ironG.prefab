@@ -228,8 +228,9 @@ MonoBehaviour:
   towerPrefab: {fileID: 2289726996055108080, guid: c8ef057b51e07754ab49afc3a9e1d8dc, type: 3}
   gridRoot: {fileID: 0}
   snapThreshold: 0.5
-  isResourceGatherer: 0
+  requireAffordable: 1
+  isResourceGatherer: 1
   resourceLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   adjacencyRadius: 1.25

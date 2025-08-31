@@ -560,6 +560,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemyCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -569,7 +573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: EnemySpawns.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Visited.Array.data[0].x
@@ -1044,6 +1048,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3876357771370153746, guid: e2984550a5c4c0547b5a832f95b17d88, type: 3}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[2].Enemy
+      value: 
+      objectReference: {fileID: 1299241042516606528, guid: f5b89782094e4fb488e8ca78eb611ed5, type: 3}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[3].Enemy
+      value: 
+      objectReference: {fileID: 1636409395377828315, guid: 1d6d1975a9e862942867de33cffaae13, type: 3}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[4].Enemy
+      value: 
+      objectReference: {fileID: 1636409395377828315, guid: 1d6d1975a9e862942867de33cffaae13, type: 3}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: EnemySpawns.Array.data[0].SpawnTimer
       value: 2
       objectReference: {fileID: 0}
@@ -1056,12 +1072,32 @@ PrefabInstance:
       value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[2].RouteTaken
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[2].SpawnTimer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[3].SpawnTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[4].SpawnTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[1].CheckPoints.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[1].TunnelTimes.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.data[0].Objective
@@ -2244,7 +2280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: EnemyCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.size
@@ -2256,7 +2292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: EnemySpawns.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Visited.Array.data[0].x
@@ -2619,12 +2655,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1384738924307322464, guid: a489b88f2999583479fea8d54e07832b, type: 3}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[2].Enemy
+      value: 
+      objectReference: {fileID: 1384738924307322464, guid: a489b88f2999583479fea8d54e07832b, type: 3}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: EnemySpawns.Array.data[0].SpawnTimer
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: EnemySpawns.Array.data[1].SpawnTimer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[2].SpawnTimer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.size
@@ -3162,7 +3206,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 294088303311415417, guid: 0914e70d8b3f2dc4cb19c34c94d7ea00, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1514227932448612080, guid: 0914e70d8b3f2dc4cb19c34c94d7ea00, type: 3}
       propertyPath: gridRoot
