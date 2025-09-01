@@ -25,7 +25,20 @@ public class DeckBuilder : MonoBehaviour
         var options = new List<string> { NoneLabel };
         foreach (var card in database.allCards)
         {
-            if (card != null) options.Add(card.name);
+            if (card)
+            {
+                EntityBehaviour towerCard = card.GetComponent<EntityBehaviour>();
+                if (towerCard)
+                {
+                    options.Add(towerCard.Stats.Name);
+                }else if (card.GetComponent<Gatherer>())
+                {
+                    options.Add(card.GetComponent<Gatherer>().gathererType + " Gatherer");
+                }
+
+            }
+
+            
         }
 
         // Populate dropdowns and restore saved values

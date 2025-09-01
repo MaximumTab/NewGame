@@ -10,9 +10,15 @@ public class DeckLoader : MonoBehaviour
     [SerializeField] private Transform deckPanel;     // panel under Canvas, has HorizontalLayoutGroup
 
     private const string PrefKey = "CardSlot";
+    private GameObject AutoGenCard;
 
     void Start()
     {
+        if (database.AutoGenCard)
+        {
+            AutoGenCard = database.AutoGenCard;
+        }
+
         LoadAndPlaceDeck();
     }
 
@@ -44,7 +50,10 @@ public class DeckLoader : MonoBehaviour
         // Instantiate into panel
         foreach (var card in chosen)
         {
-            var cardUI = Instantiate(card, deckPanel);
+            var cardUI = Instantiate(AutoGenCard, deckPanel);
+            CardDrag CDUI = cardUI.GetComponent<CardDrag>();
+            CDUI.towerPrefab = card;
+            CDUI.SetData();
             cardUI.transform.localScale = Vector3.one; // reset scale to avoid stretched UI
         }
 

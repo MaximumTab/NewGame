@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -24,16 +25,19 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private CanvasGroup canvasGroup;
     private GameObject draggingTower;
     private TowerStats.TowerCost[] prefabCosts;
+    [SerializeField] private TMP_Text NameText;
+    [SerializeField] private TMP_Text CostText;
 
     void Awake()
     {
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
         mainCamera = Camera.main;
+        SetData();
+        
+    }
 
-        var eb = towerPrefab != null ? towerPrefab.GetComponent<EntityBehaviour>() : null;
-        var towerStats = eb != null ? eb.Stats as TowerStats : null;
-        prefabCosts = towerStats != null ? towerStats.towerCosts : null;
-
+    public void SetGrid()
+    {
         if (!gridRoot)
         {
             if (isResourceGatherer)
@@ -65,6 +69,31 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
+    public void SetData()
+    {
+        var eb = towerPrefab != null ? towerPrefab.GetComponent<EntityBehaviour>() : null;
+        var towerStats = eb != null ? eb.Stats as TowerStats : null;
+        prefabCosts = towerStats != null ? towerStats.towerCosts : null;
+        Gatherer gathInfo = towerPrefab.GetComponent<Gatherer>();
+        if (NameText&&towerStats)
+        {
+            NameText.text = towerStats.Name;
+            isResourceGatherer = false;
+        }else if (NameText&&gathInfo)
+        {
+            NameText.text = gathInfo.gathererType + " Gatherer";
+            isResourceGatherer = true;
+        }
+
+        if (CostText&&prefabCosts is { Length: 3 })
+        {
+            CostText.text = prefabCosts[0].resourceCost + "\n" + prefabCosts[1].resourceCost + "\n" + prefabCosts[2].resourceCost;
+        }else if (CostText)
+        {
+            CostText.text = "Free";
+        }
+        SetGrid();
+    }
 
 
 

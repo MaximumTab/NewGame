@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12981e0ed6215e04fbfc525bde61e4a4, type: 3}
   m_Name: BlockingTS
   m_EditorClassIdentifier: 
-  Name: BAttack
+  Name: Spade Tower
   Range: 1
   MaxHp: 400
   Atk: 2

@@ -1,8 +1,12 @@
+using System;
+using TMPro;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance { get; private set; }
+
+    [SerializeField] private TMP_Text ResourceShow;
 
     // index by (int)ResourceType: wood, stone, iron
     [SerializeField] private float[] amounts = new float[3];
@@ -12,6 +16,14 @@ public class ResourceManager : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         // Optional: DontDestroyOnLoad(gameObject);
+    }
+
+    private void Update()
+    {
+        if (ResourceShow)
+        {
+            ResourceShow.text = "Resources:\nWood: " + amounts[0] + "\nStone: " + amounts[1] + "\nIron: " + amounts[2];
+        }
     }
 
     public float Get(ResourceType type) => amounts[(int)type];
