@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text CounterDisplay;
 
 
+    private void Start()
+    {
+        Time.timeScale = 1;
+    }
+
     private void Update()
     {
         if (Lives <= 0)
