@@ -11,6 +11,7 @@ public class TowerBase : EntityBehaviour
         rb.useGravity = false;
         BoxCollider BoxCol=gameObject.AddComponent<BoxCollider>();
         BoxCol.size = new Vector3(0.7f, 1, 0.7f);
+        BoxCol.center= Vector3.up*0.5f;
         BoxCol.isTrigger = true;
         base.OnSpawn();
         

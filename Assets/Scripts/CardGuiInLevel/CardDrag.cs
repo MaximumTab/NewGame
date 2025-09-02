@@ -26,6 +26,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private CanvasGroup canvasGroup;
     private GameObject draggingTower;
     private TowerBase thisTower;
+    private float positionChange;
     private TowerStats.TowerCost[] prefabCosts;
     [SerializeField] private TMP_Text NameText;
     [SerializeField] private TMP_Text CostText;
@@ -157,7 +158,8 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public bool FindDeployableAtLoc(Vector3 Loc)
     {
-        Collider[] ObjectsAtLoc=Physics.OverlapSphere(Loc, 1);
+        positionChange = 0;
+        Collider[] ObjectsAtLoc=Physics.OverlapSphere(Loc, 0.4f);
         foreach (Collider col in ObjectsAtLoc)
         {
             Deployable TileDeploy = col.transform.parent.GetComponent<Deployable>();
@@ -165,28 +167,27 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             {
                 if (TileDeploy is Path&&thisTower.Stats.Range==EntityStats.RangeType.Melee)
                 {
+                    positionChange = 0;
                     return true;
                 }
                 if (TileDeploy is not Path&&thisTower.Stats.Range == EntityStats.RangeType.Ranged)
                 {
+                    positionChange = 0.25f;
                     return true;
                 }
             }
         }
-
         return false;
     }
 
     public void snaptoGrid()
     {
         // snap to nearest grid cell    
-        gridRoot.cellSwizzle = GridLayout.CellSwizzle.XYZ;
-        Vector3 cell = gridRoot.WorldToCell(draggingTower.transform.position);
+        Vector3 cell = new Vector3(Mathf.Floor(draggingTower.transform.position.x),Mathf.RoundToInt(draggingTower.transform.position.y)-1f,Mathf.Floor(draggingTower.transform.position.z))+gridRoot.transform.position+new Vector3(0.5f,0,0.5f);
         if (FindDeployableAtLoc(cell))
         {
-            draggingTower.transform.position = cell;
+            draggingTower.transform.position = cell+Vector3.up*(positionChange);
         }
-
     }
 
     public void ReturnCard()
