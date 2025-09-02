@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca37838cf9195849a4e2357f1babd55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deployable: 0
+  ExitTunnel: []
+  EnterTunnel: []
 --- !u!1 &4883679696711122302
 GameObject:
   m_ObjectHideFlags: 0

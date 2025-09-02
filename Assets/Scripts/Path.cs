@@ -1,5 +1,5 @@
 using UnityEngine;
 
-public class Path : MonoBehaviour
+public class Path : Deployable
 {
 }

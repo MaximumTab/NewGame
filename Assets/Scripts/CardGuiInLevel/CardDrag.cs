@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,7 +7,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 {
     [Header("Drag & Drop Settings")]
     public GameObject towerPrefab;    // tower prefab
-    public Transform gridRoot;        // the grid its refering to
+    public Grid gridRoot;        // the grid its refering to
     public float snapThreshold = 0.5f; // snap to grid range
 
     [Header("Cost / Placement Rules")]
@@ -24,6 +25,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Camera mainCamera;
     private CanvasGroup canvasGroup;
     private GameObject draggingTower;
+    private TowerBase thisTower;
     private TowerStats.TowerCost[] prefabCosts;
     [SerializeField] private TMP_Text NameText;
     [SerializeField] private TMP_Text CostText;
@@ -36,6 +38,26 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         
     }
 
+    public void FindAutoGrid()
+    {
+        if (!gridRoot)
+        {
+            Grid[] AllGrids = FindObjectsByType<Grid>(FindObjectsSortMode.None);
+            foreach (Grid indivGrid in AllGrids)
+            {
+                if (!isResourceGatherer&&indivGrid.GetComponentInChildren<EnemySpawning>())
+                {
+                    gridRoot = indivGrid;
+                }
+                else if(isResourceGatherer)
+                {
+                    gridRoot = indivGrid;
+                }
+            }
+            
+        }
+    }
+/*
     public void SetGrid()
     {
         if (!gridRoot)
@@ -67,12 +89,12 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 }
             }
         }
-    }
+    }*/
 
     public void SetData()
     {
-        var eb = towerPrefab != null ? towerPrefab.GetComponent<EntityBehaviour>() : null;
-        var towerStats = eb != null ? eb.Stats as TowerStats : null;
+        thisTower = towerPrefab != null ? towerPrefab.GetComponent<TowerBase>() : null;
+        var towerStats = thisTower != null ? thisTower.Stats as TowerStats : null;
         prefabCosts = towerStats != null ? towerStats.towerCosts : null;
         Gatherer gathInfo = towerPrefab.GetComponent<Gatherer>();
         if (NameText&&towerStats)
@@ -92,7 +114,8 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             CostText.text = "Free";
         }
-        SetGrid();
+        FindAutoGrid();
+        //SetGrid();
     }
 
 
@@ -128,6 +151,48 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (draggingTower == null) return;
         // follow cursor at grid height
         draggingTower.transform.position = ScreenToGridWorldPoint(e.position);
+        snaptoGrid();
+    }
+
+
+    public bool FindDeployableAtLoc(Vector3 Loc)
+    {
+        Collider[] ObjectsAtLoc=Physics.OverlapSphere(Loc, 1);
+        foreach (Collider col in ObjectsAtLoc)
+        {
+            Deployable TileDeploy = col.transform.parent.GetComponent<Deployable>();
+            if (TileDeploy&&TileDeploy.deployable)
+            {
+                if (TileDeploy is Path&&thisTower.Stats.Range==EntityStats.RangeType.Melee)
+                {
+                    return true;
+                }
+                if (TileDeploy is not Path&&thisTower.Stats.Range == EntityStats.RangeType.Ranged)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void snaptoGrid()
+    {
+        // snap to nearest grid cell    
+        gridRoot.cellSwizzle = GridLayout.CellSwizzle.XYZ;
+        Vector3 cell = gridRoot.WorldToCell(draggingTower.transform.position);
+        if (FindDeployableAtLoc(cell))
+        {
+            draggingTower.transform.position = cell;
+        }
+
+    }
+
+    public void ReturnCard()
+    {
+        canvasGroup.alpha = 1f;                  // show card again
+        Destroy(draggingTower);                  // remove invalid preview/placement
     }
 
     public void OnEndDrag(PointerEventData e)
@@ -135,37 +200,19 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (draggingTower == null) return;
 
         // if this is a resource gatherer, enforce adjacency rule before snapping
-        if (isResourceGatherer && !CanPlaceGathererHere(draggingTower.transform.position))
+        if (isResourceGatherer && !CanPlaceGathererHere(draggingTower.transform.position)||!FindDeployableAtLoc(draggingTower.transform.position))
         {
             // invalid placement: restore the card, delete the spawned tower, and exit
-            canvasGroup.alpha = 1f;                  // show card again
-            Destroy(draggingTower);                  // remove invalid preview/placement
+            ReturnCard();
             return;
         }
-
-        // snap to nearest grid cell
-        Transform best = null;
-        float bestDist = float.MaxValue;
-        foreach (Transform cell in gridRoot)
-        {
-            float d = Vector3.Distance(cell.position, draggingTower.transform.position);
-            if (d < bestDist)
-            {
-                bestDist = d;
-                best = cell;
-            }
-        }
-        if (best != null && bestDist <= snapThreshold)
-            draggingTower.transform.position = best.position;
-
         // final affordability check and spend (handles race conditions)
         if (requireAffordable && prefabCosts != null && ResourceManager.Instance != null)
         {
             if (!ResourceManager.Instance.TrySpend(prefabCosts))
             {
                 Debug.LogWarning("[CardDrag] Could not spend resources (now insufficient). Cancelling placement.");
-                Destroy(draggingTower);          // cancel placement
-                canvasGroup.alpha = 1f;          // show card again
+                ReturnCard();
                 return;
             }
         }
@@ -182,10 +229,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Vector3 ScreenToGridWorldPoint(Vector2 screenPos)
     {
         // calculate distance along camera forward to grid plane
-        float distance = Vector3.Dot(Vector3.up * gridRoot.position.y - mainCamera.transform.position, mainCamera.transform.forward);
+        float distance = Vector3.Dot(Vector3.up-mainCamera.transform.position, mainCamera.transform.forward);
         Vector3 sp = new Vector3(screenPos.x, screenPos.y, distance);
         Vector3 wp = mainCamera.ScreenToWorldPoint(sp);
-        wp.y = gridRoot.position.y;
+        wp.y = 1;
         return wp;
     }
 
