@@ -177,6 +177,12 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 }
             }
         }
+
+        if (isResourceGatherer&&CanPlaceGathererHere(draggingTower.transform.position))
+        {
+            return true;
+        }
+
         return false;
     }
 
@@ -201,7 +207,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (draggingTower == null) return;
 
         // if this is a resource gatherer, enforce adjacency rule before snapping
-        if (isResourceGatherer && !CanPlaceGathererHere(draggingTower.transform.position)||!FindDeployableAtLoc(draggingTower.transform.position))
+        if (!FindDeployableAtLoc(draggingTower.transform.position))
         {
             // invalid placement: restore the card, delete the spawned tower, and exit
             ReturnCard();
