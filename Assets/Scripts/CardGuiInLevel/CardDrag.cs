@@ -16,7 +16,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     [Header("Resource Gatherer Placement")]
     public bool isResourceGatherer = false; // tick this for gatherer cards
     public LayerMask resourceLayer;         // layer of Resource tiles
-    public float adjacencyRadius = 1.25f;   // how close it must be to count as "next to"
+    private float adjacencyRadius = 0.4f;   // how close it must be to count as "next to"
 
     [Header("Auto-assign Grids By Layer")]
     public LayerMask towerGridLayer;      // layer of the regular tower grid root
@@ -165,22 +165,29 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             Deployable TileDeploy = col.transform.parent.GetComponent<Deployable>();
             if (TileDeploy&&TileDeploy.deployable)
             {
+                if (isResourceGatherer&&CanPlaceGathererHere(Loc))
+                {
+                    positionChange = 0.5f;
+                    return true;
+                }
+                if(isResourceGatherer)
+                {
+                    return false;
+                }
+
                 if (TileDeploy is Path&&thisTower.Stats.Range==EntityStats.RangeType.Melee)
                 {
                     positionChange = 0;
                     return true;
                 }
-                if (TileDeploy is not Path&&thisTower.Stats.Range == EntityStats.RangeType.Ranged)
+
+                if (TileDeploy is not Path && thisTower.Stats.Range == EntityStats.RangeType.Ranged)
                 {
                     positionChange = 0.25f;
                     return true;
                 }
+                
             }
-        }
-
-        if (isResourceGatherer&&CanPlaceGathererHere(draggingTower.transform.position))
-        {
-            return true;
         }
 
         return false;

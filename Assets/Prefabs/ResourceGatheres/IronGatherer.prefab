@@ -48,7 +48,7 @@ MonoBehaviour:
   gathererType: 2
   perSecond: 1
   tickSeconds: 1
-  adjacencyRadius: 1.25
+  adjacencyRadius: 0.5
   resourceLayer:
     serializedVersion: 2
     m_Bits: 256
