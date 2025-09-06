@@ -3454,7 +3454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cdb699be137b5f42b77f73214678f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: TitleScreen
+  sceneName: LevelSelect
   prerequisiteScenes: []
 --- !u!114 &2109805469
 MonoBehaviour:
