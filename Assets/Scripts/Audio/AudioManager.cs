@@ -45,7 +45,6 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        InitializeMusic(FmodEvents.instance.music);
     }
 
     private void Update()
