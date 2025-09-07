@@ -227,6 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3cc68b7d96aebe45ad525285401df63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 1
+  musicVolume: 1
+  sfxVolume: 1
 --- !u!4 &440995136
 Transform:
   m_ObjectHideFlags: 0
@@ -287,6 +290,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c86fc72d724baf4b901732f7898d65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <music>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &939678561
 GameObject:
   m_ObjectHideFlags: 0
