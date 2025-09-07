@@ -6,6 +6,7 @@ public class TowerPopupUI : MonoBehaviour
     public TMP_Text statsText;
     private EntityBehaviour currentTarget;
     public static TowerPopupUI Instance;
+    public EntityBehaviour CurrentTarget => currentTarget;
 
     void Awake()
     {
@@ -18,12 +19,16 @@ public class TowerPopupUI : MonoBehaviour
         currentTarget = target;
         if (statsText != null) statsText.text = BuildStats(target);
         gameObject.SetActive(true);
+
+         RangeOverlay.Instance?.ShowFor(target);
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);
         currentTarget = null;
+
+         RangeOverlay.Instance?.Hide();
     }
 
     public void Refresh()
@@ -48,6 +53,8 @@ public class TowerPopupUI : MonoBehaviour
     {
         return gameObject.activeSelf && ReferenceEquals(currentTarget, e);
     }
+
+    
 
     string BuildStats(EntityBehaviour ent)
     {
