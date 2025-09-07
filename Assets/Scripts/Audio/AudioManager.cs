@@ -8,11 +8,11 @@ public class AudioManager : MonoBehaviour
 {
     [Header("Volume")]
     [Range(0, 1)]
-    
+
     public float masterVolume = 1f;
-     [Range(0, 1)]
+    [Range(0, 1)]
     public float musicVolume = 1f;
-     [Range(0, 1)]
+    [Range(0, 1)]
     public float sfxVolume = 1f;
     [Range(0, 1)]
 
@@ -41,10 +41,15 @@ public class AudioManager : MonoBehaviour
         masterBus = RuntimeManager.GetBus("bus:/");
         musicBus = RuntimeManager.GetBus("bus:/Music");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
+
+        
     }
 
     private void Start()
     {
+        masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        musicVolume  = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        sfxVolume    = PlayerPrefs.GetFloat("SFXVolume", 1f);
     }
 
     private void Update()
@@ -52,6 +57,7 @@ public class AudioManager : MonoBehaviour
         masterBus.setVolume(masterVolume);
         musicBus.setVolume(musicVolume);
         sfxBus.setVolume(sfxVolume);
+
     }
     public EventInstance CreateInstance(EventReference eventReference)
     {
@@ -59,20 +65,17 @@ public class AudioManager : MonoBehaviour
         eventInstances.Add(eventinstance);
         return eventinstance;
 
-
-
     }
     public void PlayOneShot(EventReference sound)
     {
         RuntimeManager.PlayOneShot(sound);
     }
 
-    private void InitializeMusic(EventReference musicEventReference)
+    public void SetMusicVolume()
     {
-        musicEventInstance = CreateInstance(musicEventReference);
-        musicEventInstance.start();
+        
     }
-
+    
 }
 
 
