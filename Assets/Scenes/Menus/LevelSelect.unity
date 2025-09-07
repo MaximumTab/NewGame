@@ -208,8 +208,8 @@ GameObject:
   m_Component:
   - component: {fileID: 939678564}
   - component: {fileID: 939678563}
-  - component: {fileID: 939678562}
   - component: {fileID: 939678565}
+  - component: {fileID: 939678566}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -217,14 +217,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &939678562
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939678561}
-  m_Enabled: 1
 --- !u!20 &939678563
 Camera:
   m_ObjectHideFlags: 0
@@ -335,6 +327,20 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &939678566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939678561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 939678561}
 --- !u!1 &1112230656
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,11 +388,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1253779763
-      Data2: 1330997067
-      Data3: -576282239
-      Data4: -144120708
-    Path: event:/Music/SceneChange
+      Data1: -1503266853
+      Data2: 1138935099
+      Data3: -2134039396
+      Data4: 1007747078
+    Path: event:/Music/Overworld
   Event: 
   EventPlayTrigger: 1
   EventStopTrigger: 2
@@ -394,9 +400,7 @@ MonoBehaviour:
   TriggerOnce: 0
   Preload: 0
   NonRigidbodyVelocity: 0
-  Params:
-  - Name: Scenespace
-    Value: 1
+  Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
