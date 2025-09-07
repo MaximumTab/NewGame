@@ -388,11 +388,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1503266853
-      Data2: 1138935099
-      Data3: -2134039396
-      Data4: 1007747078
-    Path: event:/Music/Overworld
+      Data1: -295953099
+      Data2: 1232555089
+      Data3: 1892209284
+      Data4: 1756583478
+    Path: event:/Music/OverworldMusic
   Event: 
   EventPlayTrigger: 1
   EventStopTrigger: 2

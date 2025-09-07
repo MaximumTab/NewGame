@@ -10799,6 +10799,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5520562683310842784, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: EventReference.Path
+      value: event:/Music/TheWall BossOst
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520562683310842784, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: -388896421
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520562683310842784, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1155648840
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520562683310842784, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -658547015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520562683310842784, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: -144710702
+      objectReference: {fileID: 0}
     - target: {fileID: 7594045998241265270, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
       propertyPath: m_Name
       value: AudioManager
