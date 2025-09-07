@@ -284,6 +284,7 @@ public class EntityBehaviour : MonoBehaviour
     public void TakeDamage(float DamageTaken)
     {
         Hp -= DamageTaken;
+        TowerPopupUI.Instance?.RefreshIfTarget(this); //hook to retrive the live updated hp for the ui popups 
     }
 
     public void CheckAlive()
@@ -317,7 +318,7 @@ public class EntityBehaviour : MonoBehaviour
     {
         if (Hp > MaxHp)
         {
-            Hp=MaxHp;
+            Hp = MaxHp;
         }
     }
 
@@ -325,6 +326,7 @@ public class EntityBehaviour : MonoBehaviour
     {
         Destroy(CoEntMan.gameObject);
         Destroy(gameObject);
+        TowerPopupUI.Instance?.HideIfTarget(this); // hook to ensure ui popup dissapears once target dies
     }
 
 }
