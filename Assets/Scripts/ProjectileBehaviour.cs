@@ -192,6 +192,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
     IEnumerator DestroySelf()
     {
+        rb.linearVelocity=Vector3.zero;
         yield return new WaitForSeconds(projectileStats.DelayBtwHit*(projectileStats.NumOfHits-1));
         Destroy(gameObject);
     }

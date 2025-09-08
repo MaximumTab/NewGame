@@ -31,4 +31,9 @@ public class FinishLevel : MonoBehaviour
 
         SceneManager.LoadScene(1); // back to Level Select
     }
+
+    public void FailedLVL()
+    {
+        SceneManager.LoadScene(1);
+    }
 }

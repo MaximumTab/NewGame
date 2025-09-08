@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -58,39 +59,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             
         }
     }
-/*
-    public void SetGrid()
-    {
-        if (!gridRoot)
-        {
-            if (isResourceGatherer)
-            {
-                GameObject resGrid = GameObject.FindWithTag("ResourceGrid");
-                if (resGrid != null)
-                {
-                    gridRoot = resGrid.transform;
-                    Debug.Log($"[CardDrag] Resource grid assigned: {gridRoot.name}");
-                }
-                else
-                {
-                    Debug.LogWarning("[CardDrag] Resource grid not found! Please tag your resource grid root 'ResourceGrid'.");
-                }
-            }
-            else
-            {
-                GameObject normalGrid = GameObject.FindWithTag("TowerGrid");
-                if (normalGrid != null)
-                {
-                    gridRoot = normalGrid.transform;
-                    Debug.Log($"[CardDrag] Tower grid assigned: {gridRoot.name}");
-                }
-                else
-                {
-                    Debug.LogWarning("[CardDrag] Tower grid not found! Please tag your tower grid root 'TowerGrid'.");
-                }
-            }
-        }
-    }*/
 
     public void SetData()
     {
@@ -116,7 +84,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             CostText.text = "Free";
         }
         FindAutoGrid();
-        //SetGrid();
     }
 
 
@@ -162,31 +129,39 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         Collider[] ObjectsAtLoc=Physics.OverlapSphere(Loc, 0.4f);
         foreach (Collider col in ObjectsAtLoc)
         {
-            Deployable TileDeploy = col.transform.parent.GetComponent<Deployable>();
-            if (TileDeploy&&TileDeploy.deployable)
+            try
             {
-                if (isResourceGatherer&&CanPlaceGathererHere(Loc))
+                Deployable TileDeploy = col.transform.parent.GetComponent<Deployable>();
+                if (TileDeploy && TileDeploy.deployable)
                 {
-                    positionChange = 0.5f;
-                    return true;
-                }
-                if(isResourceGatherer)
-                {
-                    return false;
-                }
+                    if (isResourceGatherer && CanPlaceGathererHere(Loc))
+                    {
+                        positionChange = 0.5f;
+                        return true;
+                    }
 
-                if (TileDeploy is Path&&thisTower.Stats.Range==EntityStats.RangeType.Melee)
-                {
-                    positionChange = 0;
-                    return true;
-                }
+                    if (isResourceGatherer)
+                    {
+                        return false;
+                    }
 
-                if (TileDeploy is not Path && thisTower.Stats.Range == EntityStats.RangeType.Ranged)
-                {
-                    positionChange = 0.25f;
-                    return true;
+                    if (TileDeploy is Path && thisTower.Stats.Range == EntityStats.RangeType.Melee)
+                    {
+                        positionChange = 0;
+                        return true;
+                    }
+
+                    if (TileDeploy is not Path && thisTower.Stats.Range == EntityStats.RangeType.Ranged)
+                    {
+                        positionChange = 0.25f;
+                        return true;
+                    }
+
                 }
-                
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(Collider))]
 public class TowerClickable : MonoBehaviour
 {
     private TowerPopupUI popup;
@@ -19,7 +18,7 @@ public class TowerClickable : MonoBehaviour
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
         if (popup == null) return;
 
-        var eb = GetComponent<EntityBehaviour>();
+        var eb = GetComponentInParent<EntityBehaviour>();
         if (eb == null) return;
 
         // If the popup is already showing THIS tower, hide it.
@@ -37,6 +36,6 @@ public class TowerClickable : MonoBehaviour
     void OnDisable()
     {
         if (popup != null)
-            popup.HideIfTarget(GetComponent<EntityBehaviour>());
+            popup.HideIfTarget(GetComponentInParent<EntityBehaviour>());
     }
 }

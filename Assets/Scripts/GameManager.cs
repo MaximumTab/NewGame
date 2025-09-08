@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
@@ -27,15 +29,48 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("You Failed");
             ContrAnim.SetBool(Lose,true);
-            //Time.timeScale = 0;
+            Time.timeScale = 0.25f;
+            StartCoroutine(LoseLVL());
         }else if (IsWin())
         {
             Debug.Log("You Win");
             ContrAnim.SetBool(Win,true);
+            Time.timeScale = 1;
+            StartCoroutine(WinLVL());
         }
 
         LivesDisplay.text = ""+Lives;
         CounterDisplay.text = CurEnemyCount + "/" + AllEnemyCount;
+    }
+
+    private IEnumerator WinLVL()
+    {
+        yield return new WaitForSeconds(2);
+        FinishLVL();
+    }
+
+    private IEnumerator LoseLVL()
+    {
+        yield return new WaitForSeconds(1);
+        FailedLVL();
+    }
+
+    private void FinishLVL()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        Levels.MarkLevelComplete(currentScene);
+        Debug.Log("Level finished: " + currentScene);
+
+        // Show debug of all levels
+        Levels.DebugLevelStatus();
+
+        SceneManager.LoadScene(1); // back to Level Select
+    }
+
+    private void FailedLVL()
+    {
+        SceneManager.LoadScene(1);
     }
 
     public void SetCurEnemCount()
@@ -47,8 +82,9 @@ public class GameManager : MonoBehaviour
     {
         if (CurEnemyCount == AllEnemyCount)
         {
-            EnemyBehaviour[] allEnems = FindObjectsByType<EnemyBehaviour>(FindObjectsInactive.Include,FindObjectsSortMode.None);
-            if (allEnems.Length==0)
+            EnemyBehaviour[] enems =
+                FindObjectsByType<EnemyBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            if (enems.Length==0)
             {
                 return true;
             }

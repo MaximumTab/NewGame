@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6405486573717205866}
   - component: {fileID: 5426530130492161138}
-  - component: {fileID: 4089619351677789014}
   - component: {fileID: 8426265993088564977}
   m_Layer: 0
   m_Name: BlockAttack
@@ -55,27 +54,6 @@ MonoBehaviour:
   Order: 0
   Blocked: 0
   rb: {fileID: 0}
---- !u!65 &4089619351677789014
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7596022827755399929}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.66324556, z: 1}
-  m_Center: {x: 0, y: 0.6061047, z: 0}
 --- !u!114 &8426265993088564977
 MonoBehaviour:
   m_ObjectHideFlags: 0

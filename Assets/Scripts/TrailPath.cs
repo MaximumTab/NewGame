@@ -13,6 +13,8 @@ public class TrailPath : EnemyBehaviour
             Leaked = true;
             rb.linearVelocity = Vector3.zero;
             //GameManager.LoseLife(((EnemyStats)entityStats).ObjectiveLives);
+            Destroy(CoEntMan.gameObject);
+            Destroy(gameObject);
         }
     }
 

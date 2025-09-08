@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1642220734940214382}
   - component: {fileID: 2377282476527613358}
-  - component: {fileID: 1860937905358837591}
   - component: {fileID: 2416160705640948024}
   m_Layer: 0
   m_Name: TowerHeart
@@ -55,27 +54,6 @@ MonoBehaviour:
   Order: 0
   Blocked: 0
   rb: {fileID: 0}
---- !u!65 &1860937905358837591
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 837113606810366519}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.56696004, y: 1.5959024, z: 1}
-  m_Center: {x: -0.061061762, y: 0.64341843, z: 0}
 --- !u!114 &2416160705640948024
 MonoBehaviour:
   m_ObjectHideFlags: 0

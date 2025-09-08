@@ -28,10 +28,10 @@ public class EntityBehaviour : MonoBehaviour
     protected Dictionary<GameObject,int> BlockingTargets;
     public bool Blocked = false;
     public Rigidbody rb;
-    private class CoEntManager: MonoBehaviour { }
+    protected class CoEntManager: MonoBehaviour { }
 
 
-    private CoEntManager CoEntMan;
+    protected CoEntManager CoEntMan;
     private static readonly int Attacking1 = Animator.StringToHash("Attacking");
     private static readonly int Speed1 = Animator.StringToHash("Speed");
     private static readonly int Aspd1 = Animator.StringToHash("ASPD");
