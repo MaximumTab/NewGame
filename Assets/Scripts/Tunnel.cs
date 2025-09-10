@@ -1,20 +1,25 @@
-using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 [ExecuteInEditMode]
 public class Tunnel : Path
 {
     public List<Tunnel> ExitTunnel;
     public List<Tunnel> EnterTunnel;
-
-    private void Update()
+}
+[CustomEditor(typeof(Tunnel))]
+public class TunnelEditor : Editor
+{
+    public override void OnInspectorGUI()
     {
-        foreach (Tunnel exitBud in ExitTunnel)
+        Tunnel thisTun = (Tunnel)target;
+        foreach (Tunnel exitBud in thisTun.ExitTunnel)
         {
-            if (!exitBud.EnterTunnel.Contains(this))
+            if (!exitBud.EnterTunnel.Contains(thisTun))
             {
-                exitBud.EnterTunnel.Add(this);
+                exitBud.EnterTunnel.Add(thisTun);
             }
         }
+        base.OnInspectorGUI();
     }
 }
