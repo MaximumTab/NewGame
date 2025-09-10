@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +12,10 @@ public class EnemyBehaviour : EntityBehaviour
     public List<float> TunnelTimes;
     public int TunnelIndex = 0;
     private GameManager GM;
+    private Collider col;
+    private int Lives;
+    private EnemyStats myStats;
+    private bool Down = false;
 
     protected int CheckProg;
     protected bool Leaked;
@@ -24,6 +27,7 @@ public class EnemyBehaviour : EntityBehaviour
 
     public override void OnSpawn()
     {
+        myStats = (EnemyStats)entityStats;
         gameObject.layer = 6;
         CreateCollider();
         rb = gameObject.AddComponent<Rigidbody>();
@@ -31,6 +35,7 @@ public class EnemyBehaviour : EntityBehaviour
         rb.useGravity = false;
         CheckProg = 0;
         Leaked = false;
+        Lives = 0;
         base.OnSpawn();
         NewRoute();
         if (!GM)
@@ -41,10 +46,34 @@ public class EnemyBehaviour : EntityBehaviour
     
     public virtual void CreateCollider()
     {
-        CapsuleCollider CapCol=gameObject.AddComponent<CapsuleCollider>();
-        CapCol.radius = 0.05f;
-        CapCol.height = 0.2f;
-        CapCol.center.Set(0,0.2f,0);
+        if (col)
+        {
+            Destroy(col);
+        }
+
+        switch (myStats.StageAmounts[Lives])
+        {
+            case EnemyStats.MoveType.Moving:
+                CapsuleCollider CapCol=gameObject.AddComponent<CapsuleCollider>();
+                CapCol.radius = 0.05f;
+                CapCol.height = 0.2f;
+                CapCol.center.Set(0,0.2f,0);
+                col = CapCol;
+                break;
+            case EnemyStats.MoveType.Stationary:
+                BoxCollider BoxCol = gameObject.AddComponent<BoxCollider>();
+                BoxCol.size = myStats.StationaryHBoxSize[GetStationaryLife()];
+                BoxCol.center = myStats.StationaryHBoxCenter[GetStationaryLife()];
+                col = BoxCol;
+                StartCoroutine(StationTime());
+                break;
+        }
+    }
+
+    public int GetStationaryLife()
+    {
+        return myStats.StageAmounts.GetRange(0, Lives + 1).FindAll(type => type == EnemyStats.MoveType.Stationary)
+            .Count - 1;
     }
 
     public override void AlwaysRun()
@@ -55,7 +84,7 @@ public class EnemyBehaviour : EntityBehaviour
 
     public void Move()
     {
-        rb.linearVelocity=(CurPath.First()-transform.position).normalized * (Attacking||Blocked?0:Speed);
+        rb.linearVelocity=(CurPath.First()-transform.position).normalized * (Attacking||Blocked||Down||myStats.StageAmounts[Lives]==EnemyStats.MoveType.Stationary?0:Speed);
         Order = FullLength + (CurPath.First() - transform.position).magnitude;
     }
 
@@ -98,7 +127,7 @@ public class EnemyBehaviour : EntityBehaviour
         {
             Leaked = true;
             rb.linearVelocity = Vector3.zero;
-            GM.LoseALife(((EnemyStats)entityStats).ObjectiveLives);
+            GM.LoseALife(myStats.ObjectiveLives);
             DestroySelf();
         }
     }
@@ -143,6 +172,30 @@ public class EnemyBehaviour : EntityBehaviour
         }
     }
 
+    public override void DoAction()
+    {
+        if (!Down)
+        {
+            base.DoAction();
+        }
+    }
+
+    private IEnumerator StationTime()
+    {
+        yield return new WaitForSeconds(myStats.StationaryAliveTime[GetStationaryLife()]);
+        if (Lives != myStats.Lives)
+        {
+            StartCoroutine(NewLife());
+        }
+        else
+        {
+            Leaked = true;
+            rb.linearVelocity = Vector3.zero;
+            GM.LoseALife(myStats.ObjectiveLives);
+            DestroySelf();
+        }
+    }
+
     public void GoingThroughTunnel()
     {
         if (TunnelLocs.ContainsKey(CurPath[0]) && TunnelLocs.ContainsKey(CurPath[1]))
@@ -155,6 +208,48 @@ public class EnemyBehaviour : EntityBehaviour
                 }
             }
         }
+    }
+    public override void CheckAlive()
+    {
+        if (Hp <= 0&&Lives==myStats.Lives)
+        {
+            DestroySelf();
+        }else if (Lives != myStats.Lives&&Hp<=0)
+        {
+            Hp = 1;
+            StartCoroutine(NewLife());
+        }
+        PercHp = Hp / MaxHp;
+        if(HpSlider)
+            HpSlider.value = PercHp;
+    }
+
+    public override void SetStats()
+    {
+        MaxHp = entityStats.MaxHp*myStats.MaxHpMod[Lives];
+        Atk = entityStats.Atk*myStats.AtkMod[Lives];
+        Speed = entityStats.Speed*myStats.SpdMod[Lives];
+        AtkInterval = entityStats.AttackInterval;
+        Aspd = 100*myStats.AtkspdMod[Lives];
+    }
+
+    IEnumerator NewLife()
+    {
+        Down = true;
+        StopCoroutine(StationTime());
+        if (col)
+        {
+            Destroy(col);
+        }
+        Lives++;
+        SetStats();
+        for (float DownVar = 0; DownVar <= 1; DownVar += Time.deltaTime / myStats.DownTime[Lives - 1])
+        {
+            Hp = Mathf.Lerp(Hp, MaxHp, DownVar);
+            yield return null;
+        }
+        CreateCollider();
+        Down = false;
     }
 
     public override void DestroySelf()

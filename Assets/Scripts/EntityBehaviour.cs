@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class EntityBehaviour : MonoBehaviour
 {
     [SerializeField] protected GameObject HpBar;
-    private Slider HpSlider;
+    protected Slider HpSlider;
     private Camera SceneCam;
     protected Animator EntAnim;
     private Transform SpriteObj;
@@ -25,7 +25,7 @@ public class EntityBehaviour : MonoBehaviour
     protected bool Attacking = false;
     protected bool[] AbilityOnCooldown;
     protected List<GameObject>[] TargetsInRange;
-    protected Dictionary<GameObject,int> BlockingTargets;
+    public Dictionary<GameObject,int> BlockingTargets;
     public bool Blocked = false;
     public Rigidbody rb;
     protected class CoEntManager: MonoBehaviour { }
@@ -53,14 +53,19 @@ public class EntityBehaviour : MonoBehaviour
         gameObject.tag = entityStats.Tag.ToString();
         Hp = entityStats.MaxHp;
         PercHp = 1;
+        SetStats();
+        AbilityOnCooldown = new bool[entityStats.Abilities.Length];
+        TargetsInRange = new List<GameObject>[entityStats.Abilities.Length];
+        BlockingTargets = new Dictionary<GameObject, int>();
+    }
+
+    public virtual void SetStats()
+    {
         MaxHp = entityStats.MaxHp;
         Atk = entityStats.Atk;
         Speed = entityStats.Speed;
         AtkInterval = entityStats.AttackInterval;
         Aspd = 100;
-        AbilityOnCooldown = new bool[entityStats.Abilities.Length];
-        TargetsInRange = new List<GameObject>[entityStats.Abilities.Length];
-        BlockingTargets = new Dictionary<GameObject, int>();
     }
 
     public float GetAspd()
@@ -281,33 +286,17 @@ public class EntityBehaviour : MonoBehaviour
         AbilityOnCooldown[abilityIndex] = false;
     }
 
-    public void TakeDamage(float DamageTaken)
+    public virtual void TakeDamage(float DamageTaken)
     {
         Hp -= DamageTaken;
         TowerPopupUI.Instance?.RefreshIfTarget(this); //hook to retrive the live updated hp for the ui popups 
     }
 
-    public void CheckAlive()
+    public virtual void CheckAlive()
     {
         if (Hp <= 0)
         {
-            foreach (GameObject other in BlockingTargets.Keys)
-            {
-                if (other.GetComponent<EntityBehaviour>())
-                {
-                    EntityBehaviour otherEnt = other.GetComponent<EntityBehaviour>();
-                    if (otherEnt.entityStats.Tag != entityStats.Tag)
-                    {
-                        if (otherEnt.entityStats.Tag == EntityStats.ObjectTag.Enemy)
-                        {
-                            otherEnt.Blocked = false;
-                        }
-                        otherEnt.BlockingTargets.Remove(gameObject);
-                    }
-                }
-            }
             DestroySelf();
-            
         }
         PercHp = Hp / MaxHp;
         if(HpSlider)

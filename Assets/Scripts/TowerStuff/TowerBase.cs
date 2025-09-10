@@ -22,4 +22,31 @@ public class TowerBase : EntityBehaviour
     {
         OnSpawn();
     }
+
+    public override void CheckAlive()
+    {
+        if (Hp <= 0)
+        {
+            foreach (GameObject other in BlockingTargets.Keys)
+            {
+                if (other.GetComponent<EntityBehaviour>())
+                {
+                    EntityBehaviour otherEnt = other.GetComponent<EntityBehaviour>();
+                    if (otherEnt.Stats.Tag != entityStats.Tag)
+                    {
+                        if (otherEnt.Stats.Tag == EntityStats.ObjectTag.Enemy)
+                        {
+                            otherEnt.Blocked = false;
+                        }
+                        otherEnt.BlockingTargets.Remove(gameObject);
+                    }
+                }
+            }
+            DestroySelf();
+            
+        }
+        PercHp = Hp / MaxHp;
+        if(HpSlider)
+            HpSlider.value = PercHp;
+    }
 }

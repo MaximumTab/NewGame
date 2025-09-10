@@ -28,3 +28,17 @@ MonoBehaviour:
     Ability: {fileID: 11400000, guid: 04539b7767cea644eb228a5685f706b9, type: 2}
   Type: 0
   ObjectiveLives: 1
+  Lives: 1
+  MaxHpMod:
+  - 1
+  AtkMod:
+  - 1
+  SpdMod:
+  - 1
+  AtkspdMod:
+  - 1
+  DownTime: []
+  StageAmounts: 00000000
+  StationaryHBoxSize: []
+  StationaryHBoxCenter: []
+  StationaryAliveTime: []
