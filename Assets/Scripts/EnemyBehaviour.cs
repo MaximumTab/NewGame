@@ -13,7 +13,7 @@ public class EnemyBehaviour : EntityBehaviour
     public int TunnelIndex = 0;
     private GameManager GM;
     private Collider col;
-    private int Lives;
+    protected int Lives;
     private EnemyStats myStats;
     private bool Down = false;
 
@@ -65,7 +65,7 @@ public class EnemyBehaviour : EntityBehaviour
                 BoxCol.size = myStats.StationaryHBoxSize[GetStationaryLife()];
                 BoxCol.center = myStats.StationaryHBoxCenter[GetStationaryLife()];
                 col = BoxCol;
-                StartCoroutine(StationTime());
+                StartCoroutine(nameof(StationTime));
                 break;
         }
     }
@@ -179,11 +179,11 @@ public class EnemyBehaviour : EntityBehaviour
             base.DoAction();
         }
     }
-
+ 
     private IEnumerator StationTime()
     {
         yield return new WaitForSeconds(myStats.StationaryAliveTime[GetStationaryLife()]);
-        if (Lives != myStats.Lives)
+        if (Lives+1 != myStats.Lives)
         {
             StartCoroutine(NewLife());
         }
@@ -211,12 +211,13 @@ public class EnemyBehaviour : EntityBehaviour
     }
     public override void CheckAlive()
     {
-        if (Hp <= 0&&Lives==myStats.Lives)
+        if (Hp <= 0&&Lives+1==myStats.Lives&&!Down)
         {
             DestroySelf();
-        }else if (Lives != myStats.Lives&&Hp<=0)
+        }else if (Lives+1 != myStats.Lives&&Hp<=0)
         {
             Hp = 1;
+            StopCoroutine(nameof(StationTime));
             StartCoroutine(NewLife());
         }
         PercHp = Hp / MaxHp;
@@ -236,20 +237,25 @@ public class EnemyBehaviour : EntityBehaviour
     IEnumerator NewLife()
     {
         Down = true;
-        StopCoroutine(StationTime());
         if (col)
         {
             Destroy(col);
         }
         Lives++;
         SetStats();
-        for (float DownVar = 0; DownVar <= 1; DownVar += Time.deltaTime / myStats.DownTime[Lives - 1])
+        for (float DownVar = 0; DownVar <= 1; DownVar += Time.deltaTime/ myStats.DownTime[Lives - 1])
         {
             Hp = Mathf.Lerp(Hp, MaxHp, DownVar);
             yield return null;
         }
         CreateCollider();
         Down = false;
+    }
+
+    public override void TakeDamage(float DamageTaken)
+    {
+        if(!Down)
+            base.TakeDamage(DamageTaken);
     }
 
     public override void DestroySelf()

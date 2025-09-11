@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac9f665be22eeb4e8f4479bb1306928, type: 3}
+  m_Name: The Wall ES
+  m_EditorClassIdentifier: 
+  Name: The Wall
+  Range: 1
+  MaxHp: 5000
+  Atk: 100
+  AttackInterval: 2
+  Speed: 0.05
+  Tag: 0
+  SortBy:
+    Stat: 2
+    Method: 0
+  Block: 4
+  Abilities:
+  - Range: 1
+    Ability: {fileID: 11400000, guid: 363b4001b49ed294689d03f9753133bc, type: 2}
+  Type: 2
+  ObjectiveLives: 3
+  Lives: 2
+  MaxHpMod:
+  - 0.5
+  - 1
+  AtkMod:
+  - 1
+  - 1
+  SpdMod:
+  - 1
+  - 1
+  AtkspdMod:
+  - 1
+  - 1
+  DownTime:
+  - 30
+  StageAmounts: 0100000000000000
+  StationaryHBoxSize:
+  - {x: 3, y: 1, z: 2}
+  StationaryHBoxCenter:
+  - {x: 0, y: 0, z: 0.5}
+  StationaryAliveTime:
+  - 90

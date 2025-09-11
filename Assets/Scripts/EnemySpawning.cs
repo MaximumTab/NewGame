@@ -8,6 +8,7 @@ using UnityEngine;
 public class EnemySpawning : Incursion
 {
     public List<EnemySpawn> EnemySpawns;
+    public List<GameObject> EnemyList;
     private GameManager GM;
     [Serializable]
     public class EnemySpawn
@@ -28,6 +29,11 @@ public class EnemySpawning : Incursion
             public Vector3 Exit;
             public float Time;
         }
+    }
+
+    EnemySpawning()
+    {
+        EnemySpawns = new List<EnemySpawn>();
     }
 
     public int EnemyCount;
@@ -128,12 +134,11 @@ public class EnemySpawning : Incursion
             yield return null;
         }
     }
-}
+}/*
 [CustomEditor(typeof(EnemySpawning))]
 public class EnemSpawnEditor : Editor
 {
     private int EnemyLength;
-    private List<GameObject> EnemyList=new List<GameObject>();
     private List<int> InstanceAmt = new List<int>();
     public void CompFix<T>(int ImportantComp, List<T> ArrayChange, T DefValue)
     {
@@ -170,19 +175,18 @@ public class EnemSpawnEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        EnemySpawning thisESpawn = (EnemySpawning)target;
-        EnemyList = new List<GameObject>();
+        EnemySpawning thisESpawn = (EnemySpawning)target; 
         InstanceAmt = new List<int>();
         foreach (EnemySpawning.EnemySpawn ES in thisESpawn.EnemySpawns)
         {
-            if (!EnemyList.Contains(ES.Enemy)&&ES.Enemy)
+            if (!thisESpawn.EnemyList.Contains(ES.Enemy)&&ES.Enemy&&ES.Enemy!=thisESpawn.gameObject)
             {
                 InstanceAmt.Add(thisESpawn.EnemySpawns.FindAll(es=>es.Enemy==ES.Enemy).Count);
-                EnemyList.Add(ES.Enemy);
+                thisESpawn.EnemyList.Add(ES.Enemy);
             }
         }
 
-        EnemyLength = EnemyList.Count;
+        EnemyLength = thisESpawn.EnemyList.Count;
 
         EditorGUILayout.BeginFoldoutHeaderGroup(true, "Routes");
         CompFix(EditorGUILayout.IntField("Amount of Routes", thisESpawn.Routes.Count),thisESpawn.Routes,new TravelPoints());
@@ -199,21 +203,21 @@ public class EnemSpawnEditor : Editor
         EditorGUILayout.EndFoldoutHeaderGroup();
         EditorGUILayout.BeginFoldoutHeaderGroup(true, "Enemies");
         EnemyLength = EditorGUILayout.IntField("Unique Enemy Count", EnemyLength);
-        CompFix(EnemyLength,EnemyList,thisESpawn.gameObject);
+        CompFix(EnemyLength,thisESpawn.EnemyList,thisESpawn.gameObject);
         CompFix(EnemyLength,InstanceAmt,1);
         int temp = 0;
-        for (int i = 0; i < EnemyList.Count; i++)
+        for (int i = 0; i < thisESpawn.EnemyList.Count; i++)
         {
-            EnemyList[i] =(GameObject) EditorGUILayout.ObjectField(EnemyList[i].name, EnemyList[i], EnemyList[i].GetType());
-            InstanceAmt[i]= EditorGUILayout.IntField(EnemyList[i].name + "Amount", InstanceAmt[i]);
-            EditorGUILayout.Foldout(true, EnemyList[i].name + " Instances",true);
+            thisESpawn.EnemyList[i] =(GameObject) EditorGUILayout.ObjectField(thisESpawn.EnemyList[i].name, thisESpawn.EnemyList[i], typeof(GameObject));
+            InstanceAmt[i]= EditorGUILayout.IntField(thisESpawn.EnemyList[i].name + "Amount", InstanceAmt[i]);
+            EditorGUILayout.Foldout(true, thisESpawn.EnemyList[i].name + " Instances",true);
             for (int k = 0; k < InstanceAmt[i]; k++)
             {
                 if (thisESpawn.EnemySpawns.Count <= temp)
                 {
                     EnemySpawning.EnemySpawn tempESpawn = new EnemySpawning.EnemySpawn
                     {
-                        Enemy = EnemyList[i]
+                        Enemy = thisESpawn.EnemyList[i]
                     };
                     thisESpawn.EnemySpawns.Add(tempESpawn);
                 }
@@ -230,10 +234,23 @@ public class EnemSpawnEditor : Editor
 
         CompFix(temp, thisESpawn.EnemySpawns, new EnemySpawning.EnemySpawn());
         thisESpawn.EnemyCount = thisESpawn.EnemySpawns.Count;
-        thisESpawn.EnemyCount-=thisESpawn.EnemySpawns.FindAll(es => es.Enemy.GetComponent<TrailPath>()).Count;
+        foreach (EnemySpawning.EnemySpawn ES in thisESpawn.EnemySpawns)
+        {
+            try
+            {
+                if (ES.Enemy.GetComponent<TrailPath>())
+                {
+                    thisESpawn.EnemyCount--;
+                }
+            }
+            catch
+            {
+            }
+        }
 
         EditorGUILayout.EndFoldoutHeaderGroup();
         serializedObject.ApplyModifiedProperties();
+        base.OnInspectorGUI();
     }
-}
+}*/
 

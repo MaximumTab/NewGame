@@ -14,6 +14,11 @@ public class Incursion:MonoBehaviour
     public Dictionary<Vector3, Tunnel> Tunnels;
     public List<TravelPoints> Routes;
 
+    protected Incursion()
+    {
+        Routes = new List<TravelPoints>();
+    }
+
     public void GeneratePath()
     {
         //GameManager.MakingIGM();

@@ -11,15 +11,15 @@ public class EnemyStats : EntityStats
     public EnemyType Type;
     public int ObjectiveLives=1;
     public int Lives = 1;
-    public List<float> MaxHpMod;
-    public List<float> AtkMod;
-    public List<float> SpdMod;
-    public List<float> AtkspdMod;
-    public List<float> DownTime;
+    public List<float> MaxHpMod=new List<float>();
+    public List<float> AtkMod=new List<float>();
+    public List<float> SpdMod=new List<float>();
+    public List<float> AtkspdMod=new List<float>();
+    public List<float> DownTime=new List<float>();
     public List<MoveType> StageAmounts;
     public List<Vector3> StationaryHBoxSize;
     public List<Vector3> StationaryHBoxCenter;
-    public List<float> StationaryAliveTime;
+    public List<float> StationaryAliveTime=new List<float>();
 
     public enum EnemyType
     {
