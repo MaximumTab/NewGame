@@ -16,6 +16,11 @@ public class EnemySpawning : Incursion
         public int RouteTaken;
         public GameObject Enemy;
         public List<TunnnelsAndTime> TunnelTimes;
+        public EnemySpawn()
+        {
+            TunnelTimes = new List<TunnnelsAndTime>();
+        }
+
         [Serializable]
         public class TunnnelsAndTime
         {
@@ -170,7 +175,7 @@ public class EnemSpawnEditor : Editor
         InstanceAmt = new List<int>();
         foreach (EnemySpawning.EnemySpawn ES in thisESpawn.EnemySpawns)
         {
-            if (!EnemyList.Contains(ES.Enemy)&&ES.Enemy!=new GameObject())
+            if (!EnemyList.Contains(ES.Enemy)&&ES.Enemy)
             {
                 InstanceAmt.Add(thisESpawn.EnemySpawns.FindAll(es=>es.Enemy==ES.Enemy).Count);
                 EnemyList.Add(ES.Enemy);
@@ -194,7 +199,7 @@ public class EnemSpawnEditor : Editor
         EditorGUILayout.EndFoldoutHeaderGroup();
         EditorGUILayout.BeginFoldoutHeaderGroup(true, "Enemies");
         EnemyLength = EditorGUILayout.IntField("Unique Enemy Count", EnemyLength);
-        CompFix(EnemyLength,EnemyList,new GameObject());
+        CompFix(EnemyLength,EnemyList,thisESpawn.gameObject);
         CompFix(EnemyLength,InstanceAmt,1);
         int temp = 0;
         for (int i = 0; i < EnemyList.Count; i++)
@@ -206,11 +211,12 @@ public class EnemSpawnEditor : Editor
             {
                 if (thisESpawn.EnemySpawns.Count <= temp)
                 {
-                    EnemySpawning.EnemySpawn tempESpawn = new EnemySpawning.EnemySpawn();
-                    tempESpawn.Enemy = EnemyList[i];
+                    EnemySpawning.EnemySpawn tempESpawn = new EnemySpawning.EnemySpawn
+                    {
+                        Enemy = EnemyList[i]
+                    };
                     thisESpawn.EnemySpawns.Add(tempESpawn);
                 }
-                thisESpawn.EnemySpawns[temp].Enemy = EnemyList[i];
                 thisESpawn.EnemySpawns[temp].SpawnTimer=EditorGUILayout.FloatField("Instance "+k+" Spawn timer",thisESpawn.EnemySpawns[temp].SpawnTimer);
                 thisESpawn.EnemySpawns[temp].RouteTaken=EditorGUILayout.IntField("Instance "+k+" Route taken",thisESpawn.EnemySpawns[temp].RouteTaken);
                 for (int j = 0;j<thisESpawn.EnemySpawns[temp].TunnelTimes.Count; j++)
@@ -221,6 +227,8 @@ public class EnemSpawnEditor : Editor
                 temp++;
             }
         }
+
+        CompFix(temp, thisESpawn.EnemySpawns, new EnemySpawning.EnemySpawn());
         thisESpawn.EnemyCount = thisESpawn.EnemySpawns.Count;
         thisESpawn.EnemyCount-=thisESpawn.EnemySpawns.FindAll(es => es.Enemy.GetComponent<TrailPath>()).Count;
 
