@@ -4,10 +4,13 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 public class Incursion:MonoBehaviour
 {
     public bool CreatePath;
-    public List<Vector3> Visited;
+
+    private List<Color> gizColor;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
@@ -30,12 +33,22 @@ public class Incursion:MonoBehaviour
         {
             Tunnels.Add(Tun.transform.position,Tun);
         }
+
+        gizColor = new List<Color>();
         for (int k = 0; k < Routes.Count; k++)
         {
+            if (k >= gizColor.Count)
+            {
+                gizColor.Add(Random.ColorHSV());
+            }
+            else
+            {
+                gizColor[k] = Random.ColorHSV();
+            }
+
             //Routes[k].CheckPoints.First().Distances=new Dictionary<Vector3, int>();
             for (int i = 0; i < Routes[k].CheckPoints.Count; i++)
             {
-                Visited = new List<Vector3>();
                 Routes[k].CheckPoints[i].Distances =UtilPath.EmpAndAddDist(Routes[k].CheckPoints[i].Distances,Tiles);
                 Routes[k].CheckPoints[i].Distances[Routes[k].CheckPoints[i].Objective.position]=0;
                 AddValues(Routes[k].CheckPoints[i].Objective.position, 1, i,k);
@@ -54,18 +67,20 @@ public class Incursion:MonoBehaviour
             }
         }
 
-        foreach (TravelPoints TP in Routes)
+        for(int i=0;i<Routes.Count;i++)
         {
-            foreach (Paths drawPaths in TP.CheckPoints)
+            Gizmos.color = gizColor[i];
+            float riseAmount = 0;
+            foreach (Paths drawPaths in Routes[i].CheckPoints)
             {
-                drawPaths.OnDrawGizmos();
+                drawPaths.OnDrawGizmos((i+1)*0.5f+riseAmount*0.01f);
+                riseAmount += drawPaths.Path.Count-1;
             }
         }
     }
 
     private void AddValues(Vector3 StartLoc, int Index,int i,int RouteID)
     {
-        Visited.Add(StartLoc);
         if (StartLoc != transform.position)
         {
             if (Tunnels.Keys.Contains(StartLoc))
@@ -74,8 +89,7 @@ public class Incursion:MonoBehaviour
                 {
                     if (Routes[RouteID].CheckPoints[i].Distances
                             .ContainsKey(Buds.transform.position) &&
-                        (!Visited.Contains(Buds.transform.position) || Routes[RouteID]
-                            .CheckPoints[i].Distances[Buds.transform.position] > Index))
+                        Routes[RouteID].CheckPoints[i].Distances[Buds.transform.position] > Index)
                     {
                         Routes[RouteID].CheckPoints[i].Distances[Buds.transform.position] =
                             Index;
@@ -89,7 +103,7 @@ public class Incursion:MonoBehaviour
             //Debug.Log("My index is "+Index);
             foreach (Vector3 Dir in UtilPath.AllAdjDirections(StartLoc))
             {
-                if (Routes[RouteID].CheckPoints[i].Distances.ContainsKey(Dir) && (!Visited.Contains(Dir)||Routes[RouteID].CheckPoints[i].Distances[Dir]>Index))
+                if (Routes[RouteID].CheckPoints[i].Distances.ContainsKey(Dir) && Routes[RouteID].CheckPoints[i].Distances[Dir]>Index)
                 {
                     Routes[RouteID].CheckPoints[i].Distances[Dir]=Index;
                     AddValues(Dir,Index+1,i,RouteID);

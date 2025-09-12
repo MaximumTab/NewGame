@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HpBar: {fileID: 2964377668342257350, guid: 45fdf50af33b03b4897a60c4df94cd72, type: 3}
-  ProjStart: {fileID: 0}
+  ProjStart: {fileID: 8960864411627335271}
   entityStats: {fileID: 11400000, guid: 81b5c48096470fc439514f807c75e8b0, type: 2}
   Hp: 0
   PercHp: 0
@@ -68,16 +68,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 3734970516587655277}
     m_Modifications:
     - target: {fileID: 5163278599820291833, guid: 2991a6e1e969adb4796f455850ec79ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163278599820291833, guid: 2991a6e1e969adb4796f455850ec79ab, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000014901161
+      value: -0.0000004172325
       objectReference: {fileID: 0}
     - target: {fileID: 5853247743308417214, guid: 2991a6e1e969adb4796f455850ec79ab, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9135
+      value: 0.9135002
       objectReference: {fileID: 0}
     - target: {fileID: 5853247743308417214, guid: 2991a6e1e969adb4796f455850ec79ab, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.40683872
+      value: -0.40683836
       objectReference: {fileID: 0}
     - target: {fileID: 6476719077866784451, guid: 2991a6e1e969adb4796f455850ec79ab, type: 3}
       propertyPath: m_LocalRotation.w
@@ -90,6 +94,10 @@ PrefabInstance:
     - target: {fileID: 7910734918373609238, guid: 2991a6e1e969adb4796f455850ec79ab, type: 3}
       propertyPath: m_Name
       value: failedExpEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552005268321315613, guid: 2991a6e1e969adb4796f455850ec79ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8552005268321315613, guid: 2991a6e1e969adb4796f455850ec79ab, type: 3}
       propertyPath: m_LocalRotation.z
@@ -159,5 +167,10 @@ PrefabInstance:
 --- !u!4 &6884513455805799692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9007351717582034805, guid: 2991a6e1e969adb4796f455850ec79ab, type: 3}
+  m_PrefabInstance: {fileID: 2488870090658335353}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8960864411627335271 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6832343941404451870, guid: 2991a6e1e969adb4796f455850ec79ab, type: 3}
   m_PrefabInstance: {fileID: 2488870090658335353}
   m_PrefabAsset: {fileID: 0}

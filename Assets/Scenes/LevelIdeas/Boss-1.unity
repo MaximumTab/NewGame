@@ -1675,7 +1675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: CreatePath
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: EnemyCount
@@ -1683,7 +1683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Visited.Array.size
@@ -2466,6 +2466,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.data[0].Objective
       value: 
       objectReference: {fileID: 889682154}
@@ -2474,11 +2478,35 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1324973252}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Objective
+      value: 
+      objectReference: {fileID: 1076932225}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Objective
+      value: 
+      objectReference: {fileID: 889682154}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Objective
+      value: 
+      objectReference: {fileID: 1324973252}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.data[0].Path.Array.size
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.data[1].Path.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.size
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
@@ -2545,9 +2573,109 @@ PrefabInstance:
       propertyPath: Routes.Array.data[0].CheckPoints.Array.data[1].Path.Array.data[3].z
       value: -3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[0].x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[0].z
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[1].x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[1].z
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[2].x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[2].z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[3].x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[3].z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[0].x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[0].z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[1].x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[1].z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[2].x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[2].z
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[3].x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[3].z
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[0].x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[0].z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[1].x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[1].z
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[2].x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[2].z
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[3].x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[3].z
+      value: -3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4396633971748990759, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: m_Name
       value: Enemy Incursion
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396633971748990759, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7228546073538427368, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5088,6 +5216,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7078358490737734853, guid: 0914e70d8b3f2dc4cb19c34c94d7ea00, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5548,81 +5680,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CreatePath: 0
-  Visited:
-  - {x: 3.5, y: 0, z: -4.5}
-  - {x: 3.5, y: 0, z: -3.5}
-  - {x: 3.5, y: 0, z: -2.5}
-  - {x: 3.5, y: 0, z: -1.5}
-  - {x: 2.5, y: 0, z: -1.5}
-  - {x: 2.5, y: 0, z: -0.5}
-  - {x: 2.5, y: 0, z: 0.5}
-  - {x: 1.5, y: 0, z: 0.5}
-  - {x: 0.5, y: 0, z: 0.5}
-  - {x: 0.5, y: 0, z: 1.5}
-  - {x: 0.5, y: 0, z: 2.5}
-  - {x: -0.5, y: 0, z: 2.5}
-  - {x: -0.5, y: 0, z: 1.5}
-  - {x: -1.5, y: 0, z: 2.5}
-  - {x: -1.5, y: 0, z: 1.5}
-  - {x: -1.5, y: 0, z: 0.5}
-  - {x: -2.5, y: 0, z: 0.5}
-  - {x: -2.5, y: 0, z: -0.5}
-  - {x: -2.5, y: 0, z: -1.5}
-  - {x: -1.5, y: 0, z: -1.5}
-  - {x: -0.5, y: 0, z: -1.5}
-  - {x: -0.5, y: 0, z: -2.5}
-  - {x: -0.5, y: 0, z: -3.5}
-  - {x: 0.5, y: 0, z: -1.5}
-  - {x: 1.5, y: 0, z: -1.5}
-  - {x: -3.5, y: 0, z: -0.5}
-  - {x: -3.5, y: 0, z: 0.5}
-  - {x: -4.5, y: 0, z: 0.5}
-  - {x: -4.5, y: 0, z: 1.5}
-  - {x: -4.5, y: 0, z: 2.5}
-  - {x: -4.5, y: 0, z: 3.5}
-  - {x: -3.5, y: 0, z: 0.5}
-  - {x: -4.5, y: 0, z: 0.5}
-  - {x: -4.5, y: 0, z: 1.5}
-  - {x: -4.5, y: 0, z: 2.5}
-  - {x: -4.5, y: 0, z: 3.5}
-  - {x: -0.5, y: 0, z: 0.5}
-  - {x: -0.5, y: 0, z: 1.5}
-  - {x: -0.5, y: 0, z: 0.5}
-  - {x: -1.5, y: 0, z: 0.5}
-  - {x: -1.5, y: 0, z: 1.5}
-  - {x: -2.5, y: 0, z: 0.5}
-  - {x: -2.5, y: 0, z: -0.5}
-  - {x: -2.5, y: 0, z: -1.5}
-  - {x: -1.5, y: 0, z: -1.5}
-  - {x: -0.5, y: 0, z: -1.5}
-  - {x: -0.5, y: 0, z: -2.5}
-  - {x: -0.5, y: 0, z: -3.5}
-  - {x: 0.5, y: 0, z: -1.5}
-  - {x: 1.5, y: 0, z: -1.5}
-  - {x: -3.5, y: 0, z: -0.5}
-  - {x: -3.5, y: 0, z: 0.5}
-  - {x: -4.5, y: 0, z: 0.5}
-  - {x: -4.5, y: 0, z: 1.5}
-  - {x: -4.5, y: 0, z: 2.5}
-  - {x: -4.5, y: 0, z: 3.5}
-  - {x: -3.5, y: 0, z: 0.5}
-  - {x: -4.5, y: 0, z: 0.5}
-  - {x: -4.5, y: 0, z: 1.5}
-  - {x: -4.5, y: 0, z: 2.5}
-  - {x: -4.5, y: 0, z: 3.5}
-  - {x: 3.5, y: 0, z: 0.5}
-  - {x: 3.5, y: 0, z: 1.5}
-  - {x: 3.5, y: 0, z: 2.5}
-  - {x: 4.5, y: 0, z: 2.5}
-  - {x: 1.5, y: 0, z: -1.5}
-  - {x: 0.5, y: 0, z: -1.5}
-  - {x: -0.5, y: 0, z: -1.5}
-  - {x: -0.5, y: 0, z: -2.5}
-  - {x: -0.5, y: 0, z: -3.5}
-  - {x: -1.5, y: 0, z: -1.5}
-  - {x: -2.5, y: 0, z: -1.5}
-  - {x: -2.5, y: 0, z: -0.5}
-  - {x: -3.5, y: 0, z: -0.5}
   Routes:
   - CheckPoints:
     - Objective: {fileID: 28243579}
@@ -6223,7 +6280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: CreatePath
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: EnemyCount
@@ -6231,7 +6288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Visited.Array.size
@@ -6978,6 +7035,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1636409395377828315, guid: 1d6d1975a9e862942867de33cffaae13, type: 3}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[6].Enemy
+      value: 
+      objectReference: {fileID: 1636409395377828315, guid: 1d6d1975a9e862942867de33cffaae13, type: 3}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: EnemySpawns.Array.data[0].SpawnTimer
       value: 12.5
       objectReference: {fileID: 0}
@@ -7002,8 +7063,16 @@ PrefabInstance:
       value: 87.5
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: EnemySpawns.Array.data[6].SpawnTimer
+      value: 87.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.data[0].Objective
@@ -7014,11 +7083,39 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1324973252}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Objective
+      value: 
+      objectReference: {fileID: 858814339}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Objective
+      value: 
+      objectReference: {fileID: 1061332740}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Objective
+      value: 
+      objectReference: {fileID: 1324973252}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].WaitSeconds
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.data[0].Path.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: Routes.Array.data[0].CheckPoints.Array.data[1].Path.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.size
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
@@ -7077,9 +7174,101 @@ PrefabInstance:
       propertyPath: Routes.Array.data[0].CheckPoints.Array.data[1].Path.Array.data[3].z
       value: -3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[0].x
+      value: -4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[0].z
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[1].x
+      value: -4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[1].z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[2].x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[0].Path.Array.data[2].z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[0].x
+      value: -4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[0].z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[1].x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[1].z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[2].x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[2].z
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[3].x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[1].Path.Array.data[3].z
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[0].x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[0].z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[1].x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[1].z
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[2].x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[2].z
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[3].x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945486237562809756, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: Routes.Array.data[1].CheckPoints.Array.data[2].Path.Array.data[3].z
+      value: -3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4396633971748990759, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: m_Name
       value: Enemy Incursion
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396633971748990759, guid: e85cb51b00823f74196401be75137fa0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7228546073538427368, guid: e85cb51b00823f74196401be75137fa0, type: 3}
       propertyPath: m_LocalPosition.x
