@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 public class Incursion:MonoBehaviour
 {
-    
-    public int ActivePath = 0;
     public bool CreatePath;
     public List<Vector3> Visited;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -14,6 +13,11 @@ public class Incursion:MonoBehaviour
 
     public Dictionary<Vector3, Tunnel> Tunnels;
     public List<TravelPoints> Routes;
+
+    protected Incursion()
+    {
+        Routes = new List<TravelPoints>();
+    }
 
     public void GeneratePath()
     {
@@ -50,9 +54,12 @@ public class Incursion:MonoBehaviour
             }
         }
 
-        foreach (Paths drawPaths in Routes[ActivePath].CheckPoints)
+        foreach (TravelPoints TP in Routes)
         {
-            drawPaths.OnDrawGizmos();
+            foreach (Paths drawPaths in TP.CheckPoints)
+            {
+                drawPaths.OnDrawGizmos();
+            }
         }
     }
 

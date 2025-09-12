@@ -14,6 +14,8 @@ public class Paths
     public Paths(Transform objective)
     {
         Objective = objective;
+        Distances = new Dictionary<Vector3, int>();
+        Path = new List<Vector3>();
     }
     public void OnDrawGizmos()
     {
@@ -30,7 +32,7 @@ public class TravelPoints
 
     public TravelPoints()
     {
-        
+        CheckPoints = new List<Paths>();
     }
 
     public float GetFullPathLength()
