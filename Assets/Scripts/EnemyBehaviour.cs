@@ -213,6 +213,21 @@ public class EnemyBehaviour : EntityBehaviour
     {
         if (Hp <= 0&&Lives+1==myStats.Lives&&!Down)
         {
+            foreach (GameObject other in BlockingTargets.Keys)
+            {
+                if (other.GetComponent<EntityBehaviour>())
+                {
+                    EntityBehaviour otherEnt = other.GetComponent<EntityBehaviour>();
+                    if (otherEnt.Stats.Tag != entityStats.Tag)
+                    {
+                        if (otherEnt.Stats.Tag == EntityStats.ObjectTag.Enemy)
+                        {
+                            otherEnt.Blocked = false;
+                        }
+                        otherEnt.BlockingTargets.Remove(gameObject);
+                    }
+                }
+            }
             DestroySelf();
         }else if (Lives+1 != myStats.Lives&&Hp<=0)
         {
