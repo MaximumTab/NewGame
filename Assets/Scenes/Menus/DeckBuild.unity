@@ -3456,6 +3456,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: LevelSelect
   prerequisiteScenes: []
+  requiresDeck: 0
+  nodeImage: {fileID: 0}
+  emptyDeckPopup: {fileID: 0}
 --- !u!114 &2109805469
 MonoBehaviour:
   m_ObjectHideFlags: 0
