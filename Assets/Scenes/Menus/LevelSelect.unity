@@ -343,6 +343,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2089911846912754128, guid: 995dfc3bb07bb5c42a069506431a3f62, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -14
+      objectReference: {fileID: 0}
     - target: {fileID: 4959032694871182097, guid: 995dfc3bb07bb5c42a069506431a3f62, type: 3}
       propertyPath: m_Name
       value: LevelSelect

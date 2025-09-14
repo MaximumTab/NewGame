@@ -2,21 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemySpawning : Incursion
 {
     public List<EnemySpawn> EnemySpawns;
+    public List<GameObject> EnemyList;
     private GameManager GM;
     [Serializable]
-    public struct EnemySpawn
+    public class EnemySpawn
     {
         public float SpawnTimer;
         public int RouteTaken;
         public GameObject Enemy;
         public List<TunnnelsAndTime> TunnelTimes;
+        public EnemySpawn()
+        {
+            TunnelTimes = new List<TunnnelsAndTime>();
+        }
+
         [Serializable]
-        public struct TunnnelsAndTime
+        public class TunnnelsAndTime
         {
             public Vector3 Enter;
             public Vector3 Exit;
@@ -24,11 +31,15 @@ public class EnemySpawning : Incursion
         }
     }
 
+    EnemySpawning()
+    {
+        EnemySpawns = new List<EnemySpawn>();
+    }
+
     public int EnemyCount;
 
     public override void OnDrawGizmos()
     {
-        base.OnDrawGizmos();
         try
         {
             foreach (EnemySpawn ES in EnemySpawns)
@@ -59,10 +70,7 @@ public class EnemySpawning : Incursion
         {
             CreatePath = true;
         }
-
-        EnemyCount = EnemySpawns.Count;
-        EnemyCount-=EnemySpawns.FindAll(es => es.Enemy.GetComponent<TrailPath>()).Count;
-
+        base.OnDrawGizmos();
     }
 
     public List<EnemySpawn> GetSpawnOrdered()
@@ -126,5 +134,123 @@ public class EnemySpawning : Incursion
             yield return null;
         }
     }
-}
+}/*
+[CustomEditor(typeof(EnemySpawning))]
+public class EnemSpawnEditor : Editor
+{
+    private int EnemyLength;
+    private List<int> InstanceAmt = new List<int>();
+    public void CompFix<T>(int ImportantComp, List<T> ArrayChange, T DefValue)
+    {
+        if (ImportantComp < 1)
+        {
+            ImportantComp = 1;
+        }
+
+        if (ImportantComp < ArrayChange.Count)
+        {
+            ArrayChange.Remove(ArrayChange.Last());
+        }
+        else if(ImportantComp!=ArrayChange.Count)
+        {
+            ArrayChange.Add(DefValue);
+        }
+    }
+    public void CompFix<T,A>(int ImportantComp, Dictionary<T,A> ArrayChange, T DefKey,A DefValue)
+    {
+        if (ImportantComp < 1)
+        {
+            ImportantComp = 1;
+        }
+
+        if (ImportantComp < ArrayChange.Count)
+        {
+            ArrayChange.Remove(ArrayChange.Keys.Last());
+        }
+        else if(ImportantComp!=ArrayChange.Count)
+        {
+            ArrayChange.Add(DefKey,DefValue);
+        }
+    }
+
+    public override void OnInspectorGUI()
+    {
+        EnemySpawning thisESpawn = (EnemySpawning)target; 
+        InstanceAmt = new List<int>();
+        foreach (EnemySpawning.EnemySpawn ES in thisESpawn.EnemySpawns)
+        {
+            if (!thisESpawn.EnemyList.Contains(ES.Enemy)&&ES.Enemy&&ES.Enemy!=thisESpawn.gameObject)
+            {
+                InstanceAmt.Add(thisESpawn.EnemySpawns.FindAll(es=>es.Enemy==ES.Enemy).Count);
+                thisESpawn.EnemyList.Add(ES.Enemy);
+            }
+        }
+
+        EnemyLength = thisESpawn.EnemyList.Count;
+
+        EditorGUILayout.BeginFoldoutHeaderGroup(true, "Routes");
+        CompFix(EditorGUILayout.IntField("Amount of Routes", thisESpawn.Routes.Count),thisESpawn.Routes,new TravelPoints());
+        foreach (TravelPoints TPoints in thisESpawn.Routes)
+        {
+            EditorGUILayout.LabelField("Route "+thisESpawn.Routes.IndexOf(TPoints));
+            CompFix(EditorGUILayout.IntField("Route "+thisESpawn.Routes.IndexOf(TPoints)+" CheckPoints", TPoints.CheckPoints.Count),TPoints.CheckPoints,new Paths(thisESpawn.transform));
+            foreach (Paths paths in TPoints.CheckPoints)
+            {
+                paths.Objective =(Transform)EditorGUILayout.ObjectField("CheckPoint "+TPoints.CheckPoints.IndexOf(paths), paths.Objective,paths.Objective.GetType());
+                paths.WaitSeconds = EditorGUILayout.FloatField("Waiting for", paths.WaitSeconds);
+            }
+        }
+        EditorGUILayout.EndFoldoutHeaderGroup();
+        EditorGUILayout.BeginFoldoutHeaderGroup(true, "Enemies");
+        EnemyLength = EditorGUILayout.IntField("Unique Enemy Count", EnemyLength);
+        CompFix(EnemyLength,thisESpawn.EnemyList,thisESpawn.gameObject);
+        CompFix(EnemyLength,InstanceAmt,1);
+        int temp = 0;
+        for (int i = 0; i < thisESpawn.EnemyList.Count; i++)
+        {
+            thisESpawn.EnemyList[i] =(GameObject) EditorGUILayout.ObjectField(thisESpawn.EnemyList[i].name, thisESpawn.EnemyList[i], typeof(GameObject));
+            InstanceAmt[i]= EditorGUILayout.IntField(thisESpawn.EnemyList[i].name + "Amount", InstanceAmt[i]);
+            EditorGUILayout.Foldout(true, thisESpawn.EnemyList[i].name + " Instances",true);
+            for (int k = 0; k < InstanceAmt[i]; k++)
+            {
+                if (thisESpawn.EnemySpawns.Count <= temp)
+                {
+                    EnemySpawning.EnemySpawn tempESpawn = new EnemySpawning.EnemySpawn
+                    {
+                        Enemy = thisESpawn.EnemyList[i]
+                    };
+                    thisESpawn.EnemySpawns.Add(tempESpawn);
+                }
+                thisESpawn.EnemySpawns[temp].SpawnTimer=EditorGUILayout.FloatField("Instance "+k+" Spawn timer",thisESpawn.EnemySpawns[temp].SpawnTimer);
+                thisESpawn.EnemySpawns[temp].RouteTaken=EditorGUILayout.IntField("Instance "+k+" Route taken",thisESpawn.EnemySpawns[temp].RouteTaken);
+                for (int j = 0;j<thisESpawn.EnemySpawns[temp].TunnelTimes.Count; j++)
+                {
+                    thisESpawn.EnemySpawns[temp].TunnelTimes[j].Time=EditorGUILayout.FloatField("Tunneling "+j+" for",thisESpawn.EnemySpawns[temp].TunnelTimes[j].Time);
+                }
+
+                temp++;
+            }
+        }
+
+        CompFix(temp, thisESpawn.EnemySpawns, new EnemySpawning.EnemySpawn());
+        thisESpawn.EnemyCount = thisESpawn.EnemySpawns.Count;
+        foreach (EnemySpawning.EnemySpawn ES in thisESpawn.EnemySpawns)
+        {
+            try
+            {
+                if (ES.Enemy.GetComponent<TrailPath>())
+                {
+                    thisESpawn.EnemyCount--;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        EditorGUILayout.EndFoldoutHeaderGroup();
+        serializedObject.ApplyModifiedProperties();
+        base.OnInspectorGUI();
+    }
+}*/
 

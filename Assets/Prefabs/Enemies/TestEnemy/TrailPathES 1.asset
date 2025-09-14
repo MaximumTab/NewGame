@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac9f665be22eeb4e8f4479bb1306928, type: 3}
+  m_Name: TrailPathES 1
+  m_EditorClassIdentifier: 
+  Name: Trail
+  Range: 0
+  MaxHp: 1
+  Atk: 0
+  AttackInterval: 0
+  Speed: 5
+  Tag: 0
+  SortBy:
+    Stat: 0
+    Method: 0
+  Block: 0
+  Abilities: []
+  Type: 0
+  ObjectiveLives: 0
+  Lives: 1
+  MaxHpMod:
+  - 1
+  AtkMod:
+  - 1
+  SpdMod:
+  - 1
+  AtkspdMod:
+  - 1
+  DownTime: []
+  StageAmounts: 00000000
+  StationaryHBoxSize: []
+  StationaryHBoxCenter: []
+  StationaryAliveTime: []

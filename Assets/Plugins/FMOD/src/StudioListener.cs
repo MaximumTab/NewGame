@@ -103,6 +103,7 @@ namespace FMODUnity
             RuntimeManager.StudioSystem.setNumListeners(Mathf.Clamp(listeners.Count, 1, FMOD.CONSTANTS.MAX_LISTENERS));
         }
 
+        
         private void OnEnable()
         {
             RuntimeUtils.EnforceLibraryOrder();

@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - ResourceGrid
   - TowerGrid
+  - CardPool
   layers:
   - Default
   - TransparentFX

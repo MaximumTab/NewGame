@@ -14,12 +14,14 @@ public class Paths
     public Paths(Transform objective)
     {
         Objective = objective;
+        Distances = new Dictionary<Vector3, int>();
+        Path = new List<Vector3>();
     }
-    public void OnDrawGizmos()
+    public void OnDrawGizmos(float rise)
     {
         for (int i = 0; i < Path.Count - 1; i++)
         {
-            Gizmos.DrawLine(Path[i],Path[i+1]);
+            Gizmos.DrawLine(Path[i]+Vector3.up*(rise+i*0.01f),Path[i+1]+Vector3.up*(rise+(i+1)*0.01f));
         }
     }
 }
@@ -30,7 +32,7 @@ public class TravelPoints
 
     public TravelPoints()
     {
-        
+        CheckPoints = new List<Paths>();
     }
 
     public float GetFullPathLength()

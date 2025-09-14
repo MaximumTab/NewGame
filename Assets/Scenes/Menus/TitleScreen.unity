@@ -227,6 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3cc68b7d96aebe45ad525285401df63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 1
+  musicVolume: 1
+  sfxVolume: 1
 --- !u!4 &440995136
 Transform:
   m_ObjectHideFlags: 0
@@ -252,7 +255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 913290912}
-  - component: {fileID: 913290913}
+  - component: {fileID: 913290914}
   m_Layer: 0
   m_Name: FmodEvents
   m_TagString: Untagged
@@ -275,7 +278,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 440995136}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &913290913
+--- !u!114 &913290914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -284,9 +287,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 913290911}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c86fc72d724baf4b901732f7898d65a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1361730208
+      Data2: 1225977879
+      Data3: 256214451
+      Data4: -601626745
+    Path: event:/Music/TitleMusic
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &939678561
 GameObject:
   m_ObjectHideFlags: 0
