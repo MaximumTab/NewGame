@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HpBar: {fileID: 0}
   ProjStart: {fileID: 0}
-  entityStats: {fileID: 11400000, guid: 45bb65d5838ccf244be6c84079cdd0d4, type: 2}
+  entityStats: {fileID: 11400000, guid: 6821577d5b214604d965edc0fddf56cb, type: 2}
   Hp: 0
   PercHp: 0
   Order: 0

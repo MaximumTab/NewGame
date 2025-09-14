@@ -76,9 +76,13 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             isResourceGatherer = true;
         }
 
-        if (CostText&&prefabCosts is { Length: 3 })
+        if (prefabCosts != null && CostText&&prefabCosts.Length>0)
         {
-            CostText.text = prefabCosts[0].resourceCost + "\n" + prefabCosts[1].resourceCost + "\n" + prefabCosts[2].resourceCost;
+            CostText.text = "";
+            foreach (TowerStats.TowerCost cost in prefabCosts)
+            {
+                CostText.text += cost.resourceType.ToString() + cost.resourceCost + "\n";
+            }
         }else if (CostText)
         {
             CostText.text = "Free";

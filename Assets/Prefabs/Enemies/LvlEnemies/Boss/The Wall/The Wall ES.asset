@@ -27,7 +27,7 @@ MonoBehaviour:
   - Range: 1
     Ability: {fileID: 11400000, guid: 363b4001b49ed294689d03f9753133bc, type: 2}
   Type: 2
-  ObjectiveLives: 3
+  ObjectiveLives: 2
   Lives: 2
   MaxHpMod:
   - 0.5
@@ -49,4 +49,4 @@ MonoBehaviour:
   StationaryHBoxCenter:
   - {x: 0, y: 0, z: 0.5}
   StationaryAliveTime:
-  - 90
+  - 120

@@ -10,17 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12981e0ed6215e04fbfc525bde61e4a4, type: 3}
-  m_Name: TestTowerTS
+  m_Name: TowerSpadeStats
   m_EditorClassIdentifier: 
-  Name: TestBase
-  Range: 0
-  MaxHp: 100
-  Atk: 0
+  Name: Spade Tower
+  Range: 1
+  MaxHp: 400
+  Atk: 2
   AttackInterval: 1
   Speed: 0
   Tag: 1
   SortBy:
-    Stat: 0
-    Method: 0
-  Block: 10
-  Abilities: []
+    Stat: 2
+    Method: 2
+  Block: 3
+  Abilities:
+  - Range: 1
+    Ability: {fileID: 11400000, guid: b52eec5ab24004e48803e60ef5b2f8e8, type: 2}
+  towerCosts:
+  - resourceType: 1
+    resourceCost: 10
+  - resourceType: 2
+    resourceCost: 15

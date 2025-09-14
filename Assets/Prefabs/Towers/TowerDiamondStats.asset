@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12981e0ed6215e04fbfc525bde61e4a4, type: 3}
-  m_Name: BlockingTS
+  m_Name: TowerDiamondStats
   m_EditorClassIdentifier: 
-  Name: Spade Tower
-  Range: 1
-  MaxHp: 400
-  Atk: 2
+  Name: Diamond Tower
+  Range: 2
+  MaxHp: 50
+  Atk: 10
   AttackInterval: 1
   Speed: 0
   Tag: 1
   SortBy:
     Stat: 2
     Method: 2
-  Block: 3
+  Block: 1
   Abilities:
-  - Range: 1
-    Ability: {fileID: 11400000, guid: b52eec5ab24004e48803e60ef5b2f8e8, type: 2}
+  - Range: 2
+    Ability: {fileID: 11400000, guid: e9c04336f8bf0984da2ae60f07dd0e3f, type: 2}
   towerCosts:
-  - resourceType: 1
+  - resourceType: 0
     resourceCost: 10
-  - resourceType: 2
+  - resourceType: 1
     resourceCost: 5

@@ -10,24 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12981e0ed6215e04fbfc525bde61e4a4, type: 3}
-  m_Name: TowerBaseStats
+  m_Name: TowerClubStats
   m_EditorClassIdentifier: 
-  Name: Diamond Tower
-  Range: 2
-  MaxHp: 50
-  Atk: 10
-  AttackInterval: 0.5
+  Name: Clubs Tower
+  Range: 1
+  MaxHp: 200
+  Atk: 15
+  AttackInterval: 1
   Speed: 0
   Tag: 1
   SortBy:
     Stat: 2
     Method: 2
-  Block: 1
+  Block: 2
   Abilities:
   - Range: 2
-    Ability: {fileID: 11400000, guid: e9c04336f8bf0984da2ae60f07dd0e3f, type: 2}
+    Ability: {fileID: 11400000, guid: 851e0ff78c32895408133743b2c5ad1a, type: 2}
   towerCosts:
+  - resourceType: 1
+    resourceCost: 15
   - resourceType: 0
     resourceCost: 10
-  - resourceType: 1
-    resourceCost: 5
+  - resourceType: 2
+    resourceCost: 0
