@@ -56,7 +56,7 @@ public class EnemyStats : EntityStats
     }
 }
 
-[CustomEditor(typeof(EnemyStats))]
+/* [CustomEditor(typeof(EnemyStats))]
 public class EnemyStatEditor : Editor
 {
     public void CompFix<T>(int ImportantComp, List<T> ArrayChange, T DefValue)
@@ -100,3 +100,4 @@ public class EnemyStatEditor : Editor
         base.OnInspectorGUI();
     }
 }
+ */
