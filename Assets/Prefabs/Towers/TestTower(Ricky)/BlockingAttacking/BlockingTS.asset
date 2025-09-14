@@ -27,9 +27,7 @@ MonoBehaviour:
   - Range: 1
     Ability: {fileID: 11400000, guid: b52eec5ab24004e48803e60ef5b2f8e8, type: 2}
   towerCosts:
-  - resourceType: 0
-    resourceCost: 1
   - resourceType: 1
-    resourceCost: 5
+    resourceCost: 10
   - resourceType: 2
-    resourceCost: 2
+    resourceCost: 5
