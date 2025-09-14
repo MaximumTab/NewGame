@@ -460,6 +460,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 264169755480522797, guid: 32623dbd180af034c873d4308e0fd76c, type: 3}
+      propertyPath: m_text
+      value: ArcanalisTD
+      objectReference: {fileID: 0}
+    - target: {fileID: 264169755480522797, guid: 32623dbd180af034c873d4308e0fd76c, type: 3}
+      propertyPath: m_fontSize
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 264169755480522797, guid: 32623dbd180af034c873d4308e0fd76c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 110
+      objectReference: {fileID: 0}
     - target: {fileID: 1375682738348800409, guid: 32623dbd180af034c873d4308e0fd76c, type: 3}
       propertyPath: m_Camera
       value: 
