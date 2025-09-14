@@ -48,7 +48,13 @@ MonoBehaviour:
       m_FromMain: 0
       m_SpriteOverride: {fileID: 4434960384636905001, guid: 9eea0556b0724c7429a6375605c8ebff, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 6
-  m_PrimaryLibraryGUID: 
-  m_ModificationHash: 638928967395158792
+    m_EntryOverrideCount: 0
+  - m_Name: newBlinks
+    m_Hash: 375190400
+    m_CategoryList: []
+    m_OverrideEntries: []
+    m_FromMain: 0
+    m_EntryOverrideCount: 0
+  m_PrimaryLibraryGUID: a69564a511a673545a325ff7d6b1d495
+  m_ModificationHash: 638933810700193407
   m_Version: 1
