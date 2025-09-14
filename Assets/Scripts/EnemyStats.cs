@@ -20,6 +20,27 @@ public class EnemyStats : EntityStats
     public List<Vector3> StationaryHBoxSize;
     public List<Vector3> StationaryHBoxCenter;
     public List<float> StationaryAliveTime=new List<float>();
+    
+    public void CompFix<T>(int ImportantComp, List<T> ArrayChange, T DefValue)
+    {
+        if (ImportantComp < ArrayChange.Count)
+        {
+            ArrayChange.Remove(ArrayChange.Last());
+        }
+        else if(ImportantComp!=ArrayChange.Count)
+        {
+            ArrayChange.Add(DefValue);
+        }
+    }
+
+    public void fixArrays()
+    {
+        CompFix(Lives,MaxHpMod,1);
+        CompFix(Lives,AtkMod,1);
+        CompFix(Lives,SpdMod,1);
+        CompFix(Lives,AtkspdMod,1);
+        CompFix(Lives,StageAmounts,EnemyStats.MoveType.Moving);
+    }
 
     public enum EnemyType
     {
