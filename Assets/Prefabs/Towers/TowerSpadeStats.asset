@@ -30,4 +30,4 @@ MonoBehaviour:
   - resourceType: 1
     resourceCost: 10
   - resourceType: 2
-    resourceCost: 5
+    resourceCost: 15

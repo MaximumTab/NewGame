@@ -76,7 +76,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             isResourceGatherer = true;
         }
 
-        if (CostText&&prefabCosts.Length>0)
+        if (prefabCosts != null && CostText&&prefabCosts.Length>0)
         {
             CostText.text = "";
             foreach (TowerStats.TowerCost cost in prefabCosts)
