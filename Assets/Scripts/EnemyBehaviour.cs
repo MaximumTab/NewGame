@@ -28,6 +28,7 @@ public class EnemyBehaviour : EntityBehaviour
     public override void OnSpawn()
     {
         myStats = (EnemyStats)entityStats;
+        myStats.fixArrays();
         gameObject.layer = 6;
         CreateCollider();
         rb = gameObject.AddComponent<Rigidbody>();
