@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/DeckBuild.unity
     guid: 7ca9b556e0627d64e9c57a44498c2e25
   - enabled: 1
-    path: Assets/Scenes/EnemyAttackingTest.unity
-    guid: 645b188d5e62cae41aa8b7a4d07b9fbd
-  - enabled: 1
     path: Assets/Scenes/LevelIdeas/Tut-1.unity
     guid: 648b66c6c20190c45a33d72ae3003fcc
   - enabled: 1
@@ -29,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelIdeas/JaysAwesomeLevel.unity
     guid: 6a652ded013cc5d44a22fd74a5ad6c4e
+  - enabled: 1
+    path: Assets/Scenes/LevelIdeas/Boss-1.unity
+    guid: 978f11c630361314db8273ac85b4b89a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
