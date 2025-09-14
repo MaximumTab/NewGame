@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5426530130492161138}
   - component: {fileID: 8426265993088564977}
   m_Layer: 0
-  m_Name: BlockAttack
+  m_Name: TowerSpade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

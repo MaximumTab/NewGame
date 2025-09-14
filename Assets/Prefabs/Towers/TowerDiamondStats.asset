@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12981e0ed6215e04fbfc525bde61e4a4, type: 3}
+  m_Name: TowerDiamondStats
+  m_EditorClassIdentifier: 
+  Name: Diamond Tower
+  Range: 2
+  MaxHp: 50
+  Atk: 10
+  AttackInterval: 0.5
+  Speed: 0
+  Tag: 1
+  SortBy:
+    Stat: 2
+    Method: 2
+  Block: 1
+  Abilities:
+  - Range: 2
+    Ability: {fileID: 11400000, guid: e9c04336f8bf0984da2ae60f07dd0e3f, type: 2}
+  towerCosts:
+  - resourceType: 0
+    resourceCost: 10
+  - resourceType: 1
+    resourceCost: 5
