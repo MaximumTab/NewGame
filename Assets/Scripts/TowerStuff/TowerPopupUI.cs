@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class TowerPopupUI : MonoBehaviour
 {
@@ -8,10 +10,42 @@ public class TowerPopupUI : MonoBehaviour
     public static TowerPopupUI Instance;
     public EntityBehaviour CurrentTarget => currentTarget;
 
+    private int guardUntilFrame = 0;
+
     void Awake()
     {
         Instance = this;
         gameObject.SetActive(false);
+    }
+
+     void Update()
+    {
+        if (!gameObject.activeSelf) return;
+
+        // Don’t react to the same frame (or the very next) as the one that opened us
+        if (Time.frameCount <= guardUntilFrame) return;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            // If click is on UI, don't close
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            // If click is on the same tower, don't close
+            if (currentTarget != null)
+            {
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out var hit))
+                {
+                    // Match exact GO or any parent with the EntityBehaviour of the current target
+                    if (hit.collider.gameObject == currentTarget.gameObject ||
+                        hit.collider.GetComponentInParent<EntityBehaviour>() == currentTarget)
+                        return;
+                }
+            }
+
+            Hide();
+        }
     }
 
     public void Show(EntityBehaviour target)
@@ -20,7 +54,10 @@ public class TowerPopupUI : MonoBehaviour
         if (statsText != null) statsText.text = BuildStats(target);
         gameObject.SetActive(true);
 
-         RangeOverlay.Instance?.ShowFor(target);
+        // Guard for the click that opened the popup (open happens on MouseDown)
+        guardUntilFrame = Time.frameCount + 1;
+
+        RangeOverlay.Instance?.ShowFor(target);
     }
 
     public void Hide()
