@@ -464,9 +464,17 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 939678563}
+    - target: {fileID: 2700473628185286340, guid: 32623dbd180af034c873d4308e0fd76c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 409
+      objectReference: {fileID: 0}
     - target: {fileID: 4959032694871182097, guid: 32623dbd180af034c873d4308e0fd76c, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183794410916835903, guid: 32623dbd180af034c873d4308e0fd76c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 206.99994
       objectReference: {fileID: 0}
     - target: {fileID: 7720356431907399821, guid: 32623dbd180af034c873d4308e0fd76c, type: 3}
       propertyPath: m_Pivot.x
@@ -551,7 +559,7 @@ PrefabInstance:
     - target: {fileID: 8436254898267076959, guid: 32623dbd180af034c873d4308e0fd76c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 6486331528654392098, guid: 1e42e12bf191b294684a5217b1586d97, type: 3}
+      objectReference: {fileID: 21300000, guid: a3a9021f8f1c43c4d8ed5deb48f9a99b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
