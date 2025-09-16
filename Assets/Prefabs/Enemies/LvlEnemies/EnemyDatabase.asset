@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c120be4a0e29945b9469a87e245d09, type: 3}
+  m_Name: EnemyDatabase
+  m_EditorClassIdentifier: 
+  Enemies:
+  - EnemyPref: {fileID: 1636409395377828315, guid: 1098720217852324eb6d178b48f93649, type: 3}
+    EnemyPic: {fileID: 0}
+    Description: A lazy wolf who came cuz he was told to
+  - EnemyPref: {fileID: 1636409395377828315, guid: 1d6d1975a9e862942867de33cffaae13, type: 3}
+    EnemyPic: {fileID: 0}
+    Description: More motivated than his lazy friend
+  - EnemyPref: {fileID: 1384738924307322464, guid: a489b88f2999583479fea8d54e07832b, type: 3}
+    EnemyPic: {fileID: 0}
+    Description: The baby of the Pufferion Dragon species. Dont underestimate the
+      young ones.
+  - EnemyPref: {fileID: 1299241042516606528, guid: f5b89782094e4fb488e8ca78eb611ed5, type: 3}
+    EnemyPic: {fileID: 0}
+    Description: One of the many failed experiments of the holy cult.
+  - EnemyPref: {fileID: 9215515746043332468, guid: 47eebfcaf45e6b74c8b99681677b5ff9, type: 3}
+    EnemyPic: {fileID: 0}
+    Description: A scout of the demon army. He doesnt know why he is here and wasnt
+      prepared for war.
+  - EnemyPref: {fileID: 9215515746043332468, guid: 7a46b658ed398c74c840f524aa2d6d48, type: 3}
+    EnemyPic: {fileID: 0}
+    Description: A scout of the demon army. He doesnt know why he is here, however
+      he was prepared for combat.
+  - EnemyPref: {fileID: 6855957738042986249, guid: 14c50b2cf58ed954592d3cf998160604, type: 3}
+    EnemyPic: {fileID: 0}
+    Description: An ancient tree, awaken by some ancient power.

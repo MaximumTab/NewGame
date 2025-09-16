@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
   m_Name: FailedExperAbl
   m_EditorClassIdentifier: 
+  AblName: Demonic Shot
   Range: 3
   AtkModifier: 1
   NumOfTargets: 1
   Cooldown: 3.1
   Projectile: {fileID: 5462313678063293214, guid: 840a842af96cd374c9ff2209c7cc8463, type: 3}
+  Description: haha shooting

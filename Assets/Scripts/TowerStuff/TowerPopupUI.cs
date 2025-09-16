@@ -104,7 +104,7 @@ public class TowerPopupUI : MonoBehaviour
         sb.AppendLine($"HP: {Mathf.CeilToInt(ent.Hp)} / {Mathf.CeilToInt(s.MaxHp)}");
         sb.AppendLine($"ATK: {s.Atk}");
         sb.AppendLine($"Interval: {s.AttackInterval}s");
-        sb.AppendLine($"Blocked: {ent.Blocked}");
+        sb.AppendLine($"Block: {s.Block}");
 
         if (towerStats != null && towerStats.towerCosts != null && towerStats.towerCosts.Length > 0)
         {
