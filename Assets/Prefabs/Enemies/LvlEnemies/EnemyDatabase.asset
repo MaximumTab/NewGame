@@ -36,4 +36,6 @@ MonoBehaviour:
       he was prepared for combat.
   - EnemyPref: {fileID: 6855957738042986249, guid: 14c50b2cf58ed954592d3cf998160604, type: 3}
     EnemyPic: {fileID: 0}
-    Description: An ancient tree, awaken by some ancient power.
+    Description: An ancient tree, awaken by some ancient power.\n\n[Wooden Defense]\nWhen
+      entering phase 2 The Wall gains damage reduction based on its remaing Hp in
+      phase 1.

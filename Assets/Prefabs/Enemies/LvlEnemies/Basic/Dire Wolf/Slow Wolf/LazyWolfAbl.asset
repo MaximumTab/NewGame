@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
   m_Name: LazyWolfAbl
   m_EditorClassIdentifier: 
+  AblName: Lazy Bite
   Range: 0
   AtkModifier: 1
   NumOfTargets: 1
   Cooldown: 3
   Projectile: {fileID: 5440579654765279068, guid: 47078c6ec3b2c864487d3dbe6bd821c9, type: 3}
+  Description: Bites anyone who gets in the way.

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
   m_Name: PuffPAS
   m_EditorClassIdentifier: 
+  AblName: Spouting Tantrum
   Range: 1
   AtkModifier: 1
   NumOfTargets: 1
   Cooldown: 3
   Projectile: {fileID: 3240375809118629576, guid: 99b9da8ecd160064db06fbdf0f7d5d45, type: 3}
+  Description: Shoots out an exploding fireball to nearby enemies.

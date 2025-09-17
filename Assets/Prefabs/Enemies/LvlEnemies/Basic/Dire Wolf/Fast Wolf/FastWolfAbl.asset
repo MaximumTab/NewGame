@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
   m_Name: FastWolfAbl
   m_EditorClassIdentifier: 
+  AblName: Angered Bite
   Range: 0
   AtkModifier: 1
   NumOfTargets: 1
   Cooldown: 3
   Projectile: {fileID: 5440579654765279068, guid: e311cd9e9cbe17446a62d8a8b574ec6e, type: 3}
+  Description: A more ferocious bite, strong enough to break bones.

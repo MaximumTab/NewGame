@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
   m_Name: ArmDemonScoutAbl
   m_EditorClassIdentifier: 
+  AblName: Demonic Shortsword
   Range: 0
   AtkModifier: 1
   NumOfTargets: 1
   Cooldown: 0
   Projectile: {fileID: 5126063939523872073, guid: 592b386727be35d48a0eda94b931ce3e, type: 3}
+  Description: A sword that can cleave through tough materials.

@@ -1,13 +1,14 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class DisplayEnemyStuffs : MonoBehaviour
 {
     public EnemyInfo SelectedInfo;
     public GameObject Holder;
-    private Image Icon;
+    public float ScrollSensitivity;
+    public Image Icon;
     public TMP_Text Name;
     public TMP_Text Type;
     public TMP_Text HP;
@@ -20,14 +21,21 @@ public class DisplayEnemyStuffs : MonoBehaviour
     {
         Icon = Holder.GetComponentInChildren<Image>();
     }
+    
 
     void Update()
     {
         if (SelectedInfo != null&&SelectedInfo.EnemyPref)
         {
             Holder.SetActive(true);
+            if (Holder.GetComponent<RectTransform>().localPosition.y < 0)
+            {
+                RectTransform rect = Holder.GetComponent<RectTransform>();
+                rect.localPosition.Set(rect.localPosition.x,0,rect.localPosition.z);
+            }
+
             EnemyStats EStats= (EnemyStats)SelectedInfo.EnemyPref.GetComponent<EnemyBehaviour>().Stats;
-            if (Icon!=null&&SelectedInfo.EnemyPic)
+            if (Icon&&SelectedInfo.EnemyPic)
             {
                 Icon.sprite = SelectedInfo.EnemyPic;
             }

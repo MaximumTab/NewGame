@@ -135,6 +135,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             try
             {
+                if (col.gameObject.GetComponent<TowerBase>())
+                {
+                    return false;
+                }
+
                 Deployable TileDeploy = col.transform.parent.GetComponent<Deployable>();
                 if (TileDeploy && TileDeploy.deployable)
                 {
