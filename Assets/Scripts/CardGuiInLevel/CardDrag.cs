@@ -133,12 +133,16 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         Collider[] ObjectsAtLoc=Physics.OverlapSphere(Loc, 0.4f);
         foreach (Collider col in ObjectsAtLoc)
         {
+            if (col.gameObject.GetComponent<TowerBase>())
+            {
+                return false;
+            }
+        }
+
+        foreach (Collider col in ObjectsAtLoc)
+        {
             try
             {
-                if (col.gameObject.GetComponent<TowerBase>())
-                {
-                    return false;
-                }
 
                 Deployable TileDeploy = col.transform.parent.GetComponent<Deployable>();
                 if (TileDeploy && TileDeploy.deployable)
