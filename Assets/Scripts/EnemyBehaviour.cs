@@ -87,6 +87,11 @@ public class EnemyBehaviour : EntityBehaviour
     public void Move()
     {
         rb.linearVelocity=(CurPath.First()-transform.position).normalized * (Attacking||Blocked||Down||myStats.StageAmounts[Lives]==EnemyStats.MoveType.Stationary?0:Speed);
+        if (rb.linearVelocity.magnitude != 0)
+        {
+            SpriteTurnCheck(rb.linearVelocity.x);
+        }
+
         Order = FullLength + (CurPath.First() - transform.position).magnitude;
     }
 
