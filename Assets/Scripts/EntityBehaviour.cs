@@ -216,12 +216,13 @@ public class EntityBehaviour : MonoBehaviour
     {
         IsFlipping = true;
         float temp = SpriteObj.rotation.eulerAngles.y;
+        float Xtemp=SpriteObj.rotation.eulerAngles.x;
         for (float i = 0; i < 1; i += Time.deltaTime*4)
         {
-            SpriteObj.rotation=Quaternion.Euler(SpriteObj.rotation.eulerAngles.x,Mathf.Lerp(temp,dir,i),SpriteObj.rotation.eulerAngles.z);
+            SpriteObj.rotation=Quaternion.Euler(Mathf.Lerp(Xtemp,-Xtemp,i),Mathf.Lerp(temp,dir,i),SpriteObj.rotation.eulerAngles.z);
             yield return null;
         }
-        SpriteObj.rotation=Quaternion.Euler(SpriteObj.rotation.eulerAngles.x,dir,SpriteObj.rotation.eulerAngles.z);
+        SpriteObj.rotation=Quaternion.Euler(-Xtemp,dir,SpriteObj.rotation.eulerAngles.z);
         IsFlipping = false;
     }
 

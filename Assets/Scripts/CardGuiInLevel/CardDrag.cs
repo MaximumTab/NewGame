@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -123,7 +124,38 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (draggingTower == null) return;
         // follow cursor at grid height
         draggingTower.transform.position = ScreenToGridWorldPoint(e.position);
+        ChangeDeployableColour(true);
         snaptoGrid();
+    }
+
+    private void ChangeDeployableColour(bool enabling)
+    {
+        Deployable[] allDeploys = FindObjectsByType<Deployable>(FindObjectsSortMode.None);
+        foreach (Deployable dep in allDeploys)
+        {
+            try
+            {
+                if (dep.deployable&&enabling)
+                {
+                    dep.IsDeployableChange(0);
+                    if (dep is Path && thisTower.Stats.Range == EntityStats.RangeType.Melee)
+                    {
+                        dep.IsDeployableChange(1);
+                    }
+
+                    if (dep is not Path && thisTower.Stats.Range == EntityStats.RangeType.Ranged)
+                    {
+                        dep.IsDeployableChange(1);
+                    }
+                }else if (!enabling)
+                {
+                    dep.IsDeployableChange(0);
+                }
+            }
+            catch
+            {
+            }
+        }
     }
 
 
@@ -200,6 +232,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnEndDrag(PointerEventData e)
     {
         if (draggingTower == null) return;
+        ChangeDeployableColour(false);
 
         // if this is a resource gatherer, enforce adjacency rule before snapping
         if (!FindDeployableAtLoc(draggingTower.transform.position))
