@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WallMat
+  m_Name: GrassMat
   m_Shader: {fileID: -6465566751694194690, guid: 3d8b81f3a3b36e4478a6d9fd9640308e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0

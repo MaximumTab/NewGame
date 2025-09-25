@@ -110,7 +110,7 @@ public class TowerPopupUI : MonoBehaviour
         DeckLoader.Instance?.AddCardForEntity(target /*, siblingIndex: optional */);
 
         // Destroy the in-world tower and close popup
-        target.DestroySelf();
+        target.Hp = 0;
         Hide();
     }
 
