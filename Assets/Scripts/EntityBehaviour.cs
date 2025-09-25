@@ -94,7 +94,12 @@ public class EntityBehaviour : MonoBehaviour
         if (EntAnim)
         {
             SpriteObj = EntAnim.transform;
-            SpriteObj.rotation = SceneCam.transform.rotation;
+            GameObject holder = new GameObject();
+            holder.transform.position = transform.position;
+            holder.transform.SetParent(transform);
+            SpriteObj.SetParent(holder.transform);
+            holder.transform.rotation = SceneCam.transform.rotation;
+            SpriteObj.localRotation=Quaternion.identity;
         }
     }
 
@@ -203,10 +208,10 @@ public class EntityBehaviour : MonoBehaviour
         {
             return;
         }
-        if (Direction > 0&&!IsFlipping&&SpriteObj.rotation.eulerAngles.y!=180)
+        if (Direction > 0&&!IsFlipping&&SpriteObj.localRotation.eulerAngles.y!=180)
         {
             StartCoroutine(LerpSprite(180));
-        }else if (Direction < 0 && !IsFlipping && SpriteObj.rotation.eulerAngles.y != 0)
+        }else if (Direction < 0 && !IsFlipping && SpriteObj.localRotation.eulerAngles.y != 0)
         {
             StartCoroutine(LerpSprite(0));
         }
@@ -215,14 +220,13 @@ public class EntityBehaviour : MonoBehaviour
     IEnumerator LerpSprite(float dir)
     {
         IsFlipping = true;
-        float temp = SpriteObj.rotation.eulerAngles.y;
-        float Xtemp=SpriteObj.rotation.eulerAngles.x;
+        float temp = SpriteObj.localRotation.y;
         for (float i = 0; i < 1; i += Time.deltaTime*4)
         {
-            SpriteObj.rotation=Quaternion.Euler(Mathf.Lerp(Xtemp,-Xtemp,i),Mathf.Lerp(temp,dir,i),SpriteObj.rotation.eulerAngles.z);
+            SpriteObj.localRotation=Quaternion.Euler(SpriteObj.localRotation.eulerAngles.x,Mathf.Lerp(temp,dir,i),SpriteObj.localRotation.eulerAngles.z);
             yield return null;
         }
-        SpriteObj.rotation=Quaternion.Euler(-Xtemp,dir,SpriteObj.rotation.eulerAngles.z);
+        SpriteObj.localRotation=Quaternion.Euler(SpriteObj.localRotation.eulerAngles.x,dir,SpriteObj.localRotation.eulerAngles.z);
         IsFlipping = false;
     }
 
