@@ -13,7 +13,11 @@ public class EntityBehaviour : MonoBehaviour
     private Transform SpriteObj;
     [SerializeField] private Transform ProjStart;
     [SerializeField] protected EntityStats entityStats;
-    public EntityStats Stats => entityStats; //u made it protected so i made a little getter for my resources hope u dont mind
+    private bool IsFlipping;
+
+    public EntityStats Stats =>
+        entityStats; //u made it protected so i made a little getter for my resources hope u dont mind
+
     public float Hp;
     public float PercHp;
     protected float MaxHp;
@@ -25,10 +29,13 @@ public class EntityBehaviour : MonoBehaviour
     protected bool Attacking = false;
     protected bool[] AbilityOnCooldown;
     protected List<GameObject>[] TargetsInRange;
-    public Dictionary<GameObject,int> BlockingTargets;
+    public Dictionary<GameObject, int> BlockingTargets;
     public bool Blocked = false;
     public Rigidbody rb;
-    protected class CoEntManager: MonoBehaviour { }
+
+    protected class CoEntManager : MonoBehaviour
+    {
+    }
 
 
     protected CoEntManager CoEntMan;
@@ -40,8 +47,8 @@ public class EntityBehaviour : MonoBehaviour
     {
         if (!CoEntMan)
         {
-            GameObject CoMan = new GameObject("CoEntityManager for "+entityStats.Name);
-            CoEntMan=CoMan.AddComponent<CoEntManager>();
+            GameObject CoMan = new GameObject("CoEntityManager for " + entityStats.Name);
+            CoEntMan = CoMan.AddComponent<CoEntManager>();
         }
 
         if (!EntAnim)
@@ -78,14 +85,15 @@ public class EntityBehaviour : MonoBehaviour
         SceneCam = FindFirstObjectByType<Camera>().GetComponentInChildren<Camera>();
         if (!HpSlider)
         {
-            GameObject hpBar= Instantiate(HpBar, transform);
+            GameObject hpBar = Instantiate(HpBar, transform);
             HpSlider = hpBar.GetComponentInChildren<Slider>();
             hpBar.GetComponentInChildren<Canvas>().worldCamera = SceneCam;
             hpBar.transform.rotation = SceneCam.transform.rotation;
         }
+
         if (EntAnim)
         {
-            SpriteObj = EntAnim.transform.parent;
+            SpriteObj = EntAnim.transform;
             SpriteObj.rotation = SceneCam.transform.rotation;
         }
     }
@@ -102,6 +110,7 @@ public class EntityBehaviour : MonoBehaviour
                 {
                     otherEnt.Blocked = false;
                 }
+
                 otherEnt.BlockingTargets.Remove(gameObject);
                 BlockingTargets.Remove(otherEnt.gameObject);
                 if (BlockingTargets.Count == 0)
@@ -111,6 +120,7 @@ public class EntityBehaviour : MonoBehaviour
             }
         }
     }
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<EntityBehaviour>())
@@ -118,11 +128,12 @@ public class EntityBehaviour : MonoBehaviour
             EntityBehaviour otherEnt = other.gameObject.GetComponent<EntityBehaviour>();
             if (otherEnt.entityStats.Tag != entityStats.Tag)
             {
-                if (otherEnt.entityStats.Tag == EntityStats.ObjectTag.Enemy&&!otherEnt.Blocked&&BlockingTargets.Values.Sum()+otherEnt.entityStats.Block<=entityStats.Block)
+                if (otherEnt.entityStats.Tag == EntityStats.ObjectTag.Enemy && !otherEnt.Blocked &&
+                    BlockingTargets.Values.Sum() + otherEnt.entityStats.Block <= entityStats.Block)
                 {
                     otherEnt.Blocked = true;
-                    otherEnt.BlockingTargets.Add(gameObject,0);
-                    BlockingTargets.Add(otherEnt.gameObject,otherEnt.entityStats.Block);
+                    otherEnt.BlockingTargets.Add(gameObject, 0);
+                    BlockingTargets.Add(otherEnt.gameObject, otherEnt.entityStats.Block);
                     Blocked = true;
                 }
             }
@@ -138,37 +149,43 @@ public class EntityBehaviour : MonoBehaviour
                 switch (entityStats.SortBy.Method)
                 {
                     case EntityStats.SortedBy.Methods.Greatest:
-                        ResultList=new List<GameObject>(list.OrderByDescending(o => o.GetComponent<EntityBehaviour>().PercHp));
+                        ResultList =
+                            new List<GameObject>(list.OrderByDescending(o => o.GetComponent<EntityBehaviour>().PercHp));
                         break;
                     case EntityStats.SortedBy.Methods.None:
                     case EntityStats.SortedBy.Methods.Smallest:
-                        ResultList=new List<GameObject>(list.OrderBy(o => o.GetComponent<EntityBehaviour>().PercHp));
+                        ResultList = new List<GameObject>(list.OrderBy(o => o.GetComponent<EntityBehaviour>().PercHp));
                         break;
                 }
+
                 break;
             case EntityStats.SortedBy.Stats.Atk:
                 switch (entityStats.SortBy.Method)
                 {
                     case EntityStats.SortedBy.Methods.Greatest:
-                        ResultList=new List<GameObject>(list.OrderByDescending(o => o.GetComponent<EntityBehaviour>().Atk));
+                        ResultList =
+                            new List<GameObject>(list.OrderByDescending(o => o.GetComponent<EntityBehaviour>().Atk));
                         break;
                     case EntityStats.SortedBy.Methods.None:
                     case EntityStats.SortedBy.Methods.Smallest:
-                        ResultList=new List<GameObject>(list.OrderBy(o => o.GetComponent<EntityBehaviour>().Atk));
+                        ResultList = new List<GameObject>(list.OrderBy(o => o.GetComponent<EntityBehaviour>().Atk));
                         break;
                 }
+
                 break;
             case EntityStats.SortedBy.Stats.Order:
                 switch (entityStats.SortBy.Method)
                 {
                     case EntityStats.SortedBy.Methods.Greatest:
-                        ResultList=new List<GameObject>(list.OrderByDescending(o => o.GetComponent<EntityBehaviour>().Order));
+                        ResultList =
+                            new List<GameObject>(list.OrderByDescending(o => o.GetComponent<EntityBehaviour>().Order));
                         break;
                     case EntityStats.SortedBy.Methods.None:
                     case EntityStats.SortedBy.Methods.Smallest:
-                        ResultList=new List<GameObject>(list.OrderBy(o => o.GetComponent<EntityBehaviour>().Order));
+                        ResultList = new List<GameObject>(list.OrderBy(o => o.GetComponent<EntityBehaviour>().Order));
                         break;
                 }
+
                 break;
         }
 
@@ -179,6 +196,36 @@ public class EntityBehaviour : MonoBehaviour
     {
         AlwaysRun();
     }
+
+    protected void SpriteTurnCheck(float Direction)
+    {
+        if (!SpriteObj)
+        {
+            return;
+        }
+        if (Direction > 0&&!IsFlipping&&SpriteObj.rotation.eulerAngles.y!=180)
+        {
+            StartCoroutine(LerpSprite(180));
+        }else if (Direction < 0 && !IsFlipping && SpriteObj.rotation.eulerAngles.y != 0)
+        {
+            StartCoroutine(LerpSprite(0));
+        }
+    }
+
+    IEnumerator LerpSprite(float dir)
+    {
+        IsFlipping = true;
+        float temp = SpriteObj.rotation.eulerAngles.y;
+        float Xtemp=SpriteObj.rotation.eulerAngles.x;
+        for (float i = 0; i < 1; i += Time.deltaTime*4)
+        {
+            SpriteObj.rotation=Quaternion.Euler(Mathf.Lerp(Xtemp,-Xtemp,i),Mathf.Lerp(temp,dir,i),SpriteObj.rotation.eulerAngles.z);
+            yield return null;
+        }
+        SpriteObj.rotation=Quaternion.Euler(-Xtemp,dir,SpriteObj.rotation.eulerAngles.z);
+        IsFlipping = false;
+    }
+
 
     public virtual void AlwaysRun()
     {
@@ -213,6 +260,7 @@ public class EntityBehaviour : MonoBehaviour
                 }
             }
             TargetsInRange[index].AddRange(sortTarget(TempList));
+
             
             if (!AbilityOnCooldown[index] && !Attacking && TargetsInRange[index].Count > 0&&entityStats.Abilities[index].Ability.GetType()!=typeof(SummonerAbil))
             {
@@ -225,6 +273,7 @@ public class EntityBehaviour : MonoBehaviour
                          : TargetsInRange[index].Count);
                      i++)
                 {
+                    SpriteTurnCheck((TargetsInRange[index][i].transform.position-transform.position).x);
                     if (ProjStart)
                     {
                         entityStats.Abilities[index].Ability

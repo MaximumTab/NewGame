@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac9f665be22eeb4e8f4479bb1306928, type: 3}
   m_Name: ArmDemonScoutEs
   m_EditorClassIdentifier: 
-  Name: Oblivious Demon Scout
+  Name: Armed Demon Scout
   Range: 1
   MaxHp: 200
   Atk: 60

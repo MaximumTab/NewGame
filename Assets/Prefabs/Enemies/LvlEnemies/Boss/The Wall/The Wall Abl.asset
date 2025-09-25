@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
   m_Name: The Wall Abl
   m_EditorClassIdentifier: 
+  AblName: Trunk Slam
   Range: 0
   AtkModifier: 1
   NumOfTargets: 1
-  Cooldown: 0
+  Cooldown: 3
   Projectile: {fileID: 8524675896046927496, guid: 5354e75575639fb4d8072c1d5605d67e, type: 3}
+  Description: A strong attack that damages nearby structures with its immense impacts.

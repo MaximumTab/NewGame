@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public int CurEnemyCount = 0;
     [SerializeField] private TMP_Text LivesDisplay;
     [SerializeField] private TMP_Text CounterDisplay;
+    [SerializeField] private TMP_Text SpeedDisplay;
+    [SerializeField] private TMP_Text PauseDisplay;
     private Animator ContrAnim;
     private static readonly int Lose = Animator.StringToHash("Lose");
     private static readonly int Win = Animator.StringToHash("Win");
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+        SpeedDisplay.text = "X1";
         ContrAnim=gameObject.GetComponent<Animator>();
     }
 
@@ -106,13 +109,32 @@ public class GameManager : MonoBehaviour
 
     public void ToggleSpeed()
     {
-        if (Time.timeScale == 1)
+        if (Time.timeScale != 2)
         {
             Time.timeScale = 2;
+            PauseDisplay.text = "Unpaused";
+            SpeedDisplay.text = "X2";
         }
-        else if (Time.timeScale == 2)
+        else if (Time.timeScale != 1)
         {
             Time.timeScale = 1;
+            PauseDisplay.text = "Unpaused";
+            SpeedDisplay.text = "X1";
+        }
+    }
+
+    public void PauseTime()
+    {
+        if (Time.timeScale != 0)
+        {
+            Time.timeScale = 0;
+            PauseDisplay.text = "Paused";
+        }
+        else
+        {
+            Time.timeScale = 1;
+            SpeedDisplay.text = "X1";
+            PauseDisplay.text = "Unpaused";
         }
     }
 }

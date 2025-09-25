@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 [CreateAssetMenu(fileName = "EnemyStats", menuName = "Entities/EnemyStats")]
 public class EnemyStats : EntityStats

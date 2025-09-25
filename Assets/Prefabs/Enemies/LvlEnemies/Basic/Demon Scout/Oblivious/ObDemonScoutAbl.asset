@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
   m_Name: ObDemonScoutAbl
   m_EditorClassIdentifier: 
+  AblName: Demon Claws
   Range: 0
   AtkModifier: 1
   NumOfTargets: 1
   Cooldown: 0
   Projectile: {fileID: 5126063939523872073, guid: 7cdc98dcf8dd4f743b239b9d6f8255da, type: 3}
+  Description: Sharps claws capable of tearing through weak structures.

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TowerTheTowerSummoning : MonoBehaviour
+public class TowerTheTowerSummoning : Ability
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
