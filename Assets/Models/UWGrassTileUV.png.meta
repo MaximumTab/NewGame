@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 91d9e16ea825f774c8c3941a9c99e059
+guid: ad5e3cbed645b6342ae6cef7d14a9c81
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7880503973471110654
-    second: treeResource_0
+      213: -6444442228605254688
+    second: UWGrassTileUV_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: treeResource_0
+      name: UWGrassTileUV_0
       rect:
         serializedVersion: 2
-        x: 231
-        y: 146
-        width: 1038
-        height: 1295
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 20a333a8363d2a290800000000000000
-      internalID: -7880503973471110654
+      spriteID: 0e3057cefedb096a0800000000000000
+      internalID: -6444442228605254688
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      treeResource_0: -7880503973471110654
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
