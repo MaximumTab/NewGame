@@ -33,8 +33,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     [SerializeField] private TMP_Text NameText;
     [SerializeField] private TMP_Text CostText;
 
+    CardCooldown cooldown;
+
     void Awake()
     {
+        cooldown = GetComponent<CardCooldown>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
         mainCamera = Camera.main;
         SetData();
@@ -95,6 +98,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData e)
     {
+        if (cooldown && cooldown.IsCooling) return;
         // affordability gate before spawning preview
         if (requireAffordable && prefabCosts != null && ResourceManager.Instance != null)
         {
