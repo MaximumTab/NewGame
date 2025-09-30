@@ -255,7 +255,18 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         //----enable towers scripts from dragingTower -----
         MonoBehaviour[] scriptsToEnable = draggingTower.GetComponentsInChildren<MonoBehaviour>();
         foreach (var script in scriptsToEnable)
+        {
             script.enabled = true;
+            if (script as TowerBase)
+            {
+                TutorialStuffs.changeTrigger(TutorialStuffs.triggers.TowerPlaced);
+            }
+            if (script as Gatherer)
+            {
+                TutorialStuffs.changeTrigger(TutorialStuffs.triggers.GathererPlaced);
+            }
+        }
+
         // remove the card UI
         Destroy(gameObject);
     }
