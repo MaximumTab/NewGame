@@ -20,7 +20,6 @@ public class TutorialStuffs : MonoBehaviour
 
     IEnumerator Tuting()
     {
-        Cutscene = true;
         foreach (Phases phase in Tuts)
         {
             float tempTime = Time.timeScale;
@@ -30,15 +29,15 @@ public class TutorialStuffs : MonoBehaviour
             LightChange.intensity = phase.lightIntensity;
             activeTriggers = phase.eventTrigger;
             Time.timeScale = phase.TimeScaling;
+            Cutscene = true;
             yield return new WaitUntil(() => trigger);
+            Cutscene = false;
             trigger = false;
             phase.TextToChange.transform.parent.gameObject.SetActive(false);
             LightChange.intensity = 1;
             Time.timeScale = tempTime;
             yield return null;
         }
-
-        Cutscene = false;
         yield return null;
     }
 
@@ -52,7 +51,7 @@ public class TutorialStuffs : MonoBehaviour
 
     private void Update()
     {
-        if (Input.anyKey&&Cutscene)
+        if (Input.anyKeyDown&&Cutscene)
         {
             changeTrigger(triggers.Clicked);
         }
