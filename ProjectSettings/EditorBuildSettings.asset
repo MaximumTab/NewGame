@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelIdeas/Boss-1.unity
     guid: 978f11c630361314db8273ac85b4b89a
+  - enabled: 1
+    path: Assets/Scenes/Menus/EnemyLog.unity
+    guid: d4637860ead1bf3429f8296a4a5e7fe8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
