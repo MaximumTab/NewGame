@@ -384,7 +384,7 @@ MonoBehaviour:
       Data2: 1236306780
       Data3: -2123172711
       Data4: 841916462
-    Path: event:/SFX/UI Click
+    Path: event:/SFX/UI/UI Click
   Event: 
   EventPlayTrigger: 17
   EventStopTrigger: 0
@@ -1547,7 +1547,7 @@ MonoBehaviour:
       Data2: 1236306780
       Data3: -2123172711
       Data4: 841916462
-    Path: event:/SFX/UI Click
+    Path: event:/SFX/UI/UI Click
   Event: 
   EventPlayTrigger: 17
   EventStopTrigger: 0
@@ -2105,7 +2105,7 @@ MonoBehaviour:
       Data2: 1236306780
       Data3: -2123172711
       Data4: 841916462
-    Path: event:/SFX/UI Click
+    Path: event:/SFX/UI/UI Click
   Event: 
   EventPlayTrigger: 17
   EventStopTrigger: 0
@@ -2495,7 +2495,7 @@ MonoBehaviour:
       Data2: 1236306780
       Data3: -2123172711
       Data4: 841916462
-    Path: event:/SFX/UI Click
+    Path: event:/SFX/UI/UI Click
   Event: 
   EventPlayTrigger: 17
   EventStopTrigger: 0
