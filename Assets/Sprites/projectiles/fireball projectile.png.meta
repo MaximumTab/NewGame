@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ad5e3cbed645b6342ae6cef7d14a9c81
+guid: 68f9d9672f87d7e4d8cca16c518742a5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6444442228605254688
-    second: UWGrassTileUV_0
+      213: -7053375735542552848
+    second: fireball projectile_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UWGrassTileUV_0
+      name: fireball projectile_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1024
+        x: 12
+        y: 130
+        width: 976
+        height: 691
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0e3057cefedb096a0800000000000000
-      internalID: -6444442228605254688
+      spriteID: 0f660af83206d1e90800000000000000
+      internalID: -7053375735542552848
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UWGrassTileUV_0: -6444442228605254688
+      fireball projectile_0: -7053375735542552848
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
