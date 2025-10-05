@@ -1,10 +1,11 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CardCooldown : MonoBehaviour
 {
-    [SerializeField] Image fill;          // radial or bar image to show remaining time (optional)
+    [SerializeField] Slider fill;          // radial or bar image to show remaining time (optional)
     [SerializeField] TMP_Text label;      // countdown text (optional)
     [SerializeField] CanvasGroup cg;      // to dim and block input (optional)
     [SerializeField] MonoBehaviour dragHandler; // your CardDrag script
@@ -24,19 +25,38 @@ public class CardCooldown : MonoBehaviour
         enabled = true;
     }
 
-    void Update()
+    public void BeginCooldown(float Seconds)
     {
-        if (!cooling) { enabled = false; return; }
-        float remaining = readyAt - Time.unscaledTime;
-        if (remaining <= 0f) { End(); return; }
-        UpdateVisuals();
+        StartCoroutine(CoolDownCard(Seconds));
     }
+
+    public IEnumerator CoolDownCard(float Seconds)
+    {
+        cooling = true;
+        for (float i = Seconds; i >= 0; i -= Time.deltaTime)
+        {
+            fill.value = i / Seconds;
+            label.text = "" + Mathf.Round(i*10)/10;
+            yield return null;
+        }
+
+        cooling = false;
+        label.text = "";
+    }
+
+    // void Update()
+    // {
+    //     if (!cooling) { enabled = false; return; }
+    //     float remaining = readyAt - Time.unscaledTime;
+    //     if (remaining <= 0f) { End(); return; }
+    //     UpdateVisuals();
+    // }
 
     void End()
     {
         cooling = false;
         SetBlocked(false);
-        if (fill) fill.fillAmount = 0f;
+        //if (fill) fill.fillAmount = 0f;
         if (label) label.text = "";
         enabled = false;
     }
@@ -60,7 +80,7 @@ public class CardCooldown : MonoBehaviour
         {
             // 1 at start, 0 when ready
             float total = Mathf.Max(remaining, 0.0001f) + (Time.unscaledTime - (readyAt - remaining));
-            fill.fillAmount = Mathf.InverseLerp(0f, total, remaining);
+            //fill.fillAmount = Mathf.InverseLerp(0f, total, remaining);
         }
     }
 }
