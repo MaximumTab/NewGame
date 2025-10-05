@@ -19,3 +19,10 @@ MonoBehaviour:
   Cooldown: 3.1
   Projectile: {fileID: 5462313678063293214, guid: 840a842af96cd374c9ff2209c7cc8463, type: 3}
   Description: Conjures a magical projectile to damage enemies from afar.
+  abilitySFX:
+    Guid:
+      Data1: -1569698115
+      Data2: 1233037297
+      Data3: -2005216325
+      Data4: -1932865700
+    Path: event:/SFX/Enemies/FailedExperiment/FE_ATK
