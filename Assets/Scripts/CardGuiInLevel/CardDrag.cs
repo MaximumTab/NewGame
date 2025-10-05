@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FMODUnity;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -280,6 +281,8 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 TutorialStuffs.changeTrigger(TutorialStuffs.triggers.GathererPlaced);
             }
         }
+
+        AudioManager.instance.CreateInstance(FmodEvents.instance.CardPlaced).start();
 
         if (isResourceGatherer)
         {

@@ -11,6 +11,7 @@ public class FmodEvents : MonoBehaviour
     [field: SerializeField] public EventReference popupsfx { get; private set; }
     [field: SerializeField] public EventReference levelfinished { get; private set; }
     [field: SerializeField] public EventReference levellose { get; private set; }
+    [field: SerializeField] public EventReference CardPlaced { get; private set; }
     public static FmodEvents instance { get; private set; }
 
     private void Awake()

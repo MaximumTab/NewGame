@@ -152,3 +152,10 @@ MonoBehaviour:
       Data3: 1418872960
       Data4: -847187372
     Path: event:/SFX/UI/LevelLose
+  <CardPlaced>k__BackingField:
+    Guid:
+      Data1: 1145268902
+      Data2: 1304702572
+      Data3: 867961771
+      Data4: 1611596315
+    Path: event:/SFX/UI/TowerPlaced
