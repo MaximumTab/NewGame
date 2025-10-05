@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text SpeedDisplay;
     [SerializeField] private TMP_Text PauseDisplay;
     private Animator ContrAnim;
+    private bool winSoundPlayed = false;
     private static readonly int Lose = Animator.StringToHash("Lose");
     private static readonly int Win = Animator.StringToHash("Win");
 
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WinLVL()
     {
+       
         yield return new WaitForSeconds(2);
         FinishLVL();
     }
@@ -61,13 +63,11 @@ public class GameManager : MonoBehaviour
     private void FinishLVL()
     {
         string currentScene = SceneManager.GetActiveScene().name;
-
         Levels.MarkLevelComplete(currentScene);
         Debug.Log("Level finished: " + currentScene);
 
         // Show debug of all levels
         Levels.DebugLevelStatus();
-
         SceneManager.LoadScene(1); // back to Level Select
     }
 
@@ -89,12 +89,22 @@ public class GameManager : MonoBehaviour
                 FindObjectsByType<EnemyBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             if (enems.Length==0)
             {
+                PlayWinSoundOnce();
                 return true;
             }
         }
 
         return false;
 
+    }
+
+       private void PlayWinSoundOnce()
+    {
+        if (winSoundPlayed) return;
+        winSoundPlayed = true;
+
+        
+        AudioManager.instance.CreateInstance(FmodEvents.instance.levelfinished).start();
     }
 
     public void SetEnemyCount(int Count)

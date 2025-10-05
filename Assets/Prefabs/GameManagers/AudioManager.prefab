@@ -138,3 +138,10 @@ MonoBehaviour:
       Data3: -1617418334
       Data4: 1592657530
     Path: event:/SFX/UI/PopUpSFX
+  <levelfinished>k__BackingField:
+    Guid:
+      Data1: 2087596206
+      Data2: 1340431452
+      Data3: -1344337256
+      Data4: 2129451462
+    Path: event:/SFX/UI/LevelFinished

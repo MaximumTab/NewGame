@@ -9,6 +9,7 @@ public class FmodEvents : MonoBehaviour
     [field: Header("CardDrag")]
     [field: SerializeField] public EventReference CardDrag { get; private set; }
     [field: SerializeField] public EventReference popupsfx { get; private set; }
+    [field: SerializeField] public EventReference levelfinished { get; private set; }
     public static FmodEvents instance { get; private set; }
 
     private void Awake()
