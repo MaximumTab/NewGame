@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AblName: RootSpawn
   Range: 2
-  AtkModifier: 0.2
+  AtkModifier: 1
   NumOfTargets: 3
   Cooldown: 2
   Projectile: {fileID: 5477716615499135637, guid: d7af573ea59b25843b27ee4df6ea4569, type: 3}

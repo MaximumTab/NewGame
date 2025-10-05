@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: The Wall
   Range: 1
   MaxHp: 500
-  Atk: 10
+  Atk: 20
   AttackInterval: 1
   Speed: 0
   Tag: 1
