@@ -131,3 +131,10 @@ MonoBehaviour:
       Data3: -668792667
       Data4: -878565686
     Path: event:/SFX/UI/CardPickup
+  <popupsfx>k__BackingField:
+    Guid:
+      Data1: 1254985826
+      Data2: 1237510226
+      Data3: -1617418334
+      Data4: 1592657530
+    Path: event:/SFX/UI/PopUpSFX

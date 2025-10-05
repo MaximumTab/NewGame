@@ -25,6 +25,7 @@ public class TutorialStuffs : MonoBehaviour
             float tempTime = Time.timeScale;
             yield return new WaitForSeconds(phase.timeToThis);
             phase.TextToChange.transform.parent.gameObject.SetActive(true);
+            AudioManager.instance.CreateInstance(FmodEvents.instance.popupsfx).start();
             phase.TextToChange.text = phase.TutText;
             LightChange.intensity = phase.lightIntensity;
             activeTriggers = phase.eventTrigger;
