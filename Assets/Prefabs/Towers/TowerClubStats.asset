@@ -32,3 +32,4 @@ MonoBehaviour:
   - resourceType: 0
     resourceCost: 5
   returnToHandCooldown: 3
+  description: Clubs Tower Description

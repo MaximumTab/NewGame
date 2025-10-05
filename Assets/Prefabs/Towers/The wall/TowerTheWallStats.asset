@@ -32,3 +32,4 @@ MonoBehaviour:
   - resourceType: 0
     resourceCost: 50
   returnToHandCooldown: 3
+  description: Wall Description

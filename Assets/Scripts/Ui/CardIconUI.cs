@@ -77,8 +77,13 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             var tb = cardPrefab.GetComponent<TowerBase>();
             var stats = tb ? tb.Stats as TowerStats : null;
 
-            if (tb)
-                data.Description = $"Tower Type: {tb.GetType().Name}";
+            if (stats)
+            {
+                // Use the write-up from TowerStats
+                data.Description = !string.IsNullOrEmpty(stats.description)
+                    ? stats.description
+                    : "No description available.";
+            }
 
             if (stats)
             {
