@@ -58,6 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2588496892140181417}
   - component: {fileID: 5520562683310842784}
+  - component: {fileID: 7418187476167057983}
   m_Layer: 0
   m_Name: FmodEvents
   m_TagString: Untagged
@@ -111,3 +112,22 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &7418187476167057983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8772880057875134890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c86fc72d724baf4b901732f7898d65a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CardDrag>k__BackingField:
+    Guid:
+      Data1: 1610331564
+      Data2: 1103021243
+      Data3: -668792667
+      Data4: -878565686
+    Path: event:/SFX/UI/CardPickup

@@ -6,8 +6,8 @@ using FMOD.Studio;
 
 public class FmodEvents : MonoBehaviour
 {
-    [field: Header("Music")]
-    [field: SerializeField] public EventReference music { get; private set; }
+    [field: Header("CardDrag")]
+    [field: SerializeField] public EventReference CardDrag { get; private set; }
     public static FmodEvents instance { get; private set; }
 
     private void Awake()
