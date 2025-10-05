@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine.SceneManagement;
 
 public class DeckLoader : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class DeckLoader : MonoBehaviour
     [SerializeField] private CardDatabase database;   // reference your CardDatabase asset
     [Header("UI")]
     [SerializeField] private Transform deckPanel;     // panel under Canvas, has HorizontalLayoutGroup
+
+    [Header("Gatherer Setup")]
+    [SerializeField] private Transform gathererPanel;
+    [SerializeField] private GameObject[] gathererPrefabs; // assign the 3 gatherers in Inspector
+
 
     private const string PrefKey = "CardSlot";
     private GameObject AutoGenCard;
@@ -27,6 +33,15 @@ public class DeckLoader : MonoBehaviour
         }
 
         LoadAndPlaceDeck();
+        if (SceneManager.GetActiveScene().name != "Tut-1")
+        {
+            SpawnGatherers();
+        }
+        else if (gathererPanel != null)
+        {
+            gathererPanel.gameObject.SetActive(false);
+        }
+ 
     }
 
     public void LoadAndPlaceDeck()
@@ -86,6 +101,29 @@ public class DeckLoader : MonoBehaviour
 
         Debug.Log(sb.ToString());
     }
+
+    private void SpawnGatherers()
+{
+    if (gathererPanel == null || gathererPrefabs == null) return;
+
+    // Clear old gatherers if any
+    foreach (Transform child in gathererPanel)
+        Destroy(child.gameObject);
+
+    foreach (var prefab in gathererPrefabs)
+    {
+        if (prefab == null) continue;
+
+        var cardUI = Instantiate(AutoGenCard, gathererPanel);
+        var cd = cardUI.GetComponent<CardDrag>();
+        cd.towerPrefab = prefab;
+        cd.SetData();
+        cardUI.transform.localScale = Vector3.one;
+    }
+
+    Debug.Log($"[DeckLoader] Spawned {gathererPrefabs.Length} gatherers.");
+}
+
 
      // ---------- NEW API: spawn a card icon back into the hand ----------
     public GameObject AddCardToHand(GameObject towerPrefab, int siblingIndex = -1)
