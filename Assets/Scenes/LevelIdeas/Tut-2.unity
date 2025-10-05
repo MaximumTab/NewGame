@@ -75412,11 +75412,23 @@ MonoBehaviour:
     TimeScaling: 0
     eventTrigger: 1
     lightIntensity: 0.75
+  - TextToChange: {fileID: 1905077064}
+    TutText: Place another gatherer down to gain a different resource
+    timeToThis: 0.5
+    TimeScaling: 0
+    eventTrigger: 1
+    lightIntensity: 0.75
   - TextToChange: {fileID: 1047612802}
     TutText: Place a tower when you have enough
     timeToThis: 0.5
     TimeScaling: 1
     eventTrigger: 0
+    lightIntensity: 1
+  - TextToChange: {fileID: 1047612802}
+    TutText: Continue defending by placing down towers. Good luck
+    timeToThis: 0.5
+    TimeScaling: 1
+    eventTrigger: 2
     lightIntensity: 1
   LightChange: {fileID: 1259443866}
 --- !u!1001 &1701593483

@@ -6,6 +6,9 @@ public class TowerStats : EntityStats
     [Header("Tower cost")]
     public TowerCost[] towerCosts;
 
+    [Header("Hand Return")]
+    public float returnToHandCooldown = 3f; // seconds
+
     [System.Serializable]
     public struct TowerCost
     {
