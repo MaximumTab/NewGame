@@ -71,7 +71,7 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         bool locked = IsLocked();
         data.IsLocked = locked;
 
-        // Description & cost
+        // --- Description & Cost ---
         if (cardPrefab != null)
         {
             var tb = cardPrefab.GetComponent<TowerBase>();
@@ -80,23 +80,46 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             if (tb)
                 data.Description = $"Tower Type: {tb.GetType().Name}";
 
-            if (stats && stats.towerCosts != null)
+            if (stats)
             {
-                foreach (var c in stats.towerCosts)
-                    data.CostInfo += $"{c.resourceType}: {c.resourceCost}\n";
-            }
+                // Cost
+                if (stats.towerCosts != null)
+                {
+                    foreach (var c in stats.towerCosts)
+                        data.CostInfo += $"{c.resourceType}: {c.resourceCost}\n";
+                    data.CostInfo = data.CostInfo.Trim();
+                }
 
-            if (!string.IsNullOrEmpty(data.CostInfo))
-                data.CostInfo = data.CostInfo.Trim();
+                // NEW: Populate tooltip stats
+                data.MaxHP = stats.MaxHp.ToString();
+                data.Damage = stats.Atk.ToString();
+
+                // If there are any abilities, grab the first range (or max range)
+                if (stats.Abilities != null && stats.Abilities.Length > 0 && stats.Abilities[0].Ability != null)
+                {
+                    float maxRange = 0f;
+                    foreach (var a in stats.Abilities)
+                    {
+                        if (a.Ability != null)
+                            maxRange = Mathf.Max(maxRange, a.Ability.Range);
+                    }
+                    data.Range = maxRange.ToString("0.0");
+                }
+                else
+                {
+                    data.Range = "—";
+                }
+            }
         }
 
-        // Unlock info
+        // --- Unlock info ---
         if (locked)
         {
             string prereq = GetPrerequisiteName();
             data.UnlockInfo = $"Unlock by completing: {prereq}";
         }
 
+        // --- Show Tooltip ---
         CardTooltip.Instance.Show(data);
     }
 

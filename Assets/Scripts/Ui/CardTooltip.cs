@@ -11,6 +11,11 @@ public class CardTooltip : MonoBehaviour
     [SerializeField] private TMP_Text costText;
     [SerializeField] private TMP_Text descText;
 
+    // NEW UI FIELDS
+    [SerializeField] private TMP_Text hpText;
+    [SerializeField] private TMP_Text damageText;
+    [SerializeField] private TMP_Text rangeText;
+
     private Canvas rootCanvas;
     private CanvasGroup cg;
 
@@ -43,12 +48,15 @@ public class CardTooltip : MonoBehaviour
 
     public void Show(CardTooltipData data)
     {
-        Debug.Log("[Tooltip] UnlockText object: " + unlockText.name);
         nameText.text = data.DisplayName;
         descText.text = data.Description;
         costText.text = data.CostInfo;
 
-        // Unlock text
+        // NEW: set stat texts
+        hpText.text = !string.IsNullOrEmpty(data.MaxHP) ? $"HP: {data.MaxHP}" : "";
+        damageText.text = !string.IsNullOrEmpty(data.Damage) ? $"DMG: {data.Damage}" : "";
+        rangeText.text = !string.IsNullOrEmpty(data.Range) ? $"RNG: {data.Range}" : "";
+
         bool hasUnlock = !string.IsNullOrEmpty(data.UnlockInfo);
         unlockText.gameObject.SetActive(hasUnlock);
         if (hasUnlock)
@@ -56,19 +64,23 @@ public class CardTooltip : MonoBehaviour
             unlockText.text = $"<color=#FF0000>{data.UnlockInfo}</color>";
             unlockText.fontStyle = FontStyles.Italic;
         }
-        // Locked styling: fade other sections
+
         if (data.IsLocked)
         {
             Color faded = new Color(1f, 1f, 1f, 0.5f);
             descText.color = faded;
             costText.color = faded;
-            nameText.color = Color.white; // or faded too if you want
+            hpText.color = faded;
+            damageText.color = faded;
+            rangeText.color = faded;
         }
         else
         {
             descText.color = Color.white;
             costText.color = Color.white;
-            nameText.color = Color.white;
+            hpText.color = Color.white;
+            damageText.color = Color.white;
+            rangeText.color = Color.white;
         }
 
         cg.alpha = 1;
@@ -77,11 +89,13 @@ public class CardTooltip : MonoBehaviour
     public void Hide()
     {
         cg.alpha = 0;
-
         nameText.text = "";
         descText.text = "";
         costText.text = "";
         unlockText.text = "";
+        hpText.text = "";
+        damageText.text = "";
+        rangeText.text = "";
         unlockText.gameObject.SetActive(false);
     }
 }
