@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardTooltip : MonoBehaviour
 {
@@ -11,17 +12,24 @@ public class CardTooltip : MonoBehaviour
     [SerializeField] private TMP_Text costText;
     [SerializeField] private TMP_Text descText;
 
-    // NEW UI FIELDS
+    // Stat fields
     [SerializeField] private TMP_Text hpText;
     [SerializeField] private TMP_Text damageText;
     [SerializeField] private TMP_Text rangeText;
+
+    // NEW: Tower sprite
+    [SerializeField] private Image towerImage;
 
     private Canvas rootCanvas;
     private CanvasGroup cg;
 
     private void Awake()
     {
-        if (Instance && Instance != this) { Destroy(gameObject); return; }
+        if (Instance && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
 
         cg = panel.GetComponent<CanvasGroup>();
@@ -52,10 +60,18 @@ public class CardTooltip : MonoBehaviour
         descText.text = data.Description;
         costText.text = data.CostInfo;
 
-        // NEW: set stat texts
+        // Set stat texts
         hpText.text = !string.IsNullOrEmpty(data.MaxHP) ? $"HP: {data.MaxHP}" : "";
         damageText.text = !string.IsNullOrEmpty(data.Damage) ? $"DMG: {data.Damage}" : "";
         rangeText.text = !string.IsNullOrEmpty(data.Range) ? $"RNG: {data.Range}" : "";
+
+        // Show tower sprite if present
+        if (towerImage)
+        {
+            bool hasSprite = data.TowerSprite != null;
+            towerImage.gameObject.SetActive(hasSprite);
+            if (hasSprite) towerImage.sprite = data.TowerSprite;
+        }
 
         bool hasUnlock = !string.IsNullOrEmpty(data.UnlockInfo);
         unlockText.gameObject.SetActive(hasUnlock);
@@ -65,23 +81,14 @@ public class CardTooltip : MonoBehaviour
             unlockText.fontStyle = FontStyles.Italic;
         }
 
-        if (data.IsLocked)
-        {
-            Color faded = new Color(1f, 1f, 1f, 0.5f);
-            descText.color = faded;
-            costText.color = faded;
-            hpText.color = faded;
-            damageText.color = faded;
-            rangeText.color = faded;
-        }
-        else
-        {
-            descText.color = Color.white;
-            costText.color = Color.white;
-            hpText.color = Color.white;
-            damageText.color = Color.white;
-            rangeText.color = Color.white;
-        }
+        // Handle locked fade
+        Color faded = new Color(1f, 1f, 1f, data.IsLocked ? 0.5f : 1f);
+        descText.color = faded;
+        costText.color = faded;
+        hpText.color = faded;
+        damageText.color = faded;
+        rangeText.color = faded;
+        if (towerImage) towerImage.color = faded;
 
         cg.alpha = 1;
     }
@@ -97,5 +104,11 @@ public class CardTooltip : MonoBehaviour
         damageText.text = "";
         rangeText.text = "";
         unlockText.gameObject.SetActive(false);
+
+        if (towerImage)
+        {
+            towerImage.sprite = null;
+            towerImage.gameObject.SetActive(false);
+        }
     }
 }
