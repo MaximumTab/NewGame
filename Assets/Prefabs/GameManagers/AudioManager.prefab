@@ -145,3 +145,10 @@ MonoBehaviour:
       Data3: -1344337256
       Data4: 2129451462
     Path: event:/SFX/UI/LevelFinished
+  <levellose>k__BackingField:
+    Guid:
+      Data1: 1416323233
+      Data2: 1156590055
+      Data3: 1418872960
+      Data4: -847187372
+    Path: event:/SFX/UI/LevelLose

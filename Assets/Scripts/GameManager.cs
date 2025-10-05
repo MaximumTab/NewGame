@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text PauseDisplay;
     private Animator ContrAnim;
     private bool winSoundPlayed = false;
+    private bool loseSoundPlayed = false;
     private static readonly int Lose = Animator.StringToHash("Lose");
     private static readonly int Win = Animator.StringToHash("Win");
 
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         if (Lives <= 0)
         {
+            PlayLoseSoundOnce();
             Debug.Log("You Failed");
             ContrAnim.SetBool(Lose,true);
             Time.timeScale = 0.25f;
@@ -108,6 +110,18 @@ public class GameManager : MonoBehaviour
 
         
         AudioManager.instance.CreateInstance(FmodEvents.instance.levelfinished).start();
+    }
+
+    private void PlayLoseSoundOnce()
+    {
+        if (loseSoundPlayed) return;
+        loseSoundPlayed = true;
+
+        var masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
+        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
+        
+        AudioManager.instance.CreateInstance(FmodEvents.instance.levellose).start();
     }
 
     public void SetEnemyCount(int Count)
