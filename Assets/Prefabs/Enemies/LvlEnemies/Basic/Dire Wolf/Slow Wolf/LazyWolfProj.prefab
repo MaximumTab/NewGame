@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2942633439499994897}
   - component: {fileID: -1370926270594520760}
+  - component: {fileID: 2817706870609274176}
   m_Layer: 0
   m_Name: LazyWolfProj
   m_TagString: Untagged
@@ -45,3 +46,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileStats: {fileID: 11400000, guid: 71ff454f53108cb428bbe79757a4ab98, type: 2}
+--- !u!114 &2817706870609274176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440579654765279068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -961639168
+      Data2: 1323631542
+      Data3: -34902883
+      Data4: 1737674639
+    Path: event:/SFX/Enemies/Direwolf/DW_ATK
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
