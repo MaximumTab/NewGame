@@ -23,7 +23,7 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         if (!rect) rect = GetComponent<RectTransform>();
         if (nameText) nameText.text = labelText;
     }
-    
+
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -33,23 +33,71 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         if (!rootCanvas) Debug.LogWarning("[CardIconUI] No Canvas found in parents.");
     }
 
-        public void OnPointerEnter(PointerEventData eventData)
+    private bool IsLocked()
     {
-        if (cardPrefab == null || CardTooltip.Instance == null) return;
+        var db = DeckBuilderDD.FindActiveDatabase();
+        if (db == null || CardIndex < 0 || CardIndex >= db.prerequisiteLevels.Length)
+            return false;
 
-        var tb = cardPrefab.GetComponent<TowerBase>();
-        var stats = tb ? tb.Stats as TowerStats : null;
+        string prereq = db.prerequisiteLevels[CardIndex];
+        if (!string.IsNullOrEmpty(prereq) && !Levels.IsLevelComplete(prereq))
+            return true;
 
-        string costStr = "";
-        if (stats && stats.towerCosts != null)
+        return false;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (CardTooltip.Instance == null) return;
+
+        string displayName = "Unknown";
+
+        if (cardPrefab != null)
         {
-            foreach (var c in stats.towerCosts)
-                costStr += $"{c.resourceType}: {c.resourceCost}\n";
+            var ent = cardPrefab.GetComponent<EntityBehaviour>();
+            if (ent && ent.Stats != null && !string.IsNullOrEmpty(ent.Stats.Name))
+            {
+                displayName = ent.Stats.Name;
+            }
+            else
+            {
+                // fallback to prefab name (clean up "(Clone)" if needed)
+                displayName = cardPrefab.name.Replace("(Clone)", "").Trim();
+            }
         }
 
-        string desc = tb ? $"Tower Type: {tb.GetType().Name}" : "";
+        CardTooltipData data = new CardTooltipData(displayName);
 
-        CardTooltip.Instance.Show(cardPrefab.name, desc, costStr.Trim());
+        bool locked = IsLocked();
+        data.IsLocked = locked;
+
+        // Description & cost
+        if (cardPrefab != null)
+        {
+            var tb = cardPrefab.GetComponent<TowerBase>();
+            var stats = tb ? tb.Stats as TowerStats : null;
+
+            if (tb)
+                data.Description = $"Tower Type: {tb.GetType().Name}";
+
+            if (stats && stats.towerCosts != null)
+            {
+                foreach (var c in stats.towerCosts)
+                    data.CostInfo += $"{c.resourceType}: {c.resourceCost}\n";
+            }
+
+            if (!string.IsNullOrEmpty(data.CostInfo))
+                data.CostInfo = data.CostInfo.Trim();
+        }
+
+        // Unlock info
+        if (locked)
+        {
+            string prereq = GetPrerequisiteName();
+            data.UnlockInfo = $"Unlock by completing: {prereq}";
+        }
+
+        CardTooltip.Instance.Show(data);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -59,24 +107,35 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (IsLocked()) return;
+
         originalParent = transform.parent;
         originalAnchoredPos = rect.anchoredPosition;
 
-        // Lift to top so it follows the cursor over everything
         if (rootCanvas) transform.SetParent(rootCanvas.transform);
         cg.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (IsLocked()) return;
         rect.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Always snap back to the available panel; the slot records the drop
+        if (IsLocked()) return;
+
         transform.SetParent(originalParent);
         rect.anchoredPosition = originalAnchoredPos;
         cg.blocksRaycasts = true;
+    }
+    
+    private string GetPrerequisiteName()
+    {
+        var db = DeckBuilderDD.FindActiveDatabase();
+        if (db == null || CardIndex < 0 || CardIndex >= db.prerequisiteLevels.Length)
+            return "";
+        return db.prerequisiteLevels[CardIndex];
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gatherer : MonoBehaviour
+public class Gatherer : TowerBase
 {
     [Header("Gatherer Setup")]
     public ResourceType gathererType = ResourceType.Wood;
@@ -58,6 +58,7 @@ public class Gatherer : MonoBehaviour
 
     void Update()
     {
+        AlwaysRun();
         // Draw green lines to each matching resource tile for a short time after placement
         if (Time.time < _debugUntil)
         {
@@ -119,5 +120,16 @@ public class Gatherer : MonoBehaviour
             Debug.DrawLine(prev + Vector3.up * 0.05f, next + Vector3.up * 0.05f, color, 0f, false);
             prev = next;
         }
+    }
+
+    public override void CheckAlive()
+    {
+        if (Hp <= 0)
+        {
+            DestroySelf();
+        }
+        PercHp = Hp / MaxHp;
+        if(HpSlider)
+            HpSlider.value = PercHp;
     }
 }

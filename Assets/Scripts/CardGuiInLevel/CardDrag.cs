@@ -76,7 +76,8 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             NameText.text = towerStats.Name;
             isResourceGatherer = false;
-        }else if (NameText&&gathInfo)
+        }
+        if (NameText&&gathInfo)
         {
             NameText.text = gathInfo.gathererType + " Gatherer";
             isResourceGatherer = true;

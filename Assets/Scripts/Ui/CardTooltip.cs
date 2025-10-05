@@ -7,8 +7,9 @@ public class CardTooltip : MonoBehaviour
 
     [SerializeField] private RectTransform panel;
     [SerializeField] private TMP_Text nameText;
-    [SerializeField] private TMP_Text descText;
+    [SerializeField] private TMP_Text unlockText;
     [SerializeField] private TMP_Text costText;
+    [SerializeField] private TMP_Text descText;
 
     private Canvas rootCanvas;
     private CanvasGroup cg;
@@ -40,16 +41,47 @@ public class CardTooltip : MonoBehaviour
         }
     }
 
-    public void Show(string name, string desc, string cost)
+    public void Show(CardTooltipData data)
     {
-        nameText.text = name;
-        descText.text = desc;
-        costText.text = cost;
+        Debug.Log("[Tooltip] UnlockText object: " + unlockText.name);
+        nameText.text = data.DisplayName;
+        descText.text = data.Description;
+        costText.text = data.CostInfo;
+
+        // Unlock text
+        bool hasUnlock = !string.IsNullOrEmpty(data.UnlockInfo);
+        unlockText.gameObject.SetActive(hasUnlock);
+        if (hasUnlock)
+        {
+            unlockText.text = $"<color=#FF0000>{data.UnlockInfo}</color>";
+            unlockText.fontStyle = FontStyles.Italic;
+        }
+        // Locked styling: fade other sections
+        if (data.IsLocked)
+        {
+            Color faded = new Color(1f, 1f, 1f, 0.5f);
+            descText.color = faded;
+            costText.color = faded;
+            nameText.color = Color.white; // or faded too if you want
+        }
+        else
+        {
+            descText.color = Color.white;
+            costText.color = Color.white;
+            nameText.color = Color.white;
+        }
+
         cg.alpha = 1;
     }
 
     public void Hide()
     {
         cg.alpha = 0;
+
+        nameText.text = "";
+        descText.text = "";
+        costText.text = "";
+        unlockText.text = "";
+        unlockText.gameObject.SetActive(false);
     }
 }
