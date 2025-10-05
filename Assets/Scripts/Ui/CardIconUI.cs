@@ -16,6 +16,7 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private Canvas rootCanvas;
     private CanvasGroup cg;
     private GameObject cardPrefab;
+
     public void Init(int cardIndex, string labelText, GameObject prefab = null)
     {
         CardIndex = cardIndex;
@@ -61,33 +62,53 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             }
             else
             {
-                // fallback to prefab name (clean up "(Clone)" if needed)
                 displayName = cardPrefab.name.Replace("(Clone)", "").Trim();
             }
         }
 
         CardTooltipData data = new CardTooltipData(displayName);
-
         bool locked = IsLocked();
         data.IsLocked = locked;
 
-        // Description & cost
+        // Description, Cost, Stats
         if (cardPrefab != null)
         {
             var tb = cardPrefab.GetComponent<TowerBase>();
             var stats = tb ? tb.Stats as TowerStats : null;
 
-            if (tb)
-                data.Description = $"Tower Type: {tb.GetType().Name}";
-
-            if (stats && stats.towerCosts != null)
+            if (stats)
             {
-                foreach (var c in stats.towerCosts)
-                    data.CostInfo += $"{c.resourceType}: {c.resourceCost}\n";
-            }
+                data.Description = !string.IsNullOrEmpty(stats.description)
+                    ? stats.description
+                    : "No description available.";
 
-            if (!string.IsNullOrEmpty(data.CostInfo))
-                data.CostInfo = data.CostInfo.Trim();
+                if (stats.towerCosts != null)
+                {
+                    foreach (var c in stats.towerCosts)
+                        data.CostInfo += $"{c.resourceType}: {c.resourceCost}\n";
+                    data.CostInfo = data.CostInfo.Trim();
+                }
+
+                data.MaxHP = stats.MaxHp.ToString();
+                data.Damage = stats.Atk.ToString();
+
+                if (stats.Abilities != null && stats.Abilities.Length > 0 && stats.Abilities[0].Ability != null)
+                {
+                    float maxRange = 0f;
+                    foreach (var a in stats.Abilities)
+                    {
+                        if (a.Ability != null)
+                            maxRange = Mathf.Max(maxRange, a.Ability.Range);
+                    }
+                    data.Range = maxRange.ToString("0.0");
+                }
+                else
+                {
+                    data.Range = "—";
+                }
+            }
+            var sr = cardPrefab.GetComponentInChildren<SpriteRenderer>();
+            if (sr != null) data.TowerSprite = sr.sprite;
         }
 
         // Unlock info
@@ -130,7 +151,7 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         rect.anchoredPosition = originalAnchoredPos;
         cg.blocksRaycasts = true;
     }
-    
+
     private string GetPrerequisiteName()
     {
         var db = DeckBuilderDD.FindActiveDatabase();

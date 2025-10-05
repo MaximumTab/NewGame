@@ -32,3 +32,4 @@ MonoBehaviour:
   - resourceType: 2
     resourceCost: 10
   returnToHandCooldown: 3
+  description: Heart Tower Description

@@ -94,6 +94,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             CostText.text = "Free";
         }
+        if (towerPrefab != null && towerPrefab.GetComponent<Gatherer>() != null)
+        {
+            isResourceGatherer = true;
+        }
         FindAutoGrid();
     }
 
@@ -277,8 +281,26 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             }
         }
 
-        // remove the card UI
-        Destroy(gameObject);
+        if (isResourceGatherer)
+        {
+            // trigger cooldown instead of destroying
+            if (cooldown != null)
+            {
+                cooldown.BeginCooldown(10f); // for now 10 seconds 
+            }
+
+            canvasGroup.alpha = 1f;
+
+            draggingTower = null;
+
+            return;
+        }
+        else
+        {
+            // remove the card UI as usual
+            Destroy(gameObject);
+        }
+
     }
 
     // Projects screen point into world at the Y-level of gridRoot
