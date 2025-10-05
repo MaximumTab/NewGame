@@ -19,3 +19,10 @@ MonoBehaviour:
   Cooldown: 0
   Projectile: {fileID: 5438021278605143860, guid: f78e5f0c9c5eac14a8b88f8b31f62fef, type: 3}
   Description: 
+  abilitySFX:
+    Guid:
+      Data1: 1505364218
+      Data2: 1079400784
+      Data3: 1662355102
+      Data4: 442813329
+    Path: event:/SFX/Towers/ArcherTower/ArcherAttack
