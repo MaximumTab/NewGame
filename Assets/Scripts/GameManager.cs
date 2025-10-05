@@ -103,6 +103,9 @@ public class GameManager : MonoBehaviour
         if (winSoundPlayed) return;
         winSoundPlayed = true;
 
+        var masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
+        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
         
         AudioManager.instance.CreateInstance(FmodEvents.instance.levelfinished).start();
     }
