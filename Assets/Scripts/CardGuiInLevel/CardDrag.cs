@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using FMODUnity;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+
 
 public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -30,6 +32,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private TowerBase thisTower;
     private float positionChange;
     private TowerStats.TowerCost[] prefabCosts;
+
     [SerializeField] private TMP_Text NameText;
     [SerializeField] private TMP_Text CostText;
 
@@ -112,7 +115,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 Debug.LogWarning("[CardDrag] Not enough resources to place this tower.");
                 return; // do not start dragging, keep the card visible
             }
+            AudioManager.instance.CreateInstance(FmodEvents.instance.CardDrag).start();
         }
+
+        
 
         // hide the card visually but keep it raycast-able
         canvasGroup.alpha = 0f;
@@ -275,6 +281,8 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 TutorialStuffs.changeTrigger(TutorialStuffs.triggers.GathererPlaced);
             }
         }
+
+        AudioManager.instance.CreateInstance(FmodEvents.instance.CardPlaced).start();
 
         if (isResourceGatherer)
         {

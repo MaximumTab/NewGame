@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileStats: {fileID: 11400000, guid: 71ff454f53108cb428bbe79757a4ab98, type: 2}
+  NoLatch: 0
