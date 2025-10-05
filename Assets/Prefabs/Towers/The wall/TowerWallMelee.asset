@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
-  m_Name: TowerDiamondAS
+  m_Name: TowerWallMelee
   m_EditorClassIdentifier: 
-  AblName: 
-  Range: 3
+  AblName: VineWhip
+  Range: 0
   AtkModifier: 1
   NumOfTargets: 1
   Cooldown: 0
-  Projectile: {fileID: 5438021278605143860, guid: f78e5f0c9c5eac14a8b88f8b31f62fef, type: 3}
-  Description: 
+  Projectile: {fileID: 5477716615499135637, guid: a523d8790d35cba479effd2a4b7db166, type: 3}
+  Description: Hits enemies with a swipe.

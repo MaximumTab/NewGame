@@ -16,8 +16,10 @@ public class ProjectileBehaviour : MonoBehaviour
     private Vector3 StartLoc;
     private List<GameObject> AlreadyHitTargets;
     private List<GameObject> TargetsInRange;
-
+    private bool Travel;
     private Rigidbody rb;
+
+    public bool NoLatch;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,6 +30,7 @@ public class ProjectileBehaviour : MonoBehaviour
         AlreadyHitTargets = new List<GameObject>();
         BounceAmount = projectileStats.BounceNum;
         rb.useGravity = false;
+        Travel = false;
     }
 
     // Update is called once per frame
@@ -52,32 +55,51 @@ public class ProjectileBehaviour : MonoBehaviour
         switch (projectileStats.DistanceMode)
         {
             case ProjectileStats.ProjectileType.Moving:
-                rb.linearVelocity = (target.transform.position - transform.position).normalized * projectileStats.Speed;
+                StartCoroutine(Moving((target.transform.position - transform.position).magnitude / projectileStats.Speed));
                 break;
             case ProjectileStats.ProjectileType.Instant:
                 rb.position = target.transform.position;
                 break;
             case ProjectileStats.ProjectileType.Arcing:
-                if (transform.position.y>target.transform.position.y||new Vector3(target.transform.position.x - transform.position.x, 0,
-                        target.transform.position.z - transform.position.z).magnitude -
-                    new Vector3(target.transform.position.x - StartLoc.x, 0,
-                        target.transform.position.z - StartLoc.z).magnitude / 2>0)
-                {
-                    rb.linearVelocity =
-                        new Vector3(target.transform.position.x - transform.position.x, 0,
-                            target.transform.position.z - transform.position.z).normalized * projectileStats.Speed +
-                        Vector3.up *
-                        ((new Vector3(target.transform.position.x - transform.position.x, 0,
-                              target.transform.position.z - transform.position.z).magnitude -
-                          new Vector3(target.transform.position.x - StartLoc.x, 0,
-                              target.transform.position.z - StartLoc.z).magnitude / 2) * projectileStats.ArcHeight* projectileStats.Speed/4);
-                }
-                else
-                {
-                    rb.linearVelocity = (target.transform.position - transform.position).normalized * projectileStats.Speed;
-                }
+                StartCoroutine(Arcing((target.transform.position - transform.position).magnitude / projectileStats.Speed));
 
                 break;
+        }
+    }
+    IEnumerator Arcing(float time)
+    {
+        Vector3 StartPos = rb.position;
+        for (float i = 0; i < 1; i+=Time.deltaTime/time)
+        {
+            rb.position = Vector3.Lerp(StartPos+Vector3.up * (projectileStats.ArcHeight * i), target.transform.position+Vector3.up * (projectileStats.ArcHeight * (1-i)), i);
+            yield return null;
+            if (!target)
+            {
+                break;
+            }
+        }
+        if (target)
+        {
+            rb.position = target.transform.position;
+        }
+    }
+
+    IEnumerator Moving(float time)
+    {
+        Vector3 StartPos = rb.position;
+        for (float i = 0; i < time; i+=Time.deltaTime)
+        {
+            rb.position = Vector3.Lerp(StartPos, target.transform.position, i/time);
+            yield return null;
+            if (!target)
+            {
+                break;
+            }
+        }
+
+        if (target)
+        {
+            rb.position = target.transform.position;
         }
     }
 
@@ -101,9 +123,10 @@ public class ProjectileBehaviour : MonoBehaviour
                 StartCoroutine(DestroySelf());
             }
         }
-        else if(!targetHit)
+        else if(!targetHit&&!Travel)
         {
             MoveToTarget();
+            Travel = true;
         }
     }
     private void OnHit()
@@ -150,9 +173,11 @@ public class ProjectileBehaviour : MonoBehaviour
         sortTarget();
         if (TargetsInRange.Count > 0)
         {
-            StartLoc = target.transform.position;
+            if(target)
+                StartLoc = target.transform.position;
             target = TargetsInRange.First();
             TargetsInRange = new List<GameObject>();
+            Travel = false;
         }
         else
         {
@@ -172,7 +197,16 @@ public class ProjectileBehaviour : MonoBehaviour
             if (target.transform.GetComponent<EntityBehaviour>())
             {
                 target.transform.GetComponent<EntityBehaviour>().TakeDamage(Damage);
-                GameObject targOHE = Instantiate(projectileStats.OnHitEffect, target.transform);
+                GameObject targOHE;
+                if (!NoLatch)
+                {
+                    targOHE = Instantiate(projectileStats.OnHitEffect, target.transform);
+                }
+                else
+                {
+                    targOHE = Instantiate(projectileStats.OnHitEffect, target.transform.position,Quaternion.identity);
+                }
+
                 targOHE.transform.Rotate(Vector3.forward, Random.Range(0, 360));
             }
 

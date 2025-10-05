@@ -248,6 +248,7 @@ public class EntityBehaviour : MonoBehaviour
     {
         for (int index=0;index<entityStats.Abilities.Length;index++)
         {
+            
             if (entityStats.Abilities[index].Range == EntityStats.RangeType.Melee && !Blocked)
             {
                 continue;
@@ -356,7 +357,7 @@ public class EntityBehaviour : MonoBehaviour
                     EntityBehaviour otherEnt = other.GetComponent<EntityBehaviour>();
                     if (otherEnt.Stats.Tag != entityStats.Tag)
                     {
-                        if (otherEnt.Stats.Tag == EntityStats.ObjectTag.Enemy)
+                        if (otherEnt.Stats.Tag == EntityStats.ObjectTag.Enemy&&otherEnt.BlockingTargets.Count==1)
                         {
                             otherEnt.Blocked = false;
                         }

@@ -75,7 +75,7 @@ public class DeckBuilderDD : MonoBehaviour
             }
 
             string label = optionLabels[i + 1]; // shift because 0 = None
-            ui.Init(cardIndex: i, labelText: label);
+            ui.Init(cardIndex: i, labelText: label, prefab: database.allCards[i]);
         }
     }
 

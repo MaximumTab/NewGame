@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d78e634a51b6c94e824b9de68c8805c, type: 3}
-  m_Name: TowerDiamondAS
+  m_Name: TowerWallBlockers
   m_EditorClassIdentifier: 
-  AblName: 
-  Range: 3
+  AblName: RootSpawn
+  Range: 2
   AtkModifier: 1
-  NumOfTargets: 1
-  Cooldown: 0
-  Projectile: {fileID: 5438021278605143860, guid: f78e5f0c9c5eac14a8b88f8b31f62fef, type: 3}
-  Description: 
+  NumOfTargets: 3
+  Cooldown: 2
+  Projectile: {fileID: 5477716615499135637, guid: d7af573ea59b25843b27ee4df6ea4569, type: 3}
+  Description: Spawns blocking vines on enemies' position.

@@ -28,6 +28,7 @@ public class TowerBaseProjectile : MonoBehaviour
             HitTarget();
         }
     }
+    
 
     protected virtual void HitTarget()
     {

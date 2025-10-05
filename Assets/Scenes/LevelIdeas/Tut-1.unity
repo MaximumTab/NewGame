@@ -2364,7 +2364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tuts:
   - TextToChange: {fileID: 1303964265}
-    TutText: Welcome to the world of Arcanalis
+    TutText: Welcome to the world of Arcanalis. Press any key to continue
     timeToThis: 2
     TimeScaling: 0
     eventTrigger: 2
