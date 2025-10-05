@@ -42,6 +42,7 @@ public class TowerBase : EntityBehaviour
                     }
                 }
             }
+            DeckLoader.Instance?.AddCardToHandFromBattle(this,((TowerStats)entityStats).returnToHandCooldown);
             DestroySelf();
             
         }

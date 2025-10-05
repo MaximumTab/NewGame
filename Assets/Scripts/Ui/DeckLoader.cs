@@ -109,6 +109,12 @@ public class DeckLoader : MonoBehaviour
         return cardUI;
     }
 
+    public void AddCardToHandFromBattle(EntityBehaviour towerPrefab,float CooldownSeconds)
+    {
+        CardCooldown cd = AddCardForEntity(towerPrefab).GetComponent<CardCooldown>();
+        if (cd) cd.BeginCooldown(CooldownSeconds);
+    }
+
     // Convenience: resolve the prefab by looking up the entity’s tower type in the DB
     public GameObject AddCardForEntity(EntityBehaviour soldEntity, int siblingIndex = -1)
     {

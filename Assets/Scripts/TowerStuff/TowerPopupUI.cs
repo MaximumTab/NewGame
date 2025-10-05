@@ -106,12 +106,6 @@ public class TowerPopupUI : MonoBehaviour
         }
 
         // return card to hand and apply cooldown
-        GameObject cardGO = DeckLoader.Instance?.AddCardForEntity(target);
-        if (cardGO && towerStats != null)
-        {
-            var cd = cardGO.GetComponent<CardCooldown>();
-            if (cd) cd.Begin(towerStats.returnToHandCooldown);
-        }
 
         target.Hp = 0;
         Hide();
