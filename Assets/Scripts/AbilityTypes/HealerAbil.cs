@@ -7,6 +7,11 @@ public class HealerAbil : Ability
     [Header("SFX Cooldown (seconds)")]
     public float healSFXCooldown = 10f;
     public float lastHealSFXTime = -999f;
+
+    private void OnEnable()
+    {
+        lastHealSFXTime = -999f; 
+    }
     public override void UseAbility(GameObject Target, Vector3 Source, float Atk)
     {
         if (!abilitySFX.IsNull && Time.unscaledTime - lastHealSFXTime >= healSFXCooldown)
