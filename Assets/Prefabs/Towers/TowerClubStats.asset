@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Clubs Tower
   Range: 1
   MaxHp: 200
-  Atk: 15
+  Atk: 20
   AttackInterval: 1
   Speed: 0
   Tag: 1
@@ -28,8 +28,7 @@ MonoBehaviour:
     Ability: {fileID: 11400000, guid: 851e0ff78c32895408133743b2c5ad1a, type: 2}
   towerCosts:
   - resourceType: 1
-    resourceCost: 15
-  - resourceType: 0
     resourceCost: 10
-  - resourceType: 2
-    resourceCost: 0
+  - resourceType: 0
+    resourceCost: 5
+  returnToHandCooldown: 3

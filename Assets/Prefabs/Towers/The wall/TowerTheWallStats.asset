@@ -20,8 +20,8 @@ MonoBehaviour:
   Speed: 0
   Tag: 1
   SortBy:
-    Stat: 0
-    Method: 0
+    Stat: 2
+    Method: 2
   Block: 3
   Abilities:
   - Range: 2
