@@ -91,6 +91,22 @@ MonoBehaviour:
       m_SpriteOverride: {fileID: 805552114295604324, guid: 1e42e12bf191b294684a5217b1586d97, type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 4
+  - m_Name: Hands
+    m_Hash: 669981948
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: hand_left
+      m_Hash: 880774573
+      m_Sprite: {fileID: -4030314483695798260, guid: 965e95e352d8f034c9187ad369f4469a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -4030314483695798260, guid: 965e95e352d8f034c9187ad369f4469a, type: 3}
+    - m_Name: hand_right
+      m_Hash: 520772417
+      m_Sprite: {fileID: 6072129349333393197, guid: 965e95e352d8f034c9187ad369f4469a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 6072129349333393197, guid: 965e95e352d8f034c9187ad369f4469a, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 638933870620069946
+  m_ModificationHash: 638953759893344815
   m_Version: 1
