@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: TowerWallMelee
   m_EditorClassIdentifier: 
   AblName: VineWhip
-  Range: 0
+  Range: 1
   AtkModifier: 1
   NumOfTargets: 1
   Cooldown: 0
   Projectile: {fileID: 5477716615499135637, guid: a523d8790d35cba479effd2a4b7db166, type: 3}
   Description: Hits enemies with a swipe.
+  abilitySFX:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
