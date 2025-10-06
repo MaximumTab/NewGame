@@ -5,6 +5,10 @@ public class TheWallBehaviour : EnemyBehaviour
     private float DamageReduction;
     public override void AlwaysRun()
     {
+        if (EntAnim)
+        {
+            EntAnim.SetFloat("DamageReduction", DamageReduction);
+        }
         base.AlwaysRun();
         if (Lives == 0 && PercHp < 0.9f)
         {

@@ -246,6 +246,10 @@ public class EnemyBehaviour : EntityBehaviour
         }
         else if (Lives + 1 != myStats.Lives && Hp <= 0)
         {
+            if (EntAnim)
+            {
+                 EntAnim.SetTrigger("PhaseTransition");
+            }
             Hp = 1;
             StopCoroutine(nameof(StationTime));
             StartCoroutine(NewLife());
