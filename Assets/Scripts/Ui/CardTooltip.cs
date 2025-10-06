@@ -35,7 +35,7 @@ public class CardTooltip : MonoBehaviour
         cg = panel.GetComponent<CanvasGroup>();
         if (!cg) cg = panel.gameObject.AddComponent<CanvasGroup>();
         cg.alpha = 0;
-
+        cg.blocksRaycasts = false;
         rootCanvas = GetComponentInParent<Canvas>();
     }
 
