@@ -32,4 +32,5 @@ MonoBehaviour:
   - resourceType: 0
     resourceCost: 5
   returnToHandCooldown: 15
-  description: Clubs Tower Description
+  description: The Club Tower joins the fight directly on the track to face enemies
+    head on!
