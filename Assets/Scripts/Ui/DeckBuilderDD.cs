@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class DeckBuilderDD : MonoBehaviour
 {
+    public static DeckBuilderDD Instance { get; private set; }
+
     [Header("Database")]
     [SerializeField] private CardDatabase database;
 
@@ -19,6 +21,11 @@ public class DeckBuilderDD : MonoBehaviour
 
     // index -> label; 0 is None, 1..N map to database.allCards (index+1)
     private List<string> optionLabels = new();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -68,14 +75,16 @@ public class DeckBuilderDD : MonoBehaviour
         {
             var go = Instantiate(cardIconPrefab, availablePanel);
             var ui = go.GetComponent<CardIconUI>();
-            if (!ui)
-            {
-                Debug.LogError("[DeckBuilderDD] cardIconPrefab must have CardIconUI.");
-                continue;
-            }
+            if (!ui) continue;
 
-            string label = optionLabels[i + 1]; // shift because 0 = None
-            ui.Init(cardIndex: i, labelText: label);
+            string label = optionLabels[i + 1];
+            ui.Init(cardIndex: i, labelText: label, prefab: database.allCards[i]);
+
+            string prereq = database.prerequisiteLevels.Length > i ? database.prerequisiteLevels[i] : "";
+            if (!string.IsNullOrEmpty(prereq) && !Levels.IsLevelComplete(prereq))
+            {
+                go.GetComponent<CanvasGroup>().alpha = 0.5f;
+            }
         }
     }
 
@@ -134,5 +143,9 @@ public class DeckBuilderDD : MonoBehaviour
             sb.AppendLine($"  Slot {i}: {label}");
         }
         Debug.Log(sb.ToString());
+    }
+    public static CardDatabase FindActiveDatabase()
+    {
+        return Instance ? Instance.database : null;
     }
 }

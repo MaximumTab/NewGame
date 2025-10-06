@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using FMODUnity;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+
 
 public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -30,11 +32,15 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private TowerBase thisTower;
     private float positionChange;
     private TowerStats.TowerCost[] prefabCosts;
+
     [SerializeField] private TMP_Text NameText;
     [SerializeField] private TMP_Text CostText;
 
+    CardCooldown cooldown;
+
     void Awake()
     {
+        cooldown = GetComponent<CardCooldown>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
         mainCamera = Camera.main;
         SetData();
@@ -71,7 +77,8 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             NameText.text = towerStats.Name;
             isResourceGatherer = false;
-        }else if (NameText&&gathInfo)
+        }
+        if (NameText&&gathInfo)
         {
             NameText.text = gathInfo.gathererType + " Gatherer";
             isResourceGatherer = true;
@@ -88,6 +95,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             CostText.text = "Free";
         }
+        if (towerPrefab != null && towerPrefab.GetComponent<Gatherer>() != null)
+        {
+            isResourceGatherer = true;
+        }
         FindAutoGrid();
     }
 
@@ -95,6 +106,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData e)
     {
+        if (cooldown && cooldown.IsCooling) return;
         // affordability gate before spawning preview
         if (requireAffordable && prefabCosts != null && ResourceManager.Instance != null)
         {
@@ -103,7 +115,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 Debug.LogWarning("[CardDrag] Not enough resources to place this tower.");
                 return; // do not start dragging, keep the card visible
             }
+            AudioManager.instance.CreateInstance(FmodEvents.instance.CardDrag).start();
         }
+
+        
 
         // hide the card visually but keep it raycast-able
         canvasGroup.alpha = 0f;
@@ -255,9 +270,40 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         //----enable towers scripts from dragingTower -----
         MonoBehaviour[] scriptsToEnable = draggingTower.GetComponentsInChildren<MonoBehaviour>();
         foreach (var script in scriptsToEnable)
+        {
             script.enabled = true;
-        // remove the card UI
-        Destroy(gameObject);
+            if (script as TowerBase)
+            {
+                TutorialStuffs.changeTrigger(TutorialStuffs.triggers.TowerPlaced);
+            }
+            if (script as Gatherer)
+            {
+                TutorialStuffs.changeTrigger(TutorialStuffs.triggers.GathererPlaced);
+            }
+        }
+
+        AudioManager.instance.CreateInstance(FmodEvents.instance.CardPlaced).start();
+
+        if (isResourceGatherer)
+        {
+            // trigger cooldown instead of destroying
+            if (cooldown != null)
+            {
+                cooldown.BeginCooldown(10f); // for now 10 seconds 
+            }
+
+            canvasGroup.alpha = 1f;
+
+            draggingTower = null;
+
+            return;
+        }
+        else
+        {
+            // remove the card UI as usual
+            Destroy(gameObject);
+        }
+
     }
 
     // Projects screen point into world at the Y-level of gridRoot

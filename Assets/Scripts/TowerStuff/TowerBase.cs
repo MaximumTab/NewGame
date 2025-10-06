@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TowerBase : EntityBehaviour
 {
+    public bool subTower;
+    public float subLifepercperSec=0.2f;
     public override void OnSpawn()
     {
         rb = gameObject.AddComponent<Rigidbody>();
@@ -21,6 +23,10 @@ public class TowerBase : EntityBehaviour
     private void Start()
     {
         OnSpawn();
+        if (subTower)
+        {
+            StartCoroutine(LifeDrain(subLifepercperSec));
+        }
     }
 
     public override void CheckAlive()
@@ -42,9 +48,12 @@ public class TowerBase : EntityBehaviour
                     }
                 }
             }
+            if(!subTower)
+                DeckLoader.Instance?.AddCardToHandFromBattle(this,((TowerStats)entityStats).returnToHandCooldown);
             DestroySelf();
             
         }
+
         PercHp = Hp / MaxHp;
         if(HpSlider)
             HpSlider.value = PercHp;

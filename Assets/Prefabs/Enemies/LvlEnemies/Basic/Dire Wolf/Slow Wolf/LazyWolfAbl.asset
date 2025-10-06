@@ -19,3 +19,10 @@ MonoBehaviour:
   Cooldown: 3
   Projectile: {fileID: 5440579654765279068, guid: 47078c6ec3b2c864487d3dbe6bd821c9, type: 3}
   Description: Bites anyone who gets in the way.
+  abilitySFX:
+    Guid:
+      Data1: -961639168
+      Data2: 1323631542
+      Data3: -34902883
+      Data4: 1737674639
+    Path: event:/SFX/Enemies/Direwolf/DW_ATK

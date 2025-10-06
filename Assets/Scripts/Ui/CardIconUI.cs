@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private Image iconImage; // optional
@@ -15,10 +15,12 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private Vector2 originalAnchoredPos;
     private Canvas rootCanvas;
     private CanvasGroup cg;
+    private GameObject cardPrefab;
 
-    public void Init(int cardIndex, string labelText)
+    public void Init(int cardIndex, string labelText, GameObject prefab = null)
     {
         CardIndex = cardIndex;
+        cardPrefab = prefab;
         if (!rect) rect = GetComponent<RectTransform>();
         if (nameText) nameText.text = labelText;
     }
@@ -32,26 +34,129 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         if (!rootCanvas) Debug.LogWarning("[CardIconUI] No Canvas found in parents.");
     }
 
+    private bool IsLocked()
+    {
+        var db = DeckBuilderDD.FindActiveDatabase();
+        if (db == null || CardIndex < 0 || CardIndex >= db.prerequisiteLevels.Length)
+            return false;
+
+        string prereq = db.prerequisiteLevels[CardIndex];
+        if (!string.IsNullOrEmpty(prereq) && !Levels.IsLevelComplete(prereq))
+            return true;
+
+        return false;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (CardTooltip.Instance == null) return;
+
+        string displayName = "Unknown";
+
+        if (cardPrefab != null)
+        {
+            var ent = cardPrefab.GetComponent<EntityBehaviour>();
+            if (ent && ent.Stats != null && !string.IsNullOrEmpty(ent.Stats.Name))
+            {
+                displayName = ent.Stats.Name;
+            }
+            else
+            {
+                displayName = cardPrefab.name.Replace("(Clone)", "").Trim();
+            }
+        }
+
+        CardTooltipData data = new CardTooltipData(displayName);
+        bool locked = IsLocked();
+        data.IsLocked = locked;
+
+        // Description, Cost, Stats
+        if (cardPrefab != null)
+        {
+            var tb = cardPrefab.GetComponent<TowerBase>();
+            var stats = tb ? tb.Stats as TowerStats : null;
+
+            if (stats)
+            {
+                data.Description = !string.IsNullOrEmpty(stats.description)
+                    ? stats.description
+                    : "No description available.";
+
+                if (stats.towerCosts != null)
+                {
+                    foreach (var c in stats.towerCosts)
+                        data.CostInfo += $"{c.resourceType}: {c.resourceCost}\n";
+                    data.CostInfo = data.CostInfo.Trim();
+                }
+
+                data.MaxHP = stats.MaxHp.ToString();
+                data.Damage = stats.Atk.ToString();
+
+                if (stats.Abilities != null && stats.Abilities.Length > 0 && stats.Abilities[0].Ability != null)
+                {
+                    float maxRange = 0f;
+                    foreach (var a in stats.Abilities)
+                    {
+                        if (a.Ability != null)
+                            maxRange = Mathf.Max(maxRange, a.Ability.Range);
+                    }
+                    data.Range = maxRange.ToString("0.0");
+                }
+                else
+                {
+                    data.Range = "—";
+                }
+            }
+            var sr = cardPrefab.GetComponentInChildren<SpriteRenderer>();
+            if (sr != null) data.TowerSprite = sr.sprite;
+        }
+
+        // Unlock info
+        if (locked)
+        {
+            string prereq = GetPrerequisiteName();
+            data.UnlockInfo = $"Unlock by completing: {prereq}";
+        }
+
+        CardTooltip.Instance.Show(data);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (CardTooltip.Instance) CardTooltip.Instance.Hide();
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (IsLocked()) return;
+
         originalParent = transform.parent;
         originalAnchoredPos = rect.anchoredPosition;
 
-        // Lift to top so it follows the cursor over everything
         if (rootCanvas) transform.SetParent(rootCanvas.transform);
         cg.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (IsLocked()) return;
         rect.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Always snap back to the available panel; the slot records the drop
+        if (IsLocked()) return;
+
         transform.SetParent(originalParent);
         rect.anchoredPosition = originalAnchoredPos;
         cg.blocksRaycasts = true;
+    }
+
+    private string GetPrerequisiteName()
+    {
+        var db = DeckBuilderDD.FindActiveDatabase();
+        if (db == null || CardIndex < 0 || CardIndex >= db.prerequisiteLevels.Length)
+            return "";
+        return db.prerequisiteLevels[CardIndex];
     }
 }

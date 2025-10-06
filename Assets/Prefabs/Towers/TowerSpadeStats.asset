@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Spade Tower
   Range: 1
   MaxHp: 400
-  Atk: 2
+  Atk: 5
   AttackInterval: 1
   Speed: 0
   Tag: 1
@@ -28,6 +28,8 @@ MonoBehaviour:
     Ability: {fileID: 11400000, guid: b52eec5ab24004e48803e60ef5b2f8e8, type: 2}
   towerCosts:
   - resourceType: 1
-    resourceCost: 10
+    resourceCost: 5
   - resourceType: 2
-    resourceCost: 15
+    resourceCost: 10
+  returnToHandCooldown: 15
+  description: Spade Tower Description

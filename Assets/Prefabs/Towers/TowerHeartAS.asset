@@ -12,8 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de846c77927eef540b255d841c716d39, type: 3}
   m_Name: TowerHeartAS
   m_EditorClassIdentifier: 
+  AblName: 
   Range: 2
   AtkModifier: 1
   NumOfTargets: 2
   Cooldown: 0
   Projectile: {fileID: 5438021278605143860, guid: f78e5f0c9c5eac14a8b88f8b31f62fef, type: 3}
+  Description: 
+  abilitySFX:
+    Guid:
+      Data1: -748404444
+      Data2: 1168374426
+      Data3: -294734432
+      Data4: -173827707
+    Path: event:/SFX/Towers/HealingTower/Heal
+  healSFXCooldown: 5
+  lastHealSFXTime: 52.272892

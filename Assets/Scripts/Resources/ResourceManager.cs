@@ -5,6 +5,7 @@ using UnityEngine;
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance { get; private set; }
+    public int maxResources=99;
 
     [SerializeField] private TMP_Text ResourceShow;
 
@@ -30,7 +31,8 @@ public class ResourceManager : MonoBehaviour
 
     public void Add(ResourceType type, float value)
     {
-        amounts[(int)type] += value;
+        if(amounts[(int)type]<maxResources) 
+            amounts[(int)type] += value;
         // TODO: notify UI
     }
 

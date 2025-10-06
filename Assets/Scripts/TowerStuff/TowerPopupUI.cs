@@ -95,24 +95,22 @@ public class TowerPopupUI : MonoBehaviour
 
         var towerStats = target.Stats as TowerStats;
 
-        // Refund resources (your existing logic) ...
+        // refund unchanged
         if (towerStats != null && towerStats.towerCosts != null && ResourceManager.Instance != null)
         {
             foreach (var c in towerStats.towerCosts)
             {
-                float refund = Mathf.Max(0f, Mathf.Round(c.resourceCost * 0.5f));
+                float refund = Mathf.Max(0f, Mathf.Round(c.resourceCost * sellRefundRate));
                 if (refund > 0f) ResourceManager.Instance.Add(c.resourceType, refund);
             }
         }
 
-        // NEW: give the player the card back into the hand UI
-        // If you know which hand slot this tower came from, pass that as siblingIndex.
-        DeckLoader.Instance?.AddCardForEntity(target /*, siblingIndex: optional */);
+        // return card to hand and apply cooldown
 
-        // Destroy the in-world tower and close popup
         target.Hp = 0;
         Hide();
     }
+
 
 
     string BuildStats(EntityBehaviour ent)

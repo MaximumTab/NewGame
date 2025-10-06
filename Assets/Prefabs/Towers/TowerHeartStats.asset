@@ -28,6 +28,8 @@ MonoBehaviour:
     Ability: {fileID: 11400000, guid: c76c61a47a915da47b169155387d98fd, type: 2}
   towerCosts:
   - resourceType: 0
-    resourceCost: 20
-  - resourceType: 1
+    resourceCost: 15
+  - resourceType: 2
     resourceCost: 10
+  returnToHandCooldown: 15
+  description: Heart Tower Description

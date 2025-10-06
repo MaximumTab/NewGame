@@ -31,3 +31,5 @@ MonoBehaviour:
     resourceCost: 10
   - resourceType: 1
     resourceCost: 5
+  returnToHandCooldown: 15
+  description: Diamond Tower Description

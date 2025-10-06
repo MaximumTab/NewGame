@@ -248,6 +248,7 @@ public class EntityBehaviour : MonoBehaviour
     {
         for (int index=0;index<entityStats.Abilities.Length;index++)
         {
+            
             if (entityStats.Abilities[index].Range == EntityStats.RangeType.Melee && !Blocked)
             {
                 continue;
@@ -345,6 +346,15 @@ public class EntityBehaviour : MonoBehaviour
         TowerPopupUI.Instance?.RefreshIfTarget(this); //hook to retrive the live updated hp for the ui popups 
     }
 
+    public IEnumerator LifeDrain(float hpPercperSec)
+    {
+        while (Hp >= 0)
+        {
+            Hp -= MaxHp * hpPercperSec * Time.deltaTime;
+            yield return null;
+        }
+    }
+
     public virtual void CheckAlive()
     {
         if (Hp <= 0)
@@ -356,7 +366,7 @@ public class EntityBehaviour : MonoBehaviour
                     EntityBehaviour otherEnt = other.GetComponent<EntityBehaviour>();
                     if (otherEnt.Stats.Tag != entityStats.Tag)
                     {
-                        if (otherEnt.Stats.Tag == EntityStats.ObjectTag.Enemy)
+                        if (otherEnt.Stats.Tag == EntityStats.ObjectTag.Enemy&&otherEnt.BlockingTargets.Count==1)
                         {
                             otherEnt.Blocked = false;
                         }

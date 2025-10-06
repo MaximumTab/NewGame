@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using FMODUnity;
 using UnityEngine;
 
 public class EnemyBehaviour : EntityBehaviour
@@ -25,6 +26,8 @@ public class EnemyBehaviour : EntityBehaviour
     private float FullLength;
 
     public bool ForLeak;
+     [Header("FMOD")]
+    public EventReference DeathSFX;
 
     public override void OnSpawn()
     {
@@ -218,7 +221,7 @@ public class EnemyBehaviour : EntityBehaviour
     }
     public override void CheckAlive()
     {
-        if (Hp <= 0&&Lives+1==myStats.Lives&&!Down)
+        if (Hp <= 0 && Lives + 1 == myStats.Lives && !Down)
         {
             foreach (GameObject other in BlockingTargets.Keys)
             {
@@ -236,7 +239,12 @@ public class EnemyBehaviour : EntityBehaviour
                 }
             }
             DestroySelf();
-        }else if (Lives+1 != myStats.Lives&&Hp<=0)
+            if(!DeathSFX.IsNull)
+            {
+                RuntimeManager.PlayOneShot(DeathSFX);
+            }
+        }
+        else if (Lives + 1 != myStats.Lives && Hp <= 0)
         {
             Hp = 1;
             StopCoroutine(nameof(StationTime));

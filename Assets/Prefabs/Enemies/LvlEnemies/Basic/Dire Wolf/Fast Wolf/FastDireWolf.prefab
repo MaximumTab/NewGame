@@ -59,6 +59,13 @@ MonoBehaviour:
   TunnelIndex: 0
   SpawnSuccess: 0
   ForLeak: 0
+  DeathSFX:
+    Guid:
+      Data1: -263817893
+      Data2: 1119858743
+      Data3: 1268543672
+      Data4: -2029407016
+    Path: event:/SFX/Enemies/Direwolf/DW_DEATH
 --- !u!1001 &9221801828637275387
 PrefabInstance:
   m_ObjectHideFlags: 0
