@@ -99,9 +99,15 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             isResourceGatherer = true;
         }
+        
         FindAutoGrid();
+        
     }
 
+    private void Update()
+    {
+        cooldown.ShowPayable(ResourceManager.Instance.CanAfford(prefabCosts));
+    }
 
 
     public void OnBeginDrag(PointerEventData e)

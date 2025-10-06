@@ -25,6 +25,18 @@ public class CardCooldown : MonoBehaviour
         enabled = true;
     }
 
+    public void ShowPayable(bool enough)
+    {
+        if (enough)
+        {
+            fill.value = 0;
+        }
+        else
+        {
+            fill.value = 1;
+        }
+    }
+
     public void BeginCooldown(float Seconds)
     {
         StartCoroutine(CoolDownCard(Seconds));

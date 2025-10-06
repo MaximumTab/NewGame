@@ -32,4 +32,5 @@ MonoBehaviour:
   - resourceType: 2
     resourceCost: 10
   returnToHandCooldown: 15
-  description: Spade Tower Description
+  description: The Spade Tower is placed directly on the track to block the enemies
+    path with a big tank!

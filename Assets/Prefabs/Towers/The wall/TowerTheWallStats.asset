@@ -26,10 +26,10 @@ MonoBehaviour:
   Abilities:
   - Range: 2
     Ability: {fileID: 11400000, guid: c48969f9f781db044b3fb81adcc0d2e8, type: 2}
-  - Range: 1
+  - Range: 2
     Ability: {fileID: 11400000, guid: ecacc3ffc9d8ed04e9ebf93caf7083c7, type: 2}
   towerCosts:
   - resourceType: 0
     resourceCost: 50
   returnToHandCooldown: 60
-  description: Wall Description
+  description: The Wall

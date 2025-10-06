@@ -32,4 +32,4 @@ MonoBehaviour:
   - resourceType: 1
     resourceCost: 5
   returnToHandCooldown: 15
-  description: Diamond Tower Description
+  description: The Diamond Tower snipes enemies from distance, cleaning up the track!
