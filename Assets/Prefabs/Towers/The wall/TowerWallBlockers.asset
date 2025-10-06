@@ -16,6 +16,13 @@ MonoBehaviour:
   Range: 2
   AtkModifier: 1
   NumOfTargets: 3
-  Cooldown: 2
+  Cooldown: 3
   Projectile: {fileID: 5477716615499135637, guid: d7af573ea59b25843b27ee4df6ea4569, type: 3}
   Description: Spawns blocking vines on enemies' position.
+  abilitySFX:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

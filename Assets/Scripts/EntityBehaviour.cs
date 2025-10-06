@@ -346,6 +346,15 @@ public class EntityBehaviour : MonoBehaviour
         TowerPopupUI.Instance?.RefreshIfTarget(this); //hook to retrive the live updated hp for the ui popups 
     }
 
+    public IEnumerator LifeDrain(float hpPercperSec)
+    {
+        while (Hp >= 0)
+        {
+            Hp -= MaxHp * hpPercperSec * Time.deltaTime;
+            yield return null;
+        }
+    }
+
     public virtual void CheckAlive()
     {
         if (Hp <= 0)

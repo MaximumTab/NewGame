@@ -16,7 +16,7 @@ MonoBehaviour:
   Range: 1
   MaxHp: 500
   Atk: 20
-  AttackInterval: 1
+  AttackInterval: 2
   Speed: 0
   Tag: 1
   SortBy:
@@ -31,5 +31,5 @@ MonoBehaviour:
   towerCosts:
   - resourceType: 0
     resourceCost: 50
-  returnToHandCooldown: 3
+  returnToHandCooldown: 60
   description: Wall Description

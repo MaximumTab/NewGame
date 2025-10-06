@@ -32,6 +32,7 @@ public class CardCooldown : MonoBehaviour
 
     public IEnumerator CoolDownCard(float Seconds)
     {
+        label.gameObject.SetActive(true);
         cooling = true;
         for (float i = Seconds; i >= 0; i -= Time.deltaTime)
         {
@@ -42,6 +43,7 @@ public class CardCooldown : MonoBehaviour
 
         cooling = false;
         label.text = "";
+        label.gameObject.SetActive(false);
     }
 
     // void Update()

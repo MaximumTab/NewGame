@@ -31,5 +31,5 @@ MonoBehaviour:
     resourceCost: 5
   - resourceType: 2
     resourceCost: 10
-  returnToHandCooldown: 3
+  returnToHandCooldown: 15
   description: Spade Tower Description

@@ -50,7 +50,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4913,6 +4913,7 @@ MonoBehaviour:
   Order: 0
   Blocked: 0
   rb: {fileID: 0}
+  subTower: 1
 --- !u!114 &379965640595511436
 MonoBehaviour:
   m_ObjectHideFlags: 0
