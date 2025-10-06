@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: whole body
+    m_Hash: 913122542
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: hidingBody
+      m_Hash: 415695517
+      m_Sprite: {fileID: 1465663936086176913, guid: 7be6f603daac3a04d9081e4a61cb3cf6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1465663936086176913, guid: 7be6f603daac3a04d9081e4a61cb3cf6, type: 3}
+    - m_Name: wall
+      m_Hash: 334884854
+      m_Sprite: {fileID: -3687012962044792711, guid: 7be6f603daac3a04d9081e4a61cb3cf6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3687012962044792711, guid: 7be6f603daac3a04d9081e4a61cb3cf6, type: 3}
+    - m_Name: NEWHIDINGBODY
+      m_Hash: 565840692
+      m_Sprite: {fileID: 3229167267751062244, guid: 47097bd26e526f247b337ca762353fb9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3229167267751062244, guid: 47097bd26e526f247b337ca762353fb9, type: 3}
+    - m_Name: weakenedBody
+      m_Hash: 121653706
+      m_Sprite: {fileID: -3450412630852709888, guid: cd02debd051bb224d87dc6c79f12441f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3450412630852709888, guid: cd02debd051bb224d87dc6c79f12441f, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  - m_Name: wall
+    m_Hash: 334884854
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: wall
+      m_Hash: 334884854
+      m_Sprite: {fileID: -3687012962044792711, guid: 7be6f603daac3a04d9081e4a61cb3cf6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3687012962044792711, guid: 7be6f603daac3a04d9081e4a61cb3cf6, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 1
+  - m_Name: arms
+    m_Hash: 754239016
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: wallLEftArm
+      m_Hash: 250318340
+      m_Sprite: {fileID: 4408819441442596511, guid: 7be6f603daac3a04d9081e4a61cb3cf6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4408819441442596511, guid: 7be6f603daac3a04d9081e4a61cb3cf6, type: 3}
+    - m_Name: wallRightArm
+      m_Hash: 88103404
+      m_Sprite: {fileID: 9093163391316837130, guid: 7be6f603daac3a04d9081e4a61cb3cf6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 9093163391316837130, guid: 7be6f603daac3a04d9081e4a61cb3cf6, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638953350327038127
+  m_Version: 1
