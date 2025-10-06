@@ -129,7 +129,7 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (IsLocked()) return;
-
+        if (CardTooltip.Instance) CardTooltip.Instance.Hide();
         originalParent = transform.parent;
         originalAnchoredPos = rect.anchoredPosition;
 
