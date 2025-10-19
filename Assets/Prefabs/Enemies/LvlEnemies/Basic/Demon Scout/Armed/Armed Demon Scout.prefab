@@ -59,6 +59,13 @@ MonoBehaviour:
   TunnelIndex: 0
   SpawnSuccess: 0
   ForLeak: 0
+  DeathSFX:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1001 &2666887515543451281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67,6 +74,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7309477330331487139}
     m_Modifications:
+    - target: {fileID: 27745793018236664, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
+      propertyPath: m_SpriteHash
+      value: 830041194
+      objectReference: {fileID: 0}
     - target: {fileID: 271969697248255302, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -95,6 +106,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1223124058170028243, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
+      propertyPath: m_BoneTransforms.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1307657751826194614, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -106,6 +121,10 @@ PrefabInstance:
     - target: {fileID: 1383775204568534455, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418017663553702866, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
+      propertyPath: m_BoneTransforms.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1430996944206263225, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
       propertyPath: m_Layer
@@ -135,6 +154,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2187688687605019292, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 644674292435720901, guid: 1e42e12bf191b294684a5217b1586d97, type: 3}
     - target: {fileID: 2219079752634906312, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -199,6 +222,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3668544555883037417, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -87584611748392850, guid: aca2b8b9199ac0b4ebd8d2893e38c699, type: 3}
     - target: {fileID: 3695084607612773942, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -307,6 +334,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5598680383720679281, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
+      propertyPath: m_SpriteHash
+      value: 831315747
+      objectReference: {fileID: 0}
     - target: {fileID: 5623420715768050516, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -355,6 +386,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6723056894596767067, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
+      propertyPath: m_BoneTransforms.Array.size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6751318352404458937, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -378,6 +413,10 @@ PrefabInstance:
     - target: {fileID: 7040774659955318664, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054431565826304907, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
+      propertyPath: m_SpriteHash
+      value: 64205270
       objectReference: {fileID: 0}
     - target: {fileID: 7429105222257329345, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
       propertyPath: m_Layer
@@ -439,6 +478,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8930581971075097604, guid: 2e6d360163cf1c44ab7fef0204622954, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1476764301914730217, guid: aca2b8b9199ac0b4ebd8d2893e38c699, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
