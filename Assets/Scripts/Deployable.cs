@@ -8,7 +8,7 @@ public class Deployable : MonoBehaviour
 
     private void Start()
     {
-        mat = gameObject.GetComponentInChildren<Renderer>().material;
+        mat = gameObject.GetComponentInChildren<Renderer>().sharedMaterial;
     }
 
     public void IsDeployableChange(int litIT)
