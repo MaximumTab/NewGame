@@ -17,7 +17,7 @@ MonoBehaviour:
   MaxHp: 1
   Atk: 0
   AttackInterval: 0
-  Speed: 5
+  Speed: 3
   Tag: 0
   SortBy:
     Stat: 0
