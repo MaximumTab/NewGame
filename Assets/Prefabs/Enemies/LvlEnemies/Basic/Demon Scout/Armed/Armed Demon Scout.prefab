@@ -61,11 +61,11 @@ MonoBehaviour:
   ForLeak: 0
   DeathSFX:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -147889763
+      Data2: 1088077179
+      Data3: 413058462
+      Data4: -1572936467
+    Path: event:/SFX/Enemies/PUFFP/PUFF_DEATH
 --- !u!1001 &2666887515543451281
 PrefabInstance:
   m_ObjectHideFlags: 0
