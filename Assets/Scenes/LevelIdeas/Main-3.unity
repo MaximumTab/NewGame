@@ -3344,23 +3344,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5520562683310842784, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
       propertyPath: EventReference.Path
-      value: event:/Music/BattleThemeArea1
+      value: event:/Music/BattleTheme2
       objectReference: {fileID: 0}
     - target: {fileID: 5520562683310842784, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
       propertyPath: EventReference.Guid.Data1
-      value: -983312627
+      value: -2033615085
       objectReference: {fileID: 0}
     - target: {fileID: 5520562683310842784, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
       propertyPath: EventReference.Guid.Data2
-      value: 1292440088
+      value: 1225195089
       objectReference: {fileID: 0}
     - target: {fileID: 5520562683310842784, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
       propertyPath: EventReference.Guid.Data3
-      value: -2064352852
+      value: 175914933
       objectReference: {fileID: 0}
     - target: {fileID: 5520562683310842784, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
       propertyPath: EventReference.Guid.Data4
-      value: 1819763301
+      value: -1577428597
       objectReference: {fileID: 0}
     - target: {fileID: 7594045998241265270, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
       propertyPath: m_Name
