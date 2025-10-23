@@ -660,6 +660,7 @@ GameObject:
   - component: {fileID: 287085883}
   - component: {fileID: 287085882}
   - component: {fileID: 287085881}
+  - component: {fileID: 287085885}
   m_Layer: 5
   m_Name: EnemyLog
   m_TagString: Untagged
@@ -787,6 +788,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287085879}
   m_CullTransparentMesh: 1
+--- !u!114 &287085885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287085879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -572527144
+      Data2: 1236306780
+      Data3: -2123172711
+      Data4: 841916462
+    Path: event:/SFX/UI/UI Click
+  Event: 
+  EventPlayTrigger: 17
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &295930305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4422,7 +4454,16 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7720356431907399821, guid: 995dfc3bb07bb5c42a069506431a3f62, type: 3}
       insertIndex: 2
       addedObject: {fileID: 287085880}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5263307473543871190, guid: 995dfc3bb07bb5c42a069506431a3f62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1480557346}
+    - targetCorrespondingSourceObject: {fileID: 3450481626121476970, guid: 995dfc3bb07bb5c42a069506431a3f62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1480557347}
+    - targetCorrespondingSourceObject: {fileID: 1767271747968194946, guid: 995dfc3bb07bb5c42a069506431a3f62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1480557345}
   m_SourcePrefab: {fileID: 100100000, guid: 995dfc3bb07bb5c42a069506431a3f62, type: 3}
 --- !u!224 &1480557340 stripped
 RectTransform:
@@ -4434,6 +4475,114 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4034643551494126426, guid: 995dfc3bb07bb5c42a069506431a3f62, type: 3}
   m_PrefabInstance: {fileID: 1480557339}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1480557342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1767271747968194946, guid: 995dfc3bb07bb5c42a069506431a3f62, type: 3}
+  m_PrefabInstance: {fileID: 1480557339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1480557343 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5263307473543871190, guid: 995dfc3bb07bb5c42a069506431a3f62, type: 3}
+  m_PrefabInstance: {fileID: 1480557339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1480557344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3450481626121476970, guid: 995dfc3bb07bb5c42a069506431a3f62, type: 3}
+  m_PrefabInstance: {fileID: 1480557339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1480557345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480557342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -572527144
+      Data2: 1236306780
+      Data3: -2123172711
+      Data4: 841916462
+    Path: event:/SFX/UI/UI Click
+  Event: 
+  EventPlayTrigger: 17
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1480557346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480557343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -572527144
+      Data2: 1236306780
+      Data3: -2123172711
+      Data4: 841916462
+    Path: event:/SFX/UI/UI Click
+  Event: 
+  EventPlayTrigger: 17
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1480557347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480557344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -572527144
+      Data2: 1236306780
+      Data3: -2123172711
+      Data4: 841916462
+    Path: event:/SFX/UI/UI Click
+  Event: 
+  EventPlayTrigger: 17
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &1486956126
 PrefabInstance:
   m_ObjectHideFlags: 0
