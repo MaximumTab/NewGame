@@ -3563,6 +3563,70 @@ PrefabInstance:
       propertyPath: EventReference.Guid.Data4
       value: -144710702
       objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <CardDrag>k__BackingField.Guid.Data1
+      value: 1610331564
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <CardDrag>k__BackingField.Guid.Data2
+      value: 1103021243
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <CardDrag>k__BackingField.Guid.Data3
+      value: -668792667
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <CardDrag>k__BackingField.Guid.Data4
+      value: -878565686
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <levellose>k__BackingField.Guid.Data1
+      value: 1416323233
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <levellose>k__BackingField.Guid.Data2
+      value: 1156590055
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <levellose>k__BackingField.Guid.Data3
+      value: 1418872960
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <levellose>k__BackingField.Guid.Data4
+      value: -847187372
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <CardPlaced>k__BackingField.Guid.Data1
+      value: 1145268902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <CardPlaced>k__BackingField.Guid.Data2
+      value: 1304702572
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <CardPlaced>k__BackingField.Guid.Data3
+      value: 867961771
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <CardPlaced>k__BackingField.Guid.Data4
+      value: 1611596315
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <levelfinished>k__BackingField.Guid.Data1
+      value: 2087596206
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <levelfinished>k__BackingField.Guid.Data2
+      value: 1340431452
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <levelfinished>k__BackingField.Guid.Data3
+      value: -1344337256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418187476167057983, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
+      propertyPath: <levelfinished>k__BackingField.Guid.Data4
+      value: 2129451462
+      objectReference: {fileID: 0}
     - target: {fileID: 7594045998241265270, guid: d062266aa1a2dc74fba45ff9b8b3fe49, type: 3}
       propertyPath: m_Name
       value: AudioManager
