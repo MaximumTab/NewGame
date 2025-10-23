@@ -62,11 +62,11 @@ MonoBehaviour:
   ForLeak: 0
   DeathSFX:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1500885985
+      Data2: 1080326829
+      Data3: -1518291806
+      Data4: -1867311303
+    Path: event:/SFX/Enemies/Tree Boss1/TreeBossDeath
 --- !u!1001 &2065015954505633302
 PrefabInstance:
   m_ObjectHideFlags: 0
