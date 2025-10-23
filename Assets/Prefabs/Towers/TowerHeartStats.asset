@@ -34,3 +34,4 @@ MonoBehaviour:
   returnToHandCooldown: 15
   description: The Heart Tower heals your other towers from a range, allowing them
     to stay up for longer!
+  IconSprite: {fileID: 7253111776162657331, guid: 197888b0521097a4b8c8db3c703ebf92, type: 3}
