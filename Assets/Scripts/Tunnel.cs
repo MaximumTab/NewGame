@@ -7,7 +7,7 @@ public class Tunnel : Path
     public List<Tunnel> ExitTunnel;
     public List<Tunnel> EnterTunnel;
 }
-
+/*
  [CustomEditor(typeof(Tunnel))]
 public class TunnelEditor : Editor
 {
@@ -23,4 +23,4 @@ public class TunnelEditor : Editor
         }
         base.OnInspectorGUI();
     }
-}
+}*/
