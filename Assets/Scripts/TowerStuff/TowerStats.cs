@@ -13,6 +13,9 @@ public class TowerStats : EntityStats
     [TextArea(2, 5)]
     public string description;
 
+    [Header("Card Art")]
+    public Sprite IconSprite; // NEW — used in deck builder card UI
+
     [System.Serializable]
     public struct TowerCost
     {

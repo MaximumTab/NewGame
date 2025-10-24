@@ -33,3 +33,4 @@ MonoBehaviour:
     resourceCost: 5
   returnToHandCooldown: 15
   description: The Diamond Tower snipes enemies from distance, cleaning up the track!
+  IconSprite: {fileID: 21300000, guid: ca3d896a9aeb6844888ba8c81b74c33a, type: 3}

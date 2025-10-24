@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Stone Gatherer
   Range: 2
-  MaxHp: 300
+  MaxHp: 20
   Atk: 0
   AttackInterval: 0
   Speed: 0
@@ -26,3 +26,5 @@ MonoBehaviour:
   Abilities: []
   towerCosts: []
   returnToHandCooldown: 3
+  description: 
+  IconSprite: {fileID: 21300000, guid: 88c4fbc90d18d55438c40c5e4babebab, type: 3}

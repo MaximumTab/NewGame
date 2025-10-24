@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Heart Tower
   Range: 2
   MaxHp: 50
-  Atk: 10
+  Atk: 15
   AttackInterval: 2
   Speed: 0
   Tag: 1
@@ -34,3 +34,4 @@ MonoBehaviour:
   returnToHandCooldown: 15
   description: The Heart Tower heals your other towers from a range, allowing them
     to stay up for longer!
+  IconSprite: {fileID: 21300000, guid: ce6c39943bdfb0e4991b1583d1d43e57, type: 3}

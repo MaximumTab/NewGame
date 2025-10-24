@@ -145,3 +145,10 @@ MonoBehaviour:
   TunnelIndex: 0
   SpawnSuccess: 0
   ForLeak: 0
+  DeathSFX:
+    Guid:
+      Data1: -147889763
+      Data2: 1088077179
+      Data3: 413058462
+      Data4: -1572936467
+    Path: event:/SFX/Enemies/PUFFP/PUFF_DEATH

@@ -19,7 +19,6 @@ public class DisplayEnemyStuffs : MonoBehaviour
 
     private void Start()
     {
-        Icon = Holder.GetComponentInChildren<Image>();
     }
     
 

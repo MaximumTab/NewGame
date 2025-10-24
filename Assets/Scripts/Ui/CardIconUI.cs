@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private TMP_Text nameText;
-    [SerializeField] private Image iconImage; // optional
+    [SerializeField] private Image iconImage; // now used for custom card art
 
     public int CardIndex { get; private set; } // 0..N-1
 
@@ -21,8 +21,49 @@ public class CardIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         CardIndex = cardIndex;
         cardPrefab = prefab;
-        if (!rect) rect = GetComponent<RectTransform>();
-        if (nameText) nameText.text = labelText;
+
+        if (!rect)
+            rect = GetComponent<RectTransform>();
+
+        if (nameText)
+            nameText.text = labelText;
+
+        if (iconImage != null)
+        {
+            Sprite foundSprite = null;
+            bool hasCardArt = false;
+
+            if (cardPrefab != null)
+            {
+                // Try to pull from TowerBase Stats if defined
+                var tb = cardPrefab.GetComponent<TowerBase>();
+                if (tb != null && tb.Stats != null)
+                {
+                    var towerStats = tb.Stats as TowerStats;
+                    if (towerStats != null && towerStats.IconSprite != null)
+                    {
+                        foundSprite = towerStats.IconSprite;
+                        hasCardArt = true;
+                    }
+                }
+            }
+
+            // Only use the sprite if the card art is explicitly assigned
+            if (hasCardArt && foundSprite != null)
+            {
+                iconImage.sprite = foundSprite;
+
+                // Hide text when using custom art
+                if (nameText != null)
+                    nameText.gameObject.SetActive(false);
+            }
+            else
+            {
+                // No assigned art → keep parchment and show name text
+                if (nameText != null)
+                    nameText.gameObject.SetActive(true);
+            }
+        }
     }
 
     private void Awake()

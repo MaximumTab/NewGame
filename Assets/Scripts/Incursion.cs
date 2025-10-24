@@ -26,6 +26,7 @@ public class Incursion:MonoBehaviour
     {
         //GameManager.MakingIGM();
         Path[] Tiles = transform.parent.GetComponentsInChildren<Path>();
+        FindObjectsByType<Path>(FindObjectsSortMode.None);
         Tunnel[] TunnTiles = transform.parent.GetComponentsInChildren<Tunnel>();
         Debug.Log(Tiles.Length+ " "+TunnTiles.Length);
         Tunnels = new Dictionary<Vector3, Tunnel>();
