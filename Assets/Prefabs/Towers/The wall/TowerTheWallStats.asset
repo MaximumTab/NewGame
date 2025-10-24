@@ -30,6 +30,7 @@ MonoBehaviour:
     Ability: {fileID: 11400000, guid: ecacc3ffc9d8ed04e9ebf93caf7083c7, type: 2}
   towerCosts:
   - resourceType: 0
-    resourceCost: 50
+    resourceCost: 35
   returnToHandCooldown: 60
   description: The Wall
+  IconSprite: {fileID: 0}

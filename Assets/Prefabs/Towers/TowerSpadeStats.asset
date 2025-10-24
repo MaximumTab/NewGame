@@ -34,4 +34,4 @@ MonoBehaviour:
   returnToHandCooldown: 15
   description: The Spade Tower is placed directly on the track to block the enemies
     path with a big tank!
-  IconSprite: {fileID: 7532235999110075067, guid: e97cd49477d0a0e41b7ca274053a94aa, type: 3}
+  IconSprite: {fileID: 21300000, guid: 22f7c84aff8c6a348b43d05bd6329f90, type: 3}

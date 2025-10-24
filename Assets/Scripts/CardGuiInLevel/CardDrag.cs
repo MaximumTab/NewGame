@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
-using FMODUnity;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -35,6 +33,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     [SerializeField] private TMP_Text NameText;
     [SerializeField] private TMP_Text CostText;
+    private Image CardImage;
 
     CardCooldown cooldown;
 
@@ -43,6 +42,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         cooldown = GetComponent<CardCooldown>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
         mainCamera = Camera.main;
+        CardImage = GetComponent<Image>();
         SetData();
         
     }
@@ -98,6 +98,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (towerPrefab != null && towerPrefab.GetComponent<Gatherer>() != null)
         {
             isResourceGatherer = true;
+        }
+
+        if (CardImage&&towerStats)
+        {
+            CardImage.sprite=towerStats.IconSprite;
         }
         
         FindAutoGrid();
