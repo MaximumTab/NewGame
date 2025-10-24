@@ -34,4 +34,4 @@ MonoBehaviour:
   returnToHandCooldown: 15
   description: The Club Tower joins the fight directly on the track to face enemies
     head on!
-  IconSprite: {fileID: 21300000, guid: 1d8053c8ecdc4a848b6bdf407a89fdcc, type: 3}
+  IconSprite: {fileID: 21300000, guid: 2aa77035ae67a034f9b7027d6cc4b20c, type: 3}
