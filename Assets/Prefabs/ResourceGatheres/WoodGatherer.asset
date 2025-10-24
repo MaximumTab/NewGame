@@ -27,3 +27,4 @@ MonoBehaviour:
   towerCosts: []
   returnToHandCooldown: 3
   description: 
+  IconSprite: {fileID: 21300000, guid: eff0d2c7d1aa4694a804a26b603160e3, type: 3}

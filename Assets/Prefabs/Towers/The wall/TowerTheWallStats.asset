@@ -33,4 +33,4 @@ MonoBehaviour:
     resourceCost: 35
   returnToHandCooldown: 60
   description: The Wall
-  IconSprite: {fileID: 0}
+  IconSprite: {fileID: 21300000, guid: 646b7f9d130753643a669f005a8edf3e, type: 3}
