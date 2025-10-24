@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0b0ebc50248a77449b18d24c175d74a1
+guid: a9d9f3acdc653774c8427cd916e78968
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8627245344561171469
-    second: Screenshot 2025-10-24 182926_0
+      213: 3451851373738445404
+    second: spadeTowerCard2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Screenshot 2025-10-24 182926_0
+      name: spadeTowerCard2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 246
-        height: 231
+        width: 1166
+        height: 1500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f3f947711ed54880800000000000000
-      internalID: -8627245344561171469
+      spriteID: c5acf15298077ef20800000000000000
+      internalID: 3451851373738445404
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Screenshot 2025-10-24 182926_0: -8627245344561171469
+      spadeTowerCard2_0: 3451851373738445404
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
