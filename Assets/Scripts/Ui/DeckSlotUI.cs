@@ -41,6 +41,17 @@ public class DeckSlotUI : MonoBehaviour, IDropHandler
         var icon = eventData.pointerDrag ? eventData.pointerDrag.GetComponent<CardIconUI>() : null;
         if (icon == null) return;
 
+        var db = DeckBuilderDD.FindActiveDatabase();
+        if (db != null && icon.CardIndex >= 0 && icon.CardIndex < db.prerequisiteLevels.Length)
+        {
+            string prereq = db.prerequisiteLevels[icon.CardIndex];
+            if (!string.IsNullOrEmpty(prereq) && !Levels.IsLevelComplete(prereq))
+            {
+                Debug.Log($"[DeckSlotUI] Cannot assign locked card '{labels[icon.CardIndex + 1]}' (requires {prereq}).");
+                return;
+            }
+        }
+
         builder.AssignCardToSlot(slotIndex, icon.CardIndex);
     }
 
