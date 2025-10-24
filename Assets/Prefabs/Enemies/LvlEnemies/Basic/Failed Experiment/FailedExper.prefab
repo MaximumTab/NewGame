@@ -59,6 +59,13 @@ MonoBehaviour:
   TunnelIndex: 0
   SpawnSuccess: 0
   ForLeak: 0
+  DeathSFX:
+    Guid:
+      Data1: 1302114950
+      Data2: 1324459055
+      Data3: 1701361570
+      Data4: 1889620138
+    Path: event:/SFX/Enemies/FailedExperiment/FE_DEATH
 --- !u!1001 &2488870090658335353
 PrefabInstance:
   m_ObjectHideFlags: 0
