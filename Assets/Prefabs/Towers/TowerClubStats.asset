@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Clubs Tower
   Range: 1
   MaxHp: 200
-  Atk: 20
+  Atk: 18
   AttackInterval: 1
   Speed: 0
   Tag: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wood Gatherer
   Range: 2
-  MaxHp: 40
+  MaxHp: 20
   Atk: 0
   AttackInterval: 0
   Speed: 0

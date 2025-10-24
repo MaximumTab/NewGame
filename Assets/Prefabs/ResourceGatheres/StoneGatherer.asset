@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Stone Gatherer
   Range: 2
-  MaxHp: 50
+  MaxHp: 20
   Atk: 0
   AttackInterval: 0
   Speed: 0
