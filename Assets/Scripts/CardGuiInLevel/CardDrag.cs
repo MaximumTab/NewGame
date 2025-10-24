@@ -321,11 +321,14 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Vector3 ScreenToGridWorldPoint(Vector2 screenPos)
     {
         // calculate distance along camera forward to grid plane
-        float distance = Vector3.Dot(Vector3.up-mainCamera.transform.position, mainCamera.transform.forward);
-        Vector3 sp = new Vector3(screenPos.x, screenPos.y, distance);
-        Vector3 wp = mainCamera.ScreenToWorldPoint(sp);
-        wp.y = 1;
-        return wp;
+        // World point under a screen pixel on the plane y = gridY
+            var ray   = mainCamera.ScreenPointToRay(screenPos);
+            var plane = new Plane(Vector3.up, new Vector3(0f, 1, 0f)); // plane at y = gridY
+
+            if (plane.Raycast(ray, out float t))
+                return ray.GetPoint(t);   // already has y = gridY
+
+            return Vector3.zero;  
     }
 
     // ---- Helpers for gatherer placement ----
