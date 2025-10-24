@@ -8,6 +8,7 @@ public class DeckSlotUI : MonoBehaviour, IDropHandler
 {
     [SerializeField] private TMP_Text label;
     [SerializeField] private Image background;
+    [SerializeField] private Image iconImage; // NEW: optional art for the slot
 
     [Range(0, 7)] public int slotIndex;
 
@@ -51,5 +52,42 @@ public class DeckSlotUI : MonoBehaviour, IDropHandler
 
         if (label) label.text = text;
 
+        if (!iconImage)
+            return;
+
+        // Default: show background/placeholder when empty
+        if (CurrentCardIndex < 0)
+        {
+            // Empty slot → show text, keep background visible
+            iconImage.sprite = null;          // optional: keep placeholder sprite if you have one
+            iconImage.gameObject.SetActive(true);
+            if (label) label.gameObject.SetActive(true);
+            return;
+        }
+
+        // Has a valid card
+        var db = DeckBuilderDD.FindActiveDatabase();
+        if (db == null || CurrentCardIndex >= db.allCards.Length)
+            return;
+
+        var prefab = db.allCards[CurrentCardIndex];
+        if (!prefab) return;
+
+        var tb = prefab.GetComponent<TowerBase>();
+        var towerStats = tb ? tb.Stats as TowerStats : null;
+
+        if (towerStats != null && towerStats.IconSprite != null)
+        {
+            iconImage.sprite = towerStats.IconSprite;
+            iconImage.gameObject.SetActive(true);
+            if (label) label.gameObject.SetActive(false);
+        }
+        else
+        {
+            // No art assigned → show text only
+            iconImage.sprite = null;
+            iconImage.gameObject.SetActive(true); // keep image visible if you want the parchment bg
+            if (label) label.gameObject.SetActive(true);
+        }
     }
 }
